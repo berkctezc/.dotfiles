@@ -28,8 +28,9 @@ git clone https://github.com/berkctezc/.dotfiles; cd .dotfiles;
 # adopt command is for solving conflicts between 
 # already existing files and the ones you pulled
 stow . --adopt
+# after adopting use git reset to undo changes that 
+# came from existing files
+git reset --hard
 ```
-
-
 
 
