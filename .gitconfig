@@ -10,8 +10,7 @@
 	process = git-lfs filter-process
 	required = true
 [credential]
-	helper = store
-	helper =
 	helper = /usr/local/share/gcm-core/git-credential-manager
+	helper = cache
 [credential "https://dev.azure.com"]
 	useHttpPath = true
