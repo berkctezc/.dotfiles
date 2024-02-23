@@ -1,6 +1,6 @@
 [user]
 	name = Berkcan Tezcaner
-	email = berkcan.tezcaner@gmail.com
+	email = berkcantezcaner@gmail.com
 [core]
 	autocrlf = input
 	excludesfile = /Users/berkcantezcaner/.gitignore_global
