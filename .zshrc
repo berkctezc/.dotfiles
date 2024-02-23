@@ -21,4 +21,6 @@ else
     eval "$(/usr/local/bin/brew shellenv)"
 fi
 
+if [ "$TMUX" = "" ]; then tmux -u; fi
+
 fish
