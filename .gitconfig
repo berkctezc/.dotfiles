@@ -14,3 +14,5 @@
 	helper = cache
 [credential "https://dev.azure.com"]
 	useHttpPath = true
+[maintenance]
+	repo = /Users/berkcantezcaner/.dotfiles
