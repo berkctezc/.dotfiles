@@ -16,12 +16,9 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
-if [ "$(arch)" = "arm64" ]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-else
-    eval "$(/usr/local/bin/brew shellenv)"
-fi
+if [ "$(arch)" = "arm64" ]; then ; eval "$(/opt/homebrew/bin/brew shellenv)"
+else; eval "$(/usr/local/bin/brew shellenv)";fi
 
-if [ "$TMUX" = "" ]; then tmux -u; fi
+#if [ "$TMUX" = "" ]; then tmux -u; fi
 
 fish
