@@ -2,8 +2,6 @@ if status is-interactive
   atuin init fish --disable-up-arrow | source
 end
 
-zoxide init fish | source
-
 if test (uname -s) = "Darwin"
   alias copy pbcopy
     # (╯°□°)╯︵ ┻━┻
@@ -21,3 +19,7 @@ end
 export EDITOR='nano'
 
 neofetch
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+set --export --prepend PATH "/Users/berkcantezcaner/.rd/bin"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)

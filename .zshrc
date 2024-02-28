@@ -22,3 +22,6 @@ else; eval "$(/usr/local/bin/brew shellenv)";fi
 #if [ "$TMUX" = "" ]; then tmux -u; fi
 
 fish
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/berkcantezcaner/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
