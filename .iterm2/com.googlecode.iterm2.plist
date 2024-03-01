@@ -9,7 +9,7 @@
 	<key>AllowClipboardAccess</key>
 	<true/>
 	<key>AlternateMouseScroll</key>
-	<true/>
+	<false/>
 	<key>AlwaysOpenWindowAtStartup</key>
 	<true/>
 	<key>AutoHideTmuxClientSession</key>
