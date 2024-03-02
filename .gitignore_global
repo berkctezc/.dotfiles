@@ -3,7 +3,12 @@
 ._.DS_Store
 **/.DS_Store
 **/._.DS_Store
+Desktop.ini
 fish_variables
+
+# Files that might appear on external disks
+.Spotlight-V100
+.Trashes
 
 # Logs
 logs
@@ -106,6 +111,13 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Compiled Python files
+*.pyc
+
+# Thumbnail cache files
+._*
+Thumbs.db
 
 # Intellij
 **/.idea/**
