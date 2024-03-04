@@ -26,12 +26,12 @@ alias ifactive="ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'
 
 # Maintanance
 alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update; sudo gem cleanup'
-## Flush Directory Service cache
-alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
 ## Clean up
 alias lscleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
-alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
+alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
+alias cleanup="find . -type f -name '*.DS_Store' -ls -delete; flush; lscleanup"
 alias reload="exec $SHELL -l"
+alias maintain="update;cleanup;reload;"
 # etc
 alias stfu="osascript -e 'set volume output muted true'"
 alias pumpitup="osascript -e 'set volume output volume 100'"
