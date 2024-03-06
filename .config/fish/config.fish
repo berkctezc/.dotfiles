@@ -26,6 +26,8 @@ alias flush "dscacheutil -flushcache ; killall -HUP mDNSResponder"
 alias cleanup "lscleanup ; echo 'started .DS_Store cleanup' && find . -type f -name '*.DS_Store' -delete 2>/dev/null"
 alias reload "exec $SHELL -l"
 alias maintain "update;cleanup;flush;reload;"
+alias backup_brew "cd ~ && ./scripts/brew_list.sh"
+
 # Fun
 alias stfu "osascript -e 'set volume output muted true'"
 alias pumpitup "osascript -e 'set volume output volume 100'"
