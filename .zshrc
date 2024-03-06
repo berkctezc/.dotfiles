@@ -2,13 +2,13 @@
 export ZSH="$HOME/.oh-my-zsh"
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
-export EDITOR='nano'
+export EDITOR='micro'
 export NODE_REPL_MODE='sloppy';
 
 # Set name of the theme to load --- if set to "random" ...
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME=random
-ZSH_THEME_RANDOM_CANDIDATES=(  )
+ZSH_THEME="agnoster"
+#ZSH_THEME_RANDOM_CANDIDATES=(  )
 
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -23,5 +23,3 @@ else; eval "$(/usr/local/bin/brew shellenv)";fi
  [ -d /home/linuxbrew/.linuxbrew ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 #if [ "$TMUX" = "" ]; then tmux -u; fi
-
-fish
