@@ -5,7 +5,7 @@ end
 #exports
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
-export EDITOR='nano'
+export EDITOR='micro'
 export NODE_REPL_MODE='sloppy';
 
 # Enable aliases to be sudo’ed
