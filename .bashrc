@@ -1,5 +1,4 @@
 
 [[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
 eval "$(atuin init bash)"
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-eval "$(/opt/homebrew/bin/brew shellenv)"
+ [ -d /home/linuxbrew/.linuxbrew ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
