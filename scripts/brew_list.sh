@@ -1,5 +1,5 @@
 #!/bin/bash
-DEVICE_NAME=$(hostname)
+DEVICE_NAME=$(hostname | cut -d. -f1)
 GIT_MAIL=$(git config --global user.email)
 CLOUD_STORAGE='GoogleDrive'
 DESIRED_PATH='My Drive/Programs'
