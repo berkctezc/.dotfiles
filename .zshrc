@@ -20,7 +20,7 @@ source $ZSH/oh-my-zsh.sh
 if [ "$(arch)" = "arm64" ]; then ; eval "$(/opt/homebrew/bin/brew shellenv)"
 else; eval "$(/usr/local/bin/brew shellenv)";fi
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 #if [ "$TMUX" = "" ]; then tmux -u; fi
 
