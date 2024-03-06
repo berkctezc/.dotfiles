@@ -8,40 +8,35 @@ export LC_ALL="en_US.UTF-8"
 export EDITOR='micro'
 export NODE_REPL_MODE='sloppy';
 
-# Enable aliases to be sudo’ed
-alias sudo='sudo '
-
-# Get week number
-alias week='date +%V'
-
-# Google Chrome
-alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
-
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
-alias localip="ipconfig getifaddr en0"
-alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
-
-# Show active network interfaces
-alias ifactive="ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'"
+# Utils
+alias sudo 'sudo '
+alias week 'date +%V'
+alias chrome '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
+# Network
+alias ip "dig +short myip.opendns.com @resolver1.opendns.com"
+alias localip "ipconfig getifaddr en0"
+alias ips "ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+alias scanlocal "arp -a"
+alias ifactive "ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'"
 
 # Maintanance
-alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update; sudo gem cleanup'
-## Clean up
-alias lscleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
-alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
-alias cleanup="find . -type f -name '*.DS_Store' -ls -delete; flush; lscleanup"
-alias reload="exec $SHELL -l"
-alias maintain="update;cleanup;reload;"
-# etc
-alias stfu="osascript -e 'set volume output muted true'"
-alias pumpitup="osascript -e 'set volume output volume 100'"
+alias update 'sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update; sudo gem cleanup'
+alias lscleanup "/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
+alias flush "dscacheutil -flushcache ; killall -HUP mDNSResponder"
+alias cleanup "lscleanup ; echo 'started .DS_Store cleanup' && find . -type f -name '*.DS_Store' -delete 2>/dev/null"
+alias reload "exec $SHELL -l"
+alias maintain "update;cleanup;flush;reload;"
+# Fun
+alias stfu "osascript -e 'set volume output muted true'"
+alias pumpitup "osascript -e 'set volume output volume 100'"
 
-# Easier navigation
+# Navigation
 alias ..  "cd .."
 alias ... "cd ../.."
 alias .... "cd ../../.."
 alias ..... "cd ../../../.."
 
+# copy to clipboard
 if test (uname -s) = "Darwin"
   alias copy pbcopy
     # (╯°□°)╯︵ ┻━┻
