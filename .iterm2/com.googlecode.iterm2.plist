@@ -2666,28 +2666,22 @@
 				<real>0.86197912693023682</real>
 			</dict>
 			<key>Guid</key>
-<<<<<<< HEAD
 			<string>E42D6473-57F2-4E1B-842D-6B7D0924A135</string>
-=======
 			<string>8733A532-37BB-451B-A9C7-A479625BF0B2</string>
->>>>>>> e679a788cbf46118ead65a026bb13a69bf9c6cd7
 			<key>Hide After Opening</key>
 			<false/>
 			<key>Horizontal Spacing</key>
 			<real>1</real>
-<<<<<<< HEAD
 			<key>Icon</key>
 			<integer>1</integer>
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Initial Text</key>
 			<string>fish</string>
-=======
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Initial Text</key>
 			<string></string>
->>>>>>> e679a788cbf46118ead65a026bb13a69bf9c6cd7
 			<key>Jobs to Ignore</key>
 			<array>
 				<string>rlogin</string>
@@ -3363,7 +3357,6 @@
 			<key>Working Directory</key>
 			<string></string>
 		</dict>
-<<<<<<< HEAD
 		<dict>
 			<key>ASCII Anti Aliased</key>
 			<true/>
@@ -5017,8 +5010,6 @@
 			<key>Working Directory</key>
 			<string></string>
 		</dict>
-=======
->>>>>>> e679a788cbf46118ead65a026bb13a69bf9c6cd7
 	</array>
 	<key>OpenArrangementAtStartup</key>
 	<false/>
