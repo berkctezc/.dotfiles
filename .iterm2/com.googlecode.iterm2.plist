@@ -958,7 +958,7 @@
 			<key>Custom Directory</key>
 			<string>No</string>
 			<key>Custom Locale</key>
-			<string>en_US</string>
+			<string>en_US.UTF-8</string>
 			<key>Default Bookmark</key>
 			<string>No</string>
 			<key>Description</key>
@@ -1018,6 +1018,8 @@
 			<false/>
 			<key>Horizontal Spacing</key>
 			<real>1</real>
+			<key>Icon</key>
+			<integer>1</integer>
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Initial Text</key>
