@@ -1,11 +1,11 @@
-# exports
-export ZSH="$HOME/.oh-my-zsh"
+#exports
 export LANG="en_US.UTF-8"
-export MANPATH="/usr/local/man:$MANPATH"
-export ARCHFLAGS="-arch x86_64"
 export LC_ALL="en_US.UTF-8"
 export EDITOR='micro'
 export NODE_REPL_MODE='sloppy';
+export ZSH="$HOME/.oh-my-zsh"
+export MANPATH="/usr/local/man:$MANPATH"
+export ARCHFLAGS="-arch x86_64"
 
 # options
 setopt NO_HUP

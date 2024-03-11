@@ -1,16 +1,16 @@
-if status is-interactive
-  atuin init fish --disable-up-arrow | source
-end
-
 [ -d /home/linuxbrew/.linuxbrew ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
-set PATH $PATH /Users/berkcantezcaner/.local/bin
+set -gx PATH $HOME/.local/bin $PATH
+set -gx PATH /opt/homebrew/bin $PATH
 
 #exports
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 export EDITOR='micro'
 export NODE_REPL_MODE='sloppy';
+export ZSH="$HOME/.oh-my-zsh"
+export MANPATH="/usr/local/man:$MANPATH"
+export ARCHFLAGS="-arch x86_64"
 
 # Utils
 alias sudo 'sudo '
@@ -55,6 +55,10 @@ if test (uname -s) = "Darwin"
   set -gx PATH /usr/local/opt/gnu-sed/libexec/gnubin $PATH
 else
   alias copy 'xclip -sel clip'5
+end
+
+if status is-interactive
+  atuin init fish --disable-up-arrow | source
 end
 
 neofetch
