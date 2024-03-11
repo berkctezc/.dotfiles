@@ -5,18 +5,21 @@
 	<key>AI Prompt</key>
 	<string>#!/usr/bin/\(shell)
 # Note this command runs on systems like this: \(uname)
-# The next line will do this: \(ai.prompt)
-</string>
+# The next line will do this: \(ai.prompt)</string>
 	<key>AiMaxTokens</key>
-	<integer>8192</integer>
+	<integer>0</integer>
 	<key>AiModel</key>
-	<string>gpt-4</string>
+	<string></string>
 	<key>AllowClipboardAccess</key>
 	<true/>
 	<key>AlternateMouseScroll</key>
 	<false/>
 	<key>AlwaysOpenWindowAtStartup</key>
 	<true/>
+	<key>AutoCommandHistory</key>
+	<false/>
+	<key>AutoComposer</key>
+	<false/>
 	<key>AutoHideTmuxClientSession</key>
 	<true/>
 	<key>CheckTestRelease</key>
@@ -26,6 +29,8 @@
 	<key>Default Bookmark Guid</key>
 	<string>424E550B-E0E7-4373-80A4-7113F1CFBC04</string>
 	<key>DimBackgroundWindows</key>
+	<true/>
+	<key>DimInactiveSplitPanes</key>
 	<true/>
 	<key>DimOnlyText</key>
 	<false/>
@@ -1377,7 +1382,7 @@
 			<key>Minimum Contrast (Light)</key>
 			<real>0.0</real>
 			<key>Mouse Reporting</key>
-			<true/>
+			<false/>
 			<key>Name</key>
 			<string>Default</string>
 			<key>Non Ascii Font</key>
@@ -3404,13 +3409,17 @@
 	<key>SoundForEsc</key>
 	<false/>
 	<key>SplitPaneDimmingAmount</key>
-	<real>0.068243704490291268</real>
+	<real>0.043630537014563105</real>
 	<key>StatusBarPosition</key>
 	<integer>0</integer>
 	<key>TabStyleWithAutomaticOption</key>
 	<integer>5</integer>
 	<key>TabViewType</key>
 	<integer>1</integer>
+	<key>TerminalMargin</key>
+	<integer>3</integer>
+	<key>TerminalVMargin</key>
+	<integer>0</integer>
 	<key>ThreeFingerEmulates</key>
 	<true/>
 	<key>TmuxUsesDedicatedProfile</key>
