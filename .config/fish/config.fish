@@ -4,6 +4,8 @@ end
 
 [ -d /home/linuxbrew/.linuxbrew ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
+set PATH $PATH /Users/berkcantezcaner/.local/bin
+
 #exports
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"

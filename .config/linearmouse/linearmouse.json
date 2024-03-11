@@ -1,21 +1,103 @@
 {
-  "$schema" : "https:\/\/schema.linearmouse.app\/0.9.5",
+  "$schema" : "https:\/\/schema.linearmouse.app\/0.10.0-beta.2",
   "schemes" : [
     {
+      "scrolling" : {
+        "reverse" : {
+          "vertical" : false
+        }
+      },
       "if" : {
         "device" : {
-          "vendorID" : "0x5ac",
           "category" : "trackpad",
           "productName" : "Apple Internal Keyboard \/ Trackpad",
-          "productID" : "0x281"
+          "productID" : "0x281",
+          "vendorID" : "0x5ac"
         }
       },
       "pointer" : {
         "disableAcceleration" : false
+      }
+    },
+    {
+      "pointer" : {
+        "speed" : 0.1578,
+        "acceleration" : 0.4659
+      },
+      "buttons" : {
+        "universalBackForward" : true
       },
       "scrolling" : {
+        "speed" : {
+          "vertical" : 0.48
+        },
+        "modifiers" : {
+          "horizontal" : {
+            "control" : {
+              "type" : "auto"
+            },
+            "option" : {
+              "type" : "alterOrientation"
+            }
+          },
+          "vertical" : {
+            "option" : {
+              "type" : "alterOrientation"
+            },
+            "command" : {
+              "type" : "auto"
+            },
+            "shift" : {
+              "type" : "auto"
+            },
+            "control" : {
+              "type" : "pinchZoom"
+            }
+          }
+        },
         "reverse" : {
-          "vertical" : false
+          "vertical" : true
+        }
+      },
+      "if" : {
+        "device" : {
+          "productName" : "USB Receiver",
+          "productID" : "0xc534",
+          "vendorID" : "0x46d",
+          "category" : "mouse"
+        }
+      }
+    },
+    {
+      "if" : {
+        "device" : {
+          "category" : "trackpad",
+          "productID" : "0x0",
+          "productName" : "Apple Internal Keyboard \/ Trackpad",
+          "vendorID" : "0x0"
+        }
+      },
+      "scrolling" : {
+        "modifiers" : {
+          "horizontal" : {
+            "control" : {
+              "type" : "zoom"
+            }
+          },
+          "vertical" : {
+            "option" : {
+              "type" : "alterOrientation"
+            },
+            "command" : {
+              "type" : "auto"
+            },
+            "shift" : {
+              "type" : "auto"
+            },
+            "control" : {
+              "type" : "zoom"
+            }
+          }
         }
       }
     }
