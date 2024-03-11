@@ -1,7 +1,7 @@
-[ -d /home/linuxbrew/.linuxbrew ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-
 set -gx PATH $HOME/.local/bin $PATH
 set -gx PATH /opt/homebrew/bin $PATH
+
+[ -d /home/linuxbrew/.linuxbrew ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 #exports
 export LANG="en_US.UTF-8"
@@ -22,7 +22,6 @@ alias localip "ipconfig getifaddr en0"
 alias ips "ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 alias scanlocal "arp -a"
 alias ifactive "ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'"
-
 # Maintanance
 alias update 'sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update; sudo gem cleanup'
 alias lscleanup "/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
@@ -31,11 +30,9 @@ alias cleanup "lscleanup ; echo 'started .DS_Store cleanup' && find . -type f -n
 alias reload "exec $SHELL -l"
 alias maintain "update;cleanup;flush;reload;"
 alias backup_brew "cd ~ && ./scripts/brew_list.sh"
-
 # Fun
 alias stfu "osascript -e 'set volume output muted true'"
 alias pumpitup "osascript -e 'set volume output volume 100'"
-
 # Navigation
 alias ..  "cd .."
 alias ... "cd ../.."
@@ -59,6 +56,6 @@ end
 
 if status is-interactive
   atuin init fish --disable-up-arrow | source
+	tmux attach || tmux new
+	neofetch
 end
-
-neofetch

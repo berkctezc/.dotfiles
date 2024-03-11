@@ -1,14 +1,6 @@
 {
   "schemes" : [
     {
-      "if" : {
-        "device" : {
-          "productName" : "Apple Internal Keyboard \/ Trackpad",
-          "vendorID" : "0x5ac",
-          "category" : "trackpad",
-          "productID" : "0x281"
-        }
-      },
       "pointer" : {
         "disableAcceleration" : false
       },
@@ -16,19 +8,38 @@
         "reverse" : {
           "vertical" : false
         }
+      },
+      "if" : {
+        "device" : {
+          "productName" : "Apple Internal Keyboard \/ Trackpad",
+          "productID" : "0x281",
+          "vendorID" : "0x5ac",
+          "category" : "trackpad"
+        }
       }
     },
     {
-      "buttons" : {
-        "universalBackForward" : true
-      },
       "pointer" : {
         "speed" : 0.1578,
         "acceleration" : 0.4659
       },
       "scrolling" : {
+        "reverse" : {
+          "vertical" : true
+        },
         "modifiers" : {
+          "horizontal" : {
+            "option" : {
+              "type" : "alterOrientation"
+            },
+            "control" : {
+              "type" : "auto"
+            }
+          },
           "vertical" : {
+            "shift" : {
+              "type" : "auto"
+            },
             "control" : {
               "type" : "pinchZoom"
             },
@@ -37,84 +48,77 @@
             },
             "command" : {
               "type" : "auto"
-            },
-            "shift" : {
-              "type" : "auto"
-            }
-          },
-          "horizontal" : {
-            "option" : {
-              "type" : "alterOrientation"
-            },
-            "control" : {
-              "type" : "auto"
             }
           }
         },
         "speed" : {
           "vertical" : 0.48
-        },
-        "reverse" : {
-          "vertical" : true
         }
+      },
+      "buttons" : {
+        "universalBackForward" : true
       },
       "if" : {
         "device" : {
-          "productID" : "0xc534",
-          "category" : "mouse",
           "productName" : "USB Receiver",
-          "vendorID" : "0x46d"
+          "vendorID" : "0x46d",
+          "productID" : "0xc534",
+          "category" : "mouse"
         }
       }
     },
     {
       "scrolling" : {
-        "distance" : {
-          "vertical" : "auto"
-        },
-        "speed" : {
-          "vertical" : 6.25
-        },
         "acceleration" : {
-          "vertical" : 0.88
+          "vertical" : 0.88,
+          "horizontal" : 1
         },
         "modifiers" : {
-          "horizontal" : {
-            "option" : {
-              "type" : "auto"
-            },
-            "shift" : {
-              "type" : "auto"
-            },
-            "control" : {
-              "type" : "auto"
-            },
+          "vertical" : {
             "command" : {
               "type" : "auto"
-            }
-          },
-          "vertical" : {
-            "control" : {
-              "type" : "zoom"
             },
             "shift" : {
+              "type" : "auto"
+            },
+            "control" : {
               "type" : "auto"
             },
             "option" : {
               "type" : "alterOrientation"
+            }
+          },
+          "horizontal" : {
+            "shift" : {
+              "type" : "auto"
+            },
+            "option" : {
+              "type" : "auto"
+            },
+            "control" : {
+              "type" : "auto"
             },
             "command" : {
               "type" : "auto"
             }
           }
+        },
+        "distance" : {
+          "vertical" : "auto"
+        },
+        "speed" : {
+          "vertical" : 6.25
         }
+      },
+      "buttons" : {
+        "universalBackForward" : true
       },
       "if" : {
         "device" : {
-          "productName" : "Apple Internal Keyboard \/ Trackpad",
           "vendorID" : "0x0",
           "category" : "trackpad",
-          "productID" : "0x0"
+          "productID" : "0x0",
+          "productName" : "Apple Internal Keyboard \/ Trackpad"
         }
       }
     }
