@@ -98,7 +98,7 @@
 	credentialStore =  cache
 	helper = /usr/local/share/gcm-core/git-credential-manager
 	helper = cache
-	helper = 
+	helper = /usr/local/bin/git-credential-manager
 	helper = /usr/bin/git-credential-manager
 
 [credential "https://dev.azure.com"]
