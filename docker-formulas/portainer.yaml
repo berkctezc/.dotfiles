@@ -1,0 +1,18 @@
+# docker volume create portainer_data
+version: "3"
+name: "portainer-ce"
+services:
+    portainer-ce:
+        ports:
+            - 8000:8000
+            - 9443:9443
+        container_name: portainer
+        restart: always
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - portainer_data:/data
+        image: portainer/portainer-ce:latest
+volumes:
+    portainer_data:
+        external: true
+        name: portainer_data
