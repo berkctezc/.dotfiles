@@ -3,7 +3,7 @@ set -gx PATH /opt/homebrew/bin $PATH
 
 [ -d /home/linuxbrew/.linuxbrew ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
-#exports
+# Exports
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 export EDITOR='micro'
@@ -56,6 +56,6 @@ end
 
 if status is-interactive
   atuin init fish --disable-up-arrow | source
-	tmux attach || tmux new
 	neofetch
+	tmux new
 end
