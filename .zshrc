@@ -15,30 +15,30 @@ setopt EXTENDED_HISTORY
 setopt PROMPT_SUBST
 setopt CORRECT
 setopt COMPLETE_IN_WORD
-setopt IGNORE_EOF
+# setopt IGNORE_EOF
 
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="agnoster" # ZSH_THEME_RANDOM_CANDIDATES=(  )
 
 plugins=(
-	# dev thingies
-		dotnet node npm pip python
-		git branch
-		kubectl kubectx
-		docker docker-compose
-		mongocli postgres redis-cli
-	# text editor thingies
-		textmate vscode
-	# zsh thingies
-		zsh-interactive-cd zsh-navigation-tools themes
-		web-search
-	# os and system thingies
-		archlinux debian systemd
-		macos iterm2 brew
-		battery
-	# terminal utility thingies
-		fzf gnu-utils ssh sudo
-		tmux screen
+# dev thingies
+	dotnet node npm pip python
+	git branch
+	kubectl kubectx
+	docker docker-compose
+	mongocli postgres redis-cli
+# text editor thingies
+	textmate vscode
+# zsh thingies
+	zsh-interactive-cd zsh-navigation-tools themes
+	web-search
+# os and system thingies
+	archlinux debian systemd
+	macos iterm2 brew
+	battery
+# terminal utility thingies
+	fzf gnu-utils ssh sudo
+	tmux screen
 )
 
 source $ZSH/oh-my-zsh.sh
