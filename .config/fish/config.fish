@@ -15,6 +15,7 @@ export ARCHFLAGS="-arch x86_64"
 # Utils
 alias sudo 'sudo '
 alias week 'date +%V'
+alias tks 'tmux kill-server'
 # Network
 alias myip "dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip "ipconfig getifaddr en0"
