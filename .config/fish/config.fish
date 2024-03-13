@@ -15,7 +15,6 @@ export ARCHFLAGS="-arch x86_64"
 # Utils
 alias sudo 'sudo '
 alias week 'date +%V'
-alias chrome '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
 # Network
 alias myip "dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip "ipconfig getifaddr en0"
@@ -48,6 +47,7 @@ if test (uname -s) = "Darwin"
   alias dnf brew
   alias pkg brew
   alias i "brew install"
+	alias chrome '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
   set -gx PATH /usr/local/opt/coreutils/libexec/gnubin $PATH
   set -gx PATH /usr/local/opt/gnu-sed/libexec/gnubin $PATH
 else
@@ -56,6 +56,8 @@ end
 
 if status is-interactive
   atuin init fish --disable-up-arrow | source
-	neofetch
-	tmux new
+	if set -q TMUX
+   neofetch
+	end
+	# tmux new
 end
