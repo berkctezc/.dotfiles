@@ -1,20 +1,29 @@
 {
+  "$schema" : "https:\/\/schema.linearmouse.app\/0.10.0-beta.2",
   "schemes" : [
     {
-      "pointer" : {
-        "disableAcceleration" : false
+      "buttons" : {
+        "universalBackForward" : true
       },
       "scrolling" : {
         "reverse" : {
           "vertical" : false
+        },
+        "modifiers" : {
+          "option" : {
+            "type" : "alterOrientation"
+          }
         }
+      },
+      "pointer" : {
+        "disableAcceleration" : false
       },
       "if" : {
         "device" : {
+          "category" : "trackpad",
           "productName" : "Apple Internal Keyboard \/ Trackpad",
-          "productID" : "0x281",
           "vendorID" : "0x5ac",
-          "category" : "trackpad"
+          "productID" : "0x281"
         }
       }
     },
@@ -23,11 +32,33 @@
         "speed" : 0.1578,
         "acceleration" : 0.4659
       },
+      "if" : {
+        "device" : {
+          "category" : "mouse",
+          "productName" : "USB Receiver",
+          "productID" : "0xc534",
+          "vendorID" : "0x46d"
+        }
+      },
+      "buttons" : {
+        "universalBackForward" : true
+      },
       "scrolling" : {
-        "reverse" : {
-          "vertical" : true
-        },
         "modifiers" : {
+          "vertical" : {
+            "command" : {
+              "type" : "auto"
+            },
+            "shift" : {
+              "type" : "auto"
+            },
+            "option" : {
+              "type" : "alterOrientation"
+            },
+            "control" : {
+              "type" : "pinchZoom"
+            }
+          },
           "horizontal" : {
             "option" : {
               "type" : "alterOrientation"
@@ -35,65 +66,49 @@
             "control" : {
               "type" : "auto"
             }
-          },
-          "vertical" : {
-            "shift" : {
-              "type" : "auto"
-            },
-            "control" : {
-              "type" : "pinchZoom"
-            },
-            "option" : {
-              "type" : "alterOrientation"
-            },
-            "command" : {
-              "type" : "auto"
-            }
           }
+        },
+        "reverse" : {
+          "vertical" : true
         },
         "speed" : {
           "vertical" : 0.48
-        }
-      },
-      "buttons" : {
-        "universalBackForward" : true
-      },
-      "if" : {
-        "device" : {
-          "productName" : "USB Receiver",
-          "vendorID" : "0x46d",
-          "productID" : "0xc534",
-          "category" : "mouse"
         }
       }
     },
     {
       "scrolling" : {
+        "speed" : {
+          "vertical" : 6.25
+        },
+        "distance" : {
+          "vertical" : "auto"
+        },
         "acceleration" : {
-          "vertical" : 0.88,
-          "horizontal" : 1
+          "horizontal" : 1,
+          "vertical" : 0.88
         },
         "modifiers" : {
-          "vertical" : {
+          "horizontal" : {
             "command" : {
-              "type" : "auto"
-            },
-            "shift" : {
               "type" : "auto"
             },
             "control" : {
               "type" : "auto"
             },
-            "option" : {
-              "type" : "alterOrientation"
-            }
-          },
-          "horizontal" : {
             "shift" : {
               "type" : "auto"
             },
             "option" : {
               "type" : "auto"
+            }
+          },
+          "vertical" : {
+            "shift" : {
+              "type" : "auto"
+            },
+            "option" : {
+              "type" : "alterOrientation"
             },
             "control" : {
               "type" : "auto"
@@ -102,26 +117,19 @@
               "type" : "auto"
             }
           }
-        },
-        "distance" : {
-          "vertical" : "auto"
-        },
-        "speed" : {
-          "vertical" : 6.25
+        }
+      },
+      "if" : {
+        "device" : {
+          "productID" : "0x0",
+          "productName" : "Apple Internal Keyboard \/ Trackpad",
+          "category" : "trackpad",
+          "vendorID" : "0x0"
         }
       },
       "buttons" : {
         "universalBackForward" : true
-      },
-      "if" : {
-        "device" : {
-          "vendorID" : "0x0",
-          "category" : "trackpad",
-          "productID" : "0x0",
-          "productName" : "Apple Internal Keyboard \/ Trackpad"
-        }
       }
     }
-  ],
-  "$schema" : "https:\/\/schema.linearmouse.app\/0.10.0-beta.2"
+  ]
 }
