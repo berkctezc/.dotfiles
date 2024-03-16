@@ -9,7 +9,7 @@ services:
       - PUID=1000
       - PGID=1000
     volumes:
-      - ~/Syncthing:/var/syncthing
+      - /var/.containerized/Syncthing:/var/syncthing
     ports:
       - 8384:8384 # Web UI
       - 22000:22000/tcp # TCP file transfers
