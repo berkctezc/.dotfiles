@@ -1,5 +1,7 @@
 set -gx PATH $HOME/.local/bin $PATH
 set -gx PATH /opt/homebrew/bin $PATH
+set -gx PATH $HOME/.dotnet/tools $PATH
+
 
 [ -d /home/linuxbrew/.linuxbrew ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
