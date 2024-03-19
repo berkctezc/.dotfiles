@@ -1,0 +1,23 @@
+version: '3.5'
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:unstable
+    container_name: jellyfin
+    environment:
+      - PUID=1001
+      - PGID=1001
+    network_mode: 'bridge'
+    ports:
+      - 8096:8096
+      - 8920:8920 #optional
+      - 7359:7359/udp #optional
+      - 1900:1900/udp #optional
+    volumes:
+      - ~/:/data
+      - ~/.config:/config
+      - ~/.cache:/cache
+    restart: 'unless-stopped'
+    # environment:
+    #  - JELLYFIN_PublishedServerUrl=http://example.com
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'

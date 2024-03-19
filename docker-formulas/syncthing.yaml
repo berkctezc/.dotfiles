@@ -6,10 +6,10 @@ services:
     container_name: syncthing
     hostname: synct-server
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=1001
+      - PGID=1001
     volumes:
-      - /var/.containerized/Syncthing:/var/syncthing
+      - ~/Syncthing:/var/syncthing
     ports:
       - 8384:8384 # Web UI
       - 22000:22000/tcp # TCP file transfers
