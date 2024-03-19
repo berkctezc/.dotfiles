@@ -96,8 +96,6 @@
 [credential]
 
 	credentialStore =  cache
-	helper = store
-	helper = cache
 	helper = /usr/local/share/gcm-core/git-credential-manager
 	helper = /usr/bin/git-credential-manager
 	helper = /usr/local/bin/git-credential-manager
