@@ -15,9 +15,9 @@
       "if" : {
         "device" : {
           "vendorID" : "0x5ac",
-          "category" : "trackpad",
+          "productName" : "Apple Internal Keyboard \/ Trackpad",
           "productID" : "0x281",
-          "productName" : "Apple Internal Keyboard \/ Trackpad"
+          "category" : "trackpad"
         }
       },
       "buttons" : {
@@ -28,28 +28,14 @@
       }
     },
     {
-      "buttons" : {
-        "universalBackForward" : true
-      },
-      "if" : {
-        "device" : {
-          "productName" : "USB Receiver",
-          "productID" : "0xc534",
-          "vendorID" : "0x46d",
-          "category" : "mouse"
-        }
-      },
       "scrolling" : {
-        "speed" : {
-          "vertical" : 0.48
-        },
         "modifiers" : {
           "vertical" : {
-            "control" : {
-              "type" : "pinchZoom"
-            },
             "option" : {
               "type" : "alterOrientation"
+            },
+            "control" : {
+              "type" : "pinchZoom"
             },
             "command" : {
               "type" : "auto"
@@ -69,85 +55,92 @@
         },
         "reverse" : {
           "vertical" : true
+        },
+        "speed" : {
+          "vertical" : 0.48
         }
       },
+      "if" : {
+        "device" : {
+          "vendorID" : "0x46d",
+          "productID" : "0xc534",
+          "category" : "mouse",
+          "productName" : "USB Receiver"
+        }
+      },
+      "buttons" : {
+        "universalBackForward" : true
+      },
       "pointer" : {
-        "acceleration" : 0.4659,
-        "speed" : 0.1578
+        "speed" : 0.1578,
+        "acceleration" : 0.4659
       }
     },
     {
-      "if" : {
-        "device" : {
-          "vendorID" : "0x0",
-          "productID" : "0x0",
-          "productName" : "Apple Internal Keyboard \/ Trackpad",
-          "category" : "trackpad"
-        }
-      },
       "scrolling" : {
-        "speed" : {
-          "vertical" : 1.1
-        },
-        "distance" : {
-          "vertical" : "auto"
-        },
         "modifiers" : {
-          "horizontal" : {
+          "vertical" : {
             "control" : {
-              "type" : "auto"
-            },
-            "option" : {
               "type" : "auto"
             },
             "command" : {
               "type" : "auto"
             },
-            "shift" : {
-              "type" : "auto"
-            }
-          },
-          "vertical" : {
             "option" : {
               "type" : "alterOrientation"
             },
             "shift" : {
               "type" : "auto"
-            },
-            "control" : {
+            }
+          },
+          "horizontal" : {
+            "option" : {
               "type" : "auto"
             },
             "command" : {
               "type" : "auto"
+            },
+            "control" : {
+              "type" : "auto"
+            },
+            "shift" : {
+              "type" : "auto"
             }
           }
         },
-        "acceleration" : 1
+        "acceleration" : 1,
+        "distance" : {
+          "vertical" : "auto"
+        },
+        "speed" : {
+          "vertical" : 1.1
+        }
       },
       "buttons" : {
         "universalBackForward" : true
-      }
-    },
-    {
-      "pointer" : {
-        "speed" : 0.3326,
-        "acceleration" : 0,
-        "disableAcceleration" : false
       },
       "if" : {
         "device" : {
-          "productName" : "Glorious Model I",
-          "vendorID" : "0x22d4",
-          "category" : "mouse",
-          "productID" : "0x1503"
+          "productID" : "0x0",
+          "vendorID" : "0x0",
+          "productName" : "Apple Internal Keyboard \/ Trackpad",
+          "category" : "trackpad"
         }
-      },
+      }
+    },
+    {
       "scrolling" : {
+        "distance" : {
+          "vertical" : "auto"
+        },
         "reverse" : {
           "vertical" : true
         },
         "acceleration" : {
-          "vertical" : 1.04
+          "vertical" : 1.05
+        },
+        "speed" : {
+          "vertical" : 30.2
         },
         "modifiers" : {
           "vertical" : {
@@ -155,12 +148,19 @@
               "type" : "alterOrientation"
             }
           }
-        },
-        "speed" : {
-          "vertical" : 0.49
-        },
-        "distance" : {
-          "vertical" : "auto"
+        }
+      },
+      "pointer" : {
+        "disableAcceleration" : false,
+        "acceleration" : 0,
+        "speed" : 0.3326
+      },
+      "if" : {
+        "device" : {
+          "category" : "mouse",
+          "vendorID" : "0x22d4",
+          "productID" : "0x1503",
+          "productName" : "Glorious Model I"
         }
       }
     }
