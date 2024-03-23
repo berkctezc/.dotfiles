@@ -3,9 +3,6 @@ services:
   jellyfin:
     image: jellyfin/jellyfin:unstable
     container_name: jellyfin
-    environment:
-      - PUID=1001
-      - PGID=1001
     network_mode: 'bridge'
     ports:
       - 8096:8096

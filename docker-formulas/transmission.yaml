@@ -3,8 +3,6 @@ services:
     image: lscr.io/linuxserver/transmission:latest
     container_name: transmission
     environment:
-      - PUID=1000
-      - PGID=1000
       - TZ=Etc/UTC
       #- TRANSMISSION_WEB_HOME= #optional
       #- USER= #optional
@@ -13,7 +11,7 @@ services:
       #- PEERPORT= #optional
       #- HOST_WHITELIST= #optional
     volumes:
-      - ~/:/home/host
+      - ~/Syncthing:/syncthing
       - ~/.config:/config
       - ~/Downloads:/downloads
     ports:

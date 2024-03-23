@@ -5,9 +5,6 @@ services:
     image: syncthing/syncthing:edge
     container_name: syncthing
     hostname: synct-server
-    environment:
-      - PUID=1001
-      - PGID=1001
     volumes:
       - ~/Syncthing:/var/syncthing
     ports:
