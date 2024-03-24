@@ -1,4 +1,3 @@
-# docker volume create portainer_data
 version: "3"
 name: "portainer-ce"
 services:
