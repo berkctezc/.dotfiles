@@ -5,7 +5,6 @@ export EDITOR='micro'
 export NODE_REPL_MODE='sloppy';
 export ZSH="$HOME/.oh-my-zsh"
 export MANPATH="/usr/local/man:$MANPATH"
-export ARCHFLAGS="-arch x86_64"
 
 # options
 setopt NO_HUP
@@ -47,3 +46,5 @@ source $ZSH/oh-my-zsh.sh
 if [ "$(arch)" = "arm64" ]; then ; eval "$(/opt/homebrew/bin/brew shellenv)"
 else; eval "$(/usr/local/bin/brew shellenv)";fi
 [ -d /home/linuxbrew/.linuxbrew ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+
+neofetch
