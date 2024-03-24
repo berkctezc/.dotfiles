@@ -5,6 +5,7 @@ export EDITOR='micro'
 export NODE_REPL_MODE='sloppy';
 export ZSH="$HOME/.oh-my-zsh"
 export MANPATH="/usr/local/man:$MANPATH"
+export PATH="$PATH:/$HOME/.dotnet/tools"
 
 # options
 setopt NO_HUP
