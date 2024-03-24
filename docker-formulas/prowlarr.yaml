@@ -1,0 +1,11 @@
+services:
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    environment:
+      - TZ=Etc/UTC
+    volumes:
+      - ~/config:/config
+    ports:
+      - 9696:9696
+    restart: unless-stopped

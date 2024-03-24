@@ -1,0 +1,13 @@
+services:
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - TZ=Etc/UTC
+    volumes:
+      - ~/.config:/config
+      - ~/Syncthing/media-sync/movies:/movies #optional
+      - ~/Downloads:/downloads #optional
+    ports:
+      - 7878:7878
+    restart: unless-stopped
