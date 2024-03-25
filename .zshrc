@@ -15,7 +15,6 @@ setopt EXTENDED_HISTORY
 setopt PROMPT_SUBST
 setopt CORRECT
 setopt COMPLETE_IN_WORD
-# setopt IGNORE_EOF
 
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="agnoster" # ZSH_THEME_RANDOM_CANDIDATES=(  )
@@ -43,9 +42,5 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-# homebrew for macOS and linux
-if [ "$(arch)" = "arm64" ]; then ; eval "$(/opt/homebrew/bin/brew shellenv)"
-else; eval "$(/usr/local/bin/brew shellenv)";fi
-[ -d /home/linuxbrew/.linuxbrew ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 neofetch
