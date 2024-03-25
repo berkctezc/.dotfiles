@@ -148,6 +148,7 @@
 
 	default = simple
 	followTags = true
+	autoSetupRemote = true
 
 [url "git@github.com:"]
 
