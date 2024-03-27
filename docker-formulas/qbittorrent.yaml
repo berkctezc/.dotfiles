@@ -6,8 +6,10 @@ services:
       - TZ=Etc/UTC
       - WEBUI_PORT=8080
       - TORRENTING_PORT=6881
+      - PUID=1000
+      - PGID=1000
     volumes:
-      - ~/.config:/config
+      - ~/.config/qbittorrent:/config
       - ~/Syncthing:/syncthing
       - ~/Downloads:/downloads
     ports:

@@ -4,8 +4,10 @@ services:
     container_name: radarr
     environment:
       - TZ=Etc/UTC
+      - PUID=1000
+      - PGID=1000
     volumes:
-      - ~/.config:/config
+      - ~/.config/radarr:/config
       - ~/Syncthing/media-sync/movies:/movies #optional
       - ~/Downloads:/downloads #optional
     ports:
