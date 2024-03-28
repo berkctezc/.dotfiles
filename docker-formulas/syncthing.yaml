@@ -2,7 +2,7 @@ version: "3"
 name: syncthing-server
 services:
   syncthing:
-    image: syncthing/syncthing:edge
+    image: syncthing/syncthing:rc
     container_name: syncthing
     hostname: synct-server
     environment:

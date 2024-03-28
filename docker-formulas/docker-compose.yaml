@@ -1,0 +1,86 @@
+version: '3.8'
+services:
+  
+  portainer-ce:
+    container_name: portainer
+    image: portainer/portainer-ce:alpine-sts
+    environment:
+      - PUID=1000
+      - PGID=1000
+    ports:
+        - 8000:8000
+        - 9443:9443
+    restart: always
+    volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+        - ~/.config/portainer_data:/data  
+ 
+  jellyfin:
+    image: jellyfin/jellyfin:unstable
+    container_name: jellyfin
+    network_mode: 'bridge'
+    ports:
+      - 8096:8096
+      - 8920:8920 #optional
+      - 7359:7359/udp #optional
+      - 1900:1900/udp #optional
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - ~/:/data
+      - ~/.config/jellyfin:/config
+      - ~/.cache/jellyfin:/cache
+    restart: 'unless-stopped'
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+
+  homarr:
+    container_name: homarr
+    image: ghcr.io/ajnart/homarr:latest
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ~/.config/homarr/configs:/app/data/configs
+      - ~/.config/homarr/icons:/app/public/icons
+      - ~/.config/homarr/data:/data
+    ports:
+      - '7575:7575'
+    environment:
+      - PUID=1000
+      - PGID=1000
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - TZ=Etc/UTC
+      - WEBUI_PORT=8080
+      - TORRENTING_PORT=6881
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - ~/.config/qbittorrent:/config
+      - ~/Syncthing:/syncthing
+      - ~/Downloads:/downloads
+    ports:
+      - 8080:8080
+      - 6881:6881
+      - 6881:6881/udp
+    restart: unless-stopped
+
+  syncthing:
+    image: syncthing/syncthing:rc
+    container_name: syncthing-server
+    hostname: synct-server
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - ~/Syncthing:/var/syncthing
+    ports:
+      - 8384:8384 # Web UI
+      - 22000:22000/tcp # TCP file transfers
+      - 22000:22000/udp # QUIC file transfers
+      - 21027:21027/udp # Receive local discovery broadcasts
+    restart: unless-stopped
