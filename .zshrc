@@ -52,7 +52,7 @@ alias localip="ipconfig getifaddr en0"
 alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 alias ifactive="ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'"
 # Maintanance
-alias update='sudo softwareupdate -i -a ; brew update && brew upgrade; npm install npm -g ; npm update -g && sudo gem update --system; sudo gem update'
+alias update='sudo softwareupdate -i -a ; brew update && brew upgrade ; sudo gem update --system; sudo gem update'
 alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
 alias cleanup="brew cleanup && sudo gem cleanup && echo 'started .DS_Store cleanup' && find . -type f -name '*.DS_Store' -delete 2>/dev/null"
 alias reload="exec $SHELL -l"
