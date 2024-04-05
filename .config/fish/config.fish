@@ -21,7 +21,7 @@ alias ips "ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[
 alias ifactive "ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'"
 # Maintanance
 alias macupdate 'sudo softwareupdate -i -a'
-alias update 'brew update && brew upgrade; ssudo gem update --system; sudo gem update'
+alias update 'brew update && brew upgrade; sudo gem update --system; sudo gem update'
 alias flush "dscacheutil -flushcache && killall -HUP mDNSResponder"
 alias cleanup "brew cleanup && sudo gem cleanup && echo 'started .DS_Store cleanup' && sudo find . -name ".DS_Store" -type f -delete && echo 'finished .DS_Store cleanup'"
 alias reload "exec $SHELL -l"
