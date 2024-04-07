@@ -1,43 +1,52 @@
 name: 'homelab-container'
 services:
 
+  ###########
+  # Portainer
+  ###########
   portainer-ce:
     container_name: portainer
     network_mode: bridge
     image: portainer/portainer-ce:alpine-sts
     environment:
-      - PUID=1000
-      - PGID=1000
+      PUID: "1000"
+      PGID: "1000"
     ports:
-        - 8000:8000
-        - 9443:9443
+      - "8000:8000"
+      - "9443:9443"
     restart: always
     volumes:
-        - /var/run/docker.sock:/var/run/docker.sock
-        - ~/.config/portainer_data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ~/.config/portainer_data:/data
 
+  ##########
+  # Jellyfin
+  ##########
   jellyfin:
     image: jellyfin/jellyfin:unstable
     container_name: jellyfin
     network_mode: bridge
     ports:
-      - 8096:8096
-      - 8920:8920 #optional
-      - 7359:7359/udp #optional
-      - 1900:1900/udp #optional
+      - "8096:8096"
+      - "8920:8920"
+      - "7359:7359/udp"
+      - "1900:1900/udp"
     environment:
-      - PUID=1000
-      - PGID=1000
+      PUID: "1000"
+      PGID: "1000"
     volumes:
       - ~/:/data
       - ~/.config/jellyfin:/config
       - ~/.cache/jellyfin:/cache
-    restart: 'unless-stopped'
+    restart: unless-stopped
     extra_hosts:
-      - 'host.docker.internal:host-gateway'
+      - "host.docker.internal:host-gateway"
     devices:
       - /dev/dri/renderD128:/dev/dri/renderD128
 
+  ########
+  # Homarr
+  ########
   homarr:
     container_name: homarr
     network_mode: bridge
@@ -49,69 +58,92 @@ services:
       - ~/.config/homarr/icons:/app/public/icons
       - ~/.config/homarr/data:/data
     ports:
-      - '7575:7575'
+      - "7575:7575"
     environment:
-      - PUID=1000
-      - PGID=1000
+      PUID: "1000"
+      PGID: "1000"
 
+  #############
+  # qBittorrent
+  #############
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
     network_mode: bridge
     environment:
-      - TZ=Etc/UTC
-      - WEBUI_PORT=8080
-      - TORRENTING_PORT=6881
-      - PUID=1000
-      - PGID=1000
+      TZ: "Etc/UTC"
+      WEBUI_PORT: "8080"
+      TORRENTING_PORT: "6881"
+      PUID: "1000"
+      PGID: "1000"
     volumes:
       - ~/.config/qbittorrent:/config
       - ~/Syncthing:/syncthing
       - ~/Downloads:/downloads
     ports:
-      - 8080:8080
-      - 6881:6881
-      - 6881:6881/udp
+      - "8080:8080"
+      - "6881:6881"
+      - "6881:6881/udp"
     restart: unless-stopped
 
+  ###########
+  # Syncthing
+  ###########
   syncthing:
     image: syncthing/syncthing:rc
     container_name: syncthing-server
     hostname: synct-server
     network_mode: bridge
     environment:
-      - PUID=1000
-      - PGID=1000
+      PUID: "1000"
+      PGID: "1000"
     volumes:
       - ~/Syncthing:/var/syncthing
     ports:
-      - 8384:8384 # Web UI
-      - 22000:22000/tcp # TCP file transfers
-      - 22000:22000/udp # QUIC file transfers
-      - 21027:21027/udp # Receive local discovery broadcasts
+      - "8384:8384"
+      - "22000:22000/tcp"
+      - "22000:22000/udp"
+      - "21027:21027/udp"
     restart: unless-stopped
 
   watchtower:
     container_name: watchtower
     volumes:
-        - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock
     image: containrrr/watchtower
     restart: unless-stopped
 
+  #################
+  # Kasm Workspaces
+  #################
   kasm:
     image: lscr.io/linuxserver/kasm:latest
     container_name: kasm
     privileged: true
     environment:
-      - PUID=1000
-      - PGID=1000
-      - KASM_PORT=443
+      PUID: "1000"
+      PGID: "1000"
+      KASM_PORT: "443"
     volumes:
       - ~/kasm/data:/opt
-      -  ~/kasm/profiles:/profiles #optional
-      - /dev/input:/dev/input #optional
-      - /run/udev/data:/run/udev/data #optional
+      - ~/kasm/profiles:/profiles
+      - /dev/input:/dev/input
+      - /run/udev/data:/run/udev/data
     ports:
-      - 3512:3000
-      - 489:443
+      - "3512:3000"
+      - "489:443"
     restart: unless-stopped
+    
+  #########
+  # Rancher
+  #########
+  rancher:
+    container_name: rancher-server
+    volumes:
+      - ~/rancher:/var/lib/rancher
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    privileged: true
+    image: rancher/rancher:latest
