@@ -1,3 +1,4 @@
+name: 'homelab-container'
 services:
 
   portainer-ce:
@@ -88,4 +89,29 @@ services:
       - 22000:22000/tcp # TCP file transfers
       - 22000:22000/udp # QUIC file transfers
       - 21027:21027/udp # Receive local discovery broadcasts
+    restart: unless-stopped
+
+  watchtower:
+    container_name: watchtower
+    volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+    image: containrrr/watchtower
+    restart: unless-stopped
+
+  kasm:
+    image: lscr.io/linuxserver/kasm:latest
+    container_name: kasm
+    privileged: true
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - KASM_PORT=443
+    volumes:
+      - ~/kasm/data:/opt
+      -  ~/kasm/profiles:/profiles #optional
+      - /dev/input:/dev/input #optional
+      - /run/udev/data:/run/udev/data #optional
+    ports:
+      - 3512:3000
+      - 489:443
     restart: unless-stopped
