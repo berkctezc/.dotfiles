@@ -51,8 +51,9 @@ services:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
     network_mode: bridge
+    env_file:
+      - ".env"
     environment:
-      TZ: "Etc/UTC"
       WEBUI_PORT: "8080"
       TORRENTING_PORT: "6881"
       PUID: "$(id -u)"
@@ -123,6 +124,7 @@ services:
   ###########
   rancher:
     container_name: rancher-server
+    image: rancher/rancher:latest
     volumes:
       - ~/rancher:/var/lib/rancher
     restart: unless-stopped
@@ -130,8 +132,6 @@ services:
       - "80:80"
       - "443:443"
     privileged: true
-    image: rancher/rancher:latest
-
 
   ###############
   # Filebrowser #
@@ -150,24 +150,21 @@ services:
       - "8764:80"
     restart: unless-stopped
 
-  #########
-  # Dashy #
-  #########
-  dashy:
-    image: lissy93/dashy
-    container_name: Dashy
-    volumes:
-      - ~/.config/dashy/:/app/public/
-    ports:
-      - "4628:80"
-    environment:
-      - NODE_ENV="production"
-      - PUID="$(id -u)"
-      - PGID="$(id -g)"
+  ###########
+  # Homarr #
+  ##########
+  homarr:
+    container_name: homarr
+    network_mode: bridge
+    image:  ghcr.io/ajnart/homarr:dev
     restart: unless-stopped
-    healthcheck:
-      test: ['CMD', 'node', '/app/services/healthcheck']
-      interval: 1m30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ~/.config/homarr/configs:/app/data/configs
+      - ~/.config/homarr/icons:/app/public/icons
+      - ~/.config/homarr/data:/data
+    ports:
+      - "7575:7575"
+    environment:
+      PUID: "$(id -u)"
+      PGID: "$(id -g)"
