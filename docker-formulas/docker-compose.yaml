@@ -1,16 +1,16 @@
 name: 'homelab-container'
 services:
 
-  ###########
-  # Portainer
-  ###########
+  #############
+  # Portainer #
+  #############
   portainer-ce:
     container_name: portainer
     network_mode: bridge
     image: portainer/portainer-ce:alpine-sts
     environment:
-      PUID: "1000"
-      PGID: "1000"
+      PUID: "$(id -u)"
+      PGID: "$(id -g)"
     ports:
       - "8000:8000"
       - "9443:9443"
@@ -19,9 +19,9 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ~/.config/portainer_data:/data
 
-  ##########
-  # Jellyfin
-  ##########
+  ############
+  # Jellyfin #
+  ############
   jellyfin:
     image: jellyfin/jellyfin:unstable
     container_name: jellyfin
@@ -32,8 +32,8 @@ services:
       - "7359:7359/udp"
       - "1900:1900/udp"
     environment:
-      PUID: "1000"
-      PGID: "1000"
+      PUID: "$(id -u)"
+      PGID: "$(id -g)"
     volumes:
       - ~/:/data
       - ~/.config/jellyfin:/config
@@ -44,28 +44,9 @@ services:
     devices:
       - /dev/dri/renderD128:/dev/dri/renderD128
 
-  ########
-  # Homarr
-  ########
-  homarr:
-    container_name: homarr
-    network_mode: bridge
-    image: ghcr.io/ajnart/homarr:latest
-    restart: unless-stopped
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ~/.config/homarr/configs:/app/data/configs
-      - ~/.config/homarr/icons:/app/public/icons
-      - ~/.config/homarr/data:/data
-    ports:
-      - "7575:7575"
-    environment:
-      PUID: "1000"
-      PGID: "1000"
-
-  #############
-  # qBittorrent
-  #############
+  ################
+  # qBittorrent #
+  ###############
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
@@ -74,8 +55,8 @@ services:
       TZ: "Etc/UTC"
       WEBUI_PORT: "8080"
       TORRENTING_PORT: "6881"
-      PUID: "1000"
-      PGID: "1000"
+      PUID: "$(id -u)"
+      PGID: "$(id -g)"
     volumes:
       - ~/.config/qbittorrent:/config
       - ~/Syncthing:/syncthing
@@ -86,17 +67,17 @@ services:
       - "6881:6881/udp"
     restart: unless-stopped
 
-  ###########
-  # Syncthing
-  ###########
+  ##############
+  # Syncthing #
+  #############
   syncthing:
     image: syncthing/syncthing:rc
     container_name: syncthing-server
     hostname: synct-server
     network_mode: bridge
     environment:
-      PUID: "1000"
-      PGID: "1000"
+      PUID: "$(id -u)"
+      PGID: "$(id -g)"
     volumes:
       - ~/Syncthing:/var/syncthing
     ports:
@@ -106,6 +87,9 @@ services:
       - "21027:21027/udp"
     restart: unless-stopped
 
+  ##############
+  # Watchtower #
+  ##############
   watchtower:
     container_name: watchtower
     volumes:
@@ -113,16 +97,16 @@ services:
     image: containrrr/watchtower
     restart: unless-stopped
 
-  #################
-  # Kasm Workspaces
-  #################
+  ###################
+  # Kasm Workspaces #
+  ###################
   kasm:
     image: lscr.io/linuxserver/kasm:latest
     container_name: kasm
     privileged: true
     environment:
-      PUID: "1000"
-      PGID: "1000"
+      PUID: "$(id -u)"
+      PGID: "$(id -g)"
       KASM_PORT: "443"
     volumes:
       - ~/kasm/data:/opt
@@ -134,9 +118,9 @@ services:
       - "489:443"
     restart: unless-stopped
     
-  #########
-  # Rancher
-  #########
+  ###########
+  # Rancher #
+  ###########
   rancher:
     container_name: rancher-server
     volumes:
@@ -147,3 +131,43 @@ services:
       - "443:443"
     privileged: true
     image: rancher/rancher:latest
+
+
+  ###############
+  # Filebrowser #
+  ###############
+  filebrowser:
+    image: filebrowser/filebrowser:s6
+    container_name: filebrowser
+    volumes:
+      - /home:/srv
+      - ~/.config/filebrowser/database/:/database/
+      - ~/.config/filebrowser/config/:/config/
+    environment:
+      - PUID="$(id -u)"
+      - PGID="$(id -g)"
+    ports:
+      - "8764:80"
+    restart: unless-stopped
+
+  #########
+  # Dashy #
+  #########
+  dashy:
+    image: lissy93/dashy
+    container_name: Dashy
+    volumes:
+      - ~/.config/dashy/:/app/public/
+    ports:
+      - "4628:80"
+    environment:
+      - NODE_ENV="production"
+      - PUID="$(id -u)"
+      - PGID="$(id -g)"
+    restart: unless-stopped
+    healthcheck:
+      test: ['CMD', 'node', '/app/services/healthcheck']
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
