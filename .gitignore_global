@@ -97,3 +97,4 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 **/micro/backups/**
 .wget-hsts
+**/fish/completions/**
