@@ -150,6 +150,10 @@
 	followTags = true
 	autoSetupRemote = true
 
+[pull]
+
+	rebase = true
+
 [url "git@github.com:"]
 
 	insteadOf = "gh:"
@@ -173,5 +177,3 @@
 [init]
 
 	defaultBranch = master
-[pull]
-	rebase = true
