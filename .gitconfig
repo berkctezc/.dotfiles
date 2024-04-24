@@ -96,11 +96,15 @@
 [credential]
 
 	credentialStore =  cache
+	helper = /usr/local/share/gcm-core/git-credential-manager
 	helper = /usr/bin/git-credential-manager
 	helper = /usr/local/bin/git-credential-manager
 	helper = /$HOME/.dotnet/tools/git-credential-manager
-	helper =
-	helper = /usr/local/share/gcm-core/git-credential-manager
+
+[credential "https://dev.azure.com"]
+
+	useHttpPath = true
+
 [color]
 
 	ui = auto
@@ -173,11 +177,3 @@
 [init]
 
 	defaultBranch = master
-
-[pull]
-
-	rebase = true
-
-[credential "https://dev.azure.com"]
-
-	useHttpPath = true
