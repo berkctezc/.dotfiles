@@ -52,7 +52,7 @@ end
 if status is-interactive
   atuin init fish --disable-up-arrow | source
 	if set -q TMUX
-    neofetch
+    fastfetch
 	end
 	# tmux new
 end
