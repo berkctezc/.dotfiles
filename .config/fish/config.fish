@@ -14,11 +14,14 @@ export MANPATH="/usr/local/man:$MANPATH"
 alias sudo 'sudo '
 alias week 'date +%V'
 alias tks 'tmux kill-server'
+alias neofetch 'fastfetch'
+
 # Network
 alias myip "dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip "ipconfig getifaddr en0"
 alias ips "ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 alias ifactive "ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'"
+
 # Maintanance
 alias macupdate 'sudo softwareupdate -i -a'
 alias update 'brew update && brew upgrade; sudo gem update --system; sudo gem update'
@@ -27,6 +30,7 @@ alias cleanup "brew cleanup && sudo gem cleanup && echo 'started .DS_Store clean
 alias reload "exec $SHELL -l"
 alias maintain "update && cleanup && flush && reload;"
 alias backup_brew "cd ~ && ./scripts/brew_list.sh"
+
 # Navigation
 alias ..  "cd .."
 alias ... "cd ../.."
