@@ -1,3 +1,5 @@
+#!/bin/bash
+
 sudo touch /etc/ssl/certs/ca-certificates.crt;
 
 sudo wget -O /etc/ssl/certs/ca-certificates.crt https://curl.se/ca/cacert.pem;

@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Free the Dock
 defaults write com.apple.Dock size-immutable -bool no; killall Dock
 

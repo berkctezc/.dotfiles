@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # run docker as user
 sudo groupadd docker;
 sudo usermod -aG docker $USER;
