@@ -9,6 +9,10 @@
 	export PATH="$PATH:$HOME/.local/bin"
 	export PATH="$PATH:/opt/homebrew/bin"
 
+	if [[ $(uname) != "Darwin" ]]; then
+	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+	fi
+
 # Zsh Options
 	setopt NO_HUP
 	setopt HIST_VERIFY
