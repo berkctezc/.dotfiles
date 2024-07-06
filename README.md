@@ -5,12 +5,12 @@
 stow, git
 
 ```shell
-# macOS
+# Brew (Darwin or Linux)
 brew install git stow
 # Arch Linux
-pacman -Sy git stow --noconfirm
+sudo pacman -Sy git stow --noconfirm
 # Debian or Ubuntu
-apt install git stow -y
+sudo apt install git stow -y
 ```
 
 ## Initialization
@@ -26,13 +26,13 @@ apt install git stow -y
 ## Restoration from remote repository
 
 ```bash
-#clone and enter directory
+# clone and enter directory
 git clone https://github.com/berkctezc/.dotfiles
   && cd .dotfiles;
 # adopt command is for solving conflicts between
 # already existing files and the ones you pulled
-stow . --adopt
+stow . --adopt;
 # after adopting use git reset to overwrite existing
 # files with the ones from the repo
-git reset --hard
+git reset --hard;
 ```
