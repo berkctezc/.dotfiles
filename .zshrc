@@ -9,8 +9,7 @@ setopt PROMPT_SUBST
 setopt CORRECT
 setopt COMPLETE_IN_WORD
 
-# https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="agnoster"
+ZSH_THEME="agnoster" # https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 
 plugins=(
 	# dev thingies
@@ -33,7 +32,8 @@ plugins=(
 	tmux screen
 )
 
-source $HOME/.dotfiles/.oh-my-zsh/oh-my-zsh.sh
+export ZSH="$HOME/.dotfiles/.oh-my-zsh";
+source $ZSH/oh-my-zsh.sh
 
 ##############
 # zsh + omz #
@@ -46,7 +46,6 @@ export LANG="en_US.UTF-8";
 export LC_ALL="en_US.UTF-8";
 export EDITOR='micro';
 export NODE_REPL_MODE='sloppy';
-export ZSH="$HOME/.dotfiles/.oh-my-zsh";
 export MANPATH="/usr/local/man:$MANPATH";
 export PATH="$PATH:/$HOME/.dotnet/tools";
 export PATH="$PATH:$HOME/.local/bin";
