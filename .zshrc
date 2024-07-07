@@ -33,7 +33,7 @@ plugins=(
 	tmux screen
 )
 
-source $ZSH/oh-my-zsh.sh
+source $HOME/.dotfiles/.oh-my-zsh/oh-my-zsh.sh
 
 ##############
 # zsh + omz #
