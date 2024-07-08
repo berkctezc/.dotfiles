@@ -1,6 +1,8 @@
 ##############
 # zsh + omz #
 #############
+export ZSH="$HOME/.dotfiles/.oh-my-zsh";
+
 setopt NO_HUP
 setopt HIST_VERIFY
 setopt SHARE_HISTORY
@@ -32,7 +34,6 @@ plugins=(
 	tmux screen
 )
 
-export ZSH="$HOME/.dotfiles/.oh-my-zsh";
 source $ZSH/oh-my-zsh.sh
 
 ##############
