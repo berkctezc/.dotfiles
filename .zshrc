@@ -1,6 +1,8 @@
 ##############
 # zsh + omz #
 #############
+export ZSH="$HOME/.dotfiles/.oh-my-zsh";
+
 setopt NO_HUP
 setopt HIST_VERIFY
 setopt SHARE_HISTORY
@@ -9,8 +11,7 @@ setopt PROMPT_SUBST
 setopt CORRECT
 setopt COMPLETE_IN_WORD
 
-# https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="agnoster"
+ZSH_THEME="agnoster" # https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 
 plugins=(
 	# dev thingies
@@ -33,7 +34,7 @@ plugins=(
 	tmux screen
 )
 
-source $HOME/.dotfiles/.oh-my-zsh/oh-my-zsh.sh
+source $ZSH/oh-my-zsh.sh
 
 ##############
 # zsh + omz #
@@ -46,7 +47,6 @@ export LANG="en_US.UTF-8";
 export LC_ALL="en_US.UTF-8";
 export EDITOR='micro';
 export NODE_REPL_MODE='sloppy';
-export ZSH="$HOME/.dotfiles/.oh-my-zsh";
 export MANPATH="/usr/local/man:$MANPATH";
 export PATH="$PATH:/$HOME/.dotnet/tools";
 export PATH="$PATH:$HOME/.local/bin";
@@ -67,9 +67,9 @@ alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[
 alias ifactive="ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'"
 
 # maintanance
-alias update='sudo softwareupdate -i -a ; brew update && brew upgrade ; sudo gem update --system; sudo gem update'
+alias update='brew update ; brew upgrade; sudo gem update --system; sudo gem update'
 alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
-alias cleanup="brew cleanup && sudo gem cleanup && echo 'started .DS_Store cleanup' && find . -type f -name '*.DS_Store' -delete 2>/dev/null"
+alias cleanup="brew cleanup ; sudo gem cleanup ; echo 'started .DS_Store cleanup' && sudo find . -name ".DS_Store" -type f -delete && echo 'finished .DS_Store cleanup'"
 alias reload="exec $SHELL -l"
 alias maintain="update && cleanup && flush && reload;"
 alias backup_brew="cd ~ && ./scripts/brew_list.sh"
