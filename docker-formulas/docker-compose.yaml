@@ -1,3 +1,4 @@
+
 name: 'homelab-container'
 services:
 
@@ -118,7 +119,7 @@ services:
       - "3512:3000"
       - "489:443"
     restart: unless-stopped
-    
+
   ###########
   # Rancher #
   ###########
@@ -168,3 +169,25 @@ services:
     environment:
       PUID: "$(id -u)"
       PGID: "$(id -g)"
+
+  #############
+  # Postgres #
+  ############
+  postgres:
+    container_name: postgres
+    image: postgres
+    network_mode: bridge
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      PGDATA: /data/postgres
+    volumes:
+       - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+volumes:
+    postgres:
