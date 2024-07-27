@@ -117,7 +117,7 @@ alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
 alias cleanup="brew cleanup ; sudo gem cleanup ; echo 'started .DS_Store cleanup' && sudo find . -name ".DS_Store" -type f -delete && echo 'finished .DS_Store cleanup'"
 alias reload="exec $SHELL -l"
 alias maintain="update && cleanup && flush && reload;"
-alias ubuntumaintain="sudo apt update -y && sudo apt upgrade -y &&  sudo apt full-upgrade -y && sudo apt dist-uprade -y && sudo apt autoremove -y && sudo apt autoclean -y"
+alias ubuntumaintain="sudo apt update -y && sudo apt upgrade -y &&  sudo apt full-upgrade -y && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo apt autoclean -y"
 alias backup_brew="cd ~ && ./scripts/brew_list.sh"
 
 # navigation
