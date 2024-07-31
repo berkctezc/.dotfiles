@@ -58,6 +58,8 @@ alias week='date +%V'
 alias tks='tmux kill-server'
 alias lscount='ls -1 | wc -l'
 alias cleandotnet='find . -iname "bin" -o -iname "obj" | xargs rm -rf'
+alias dotnethardrebuild='dotnet format; dotnet clean; find . -iname "bin" -o -iname "obj" | xargs rm -rf; dotnet restore ;dotnet build'
+alias nugetpurge='rm -rf ~/.nuget/packages'
 alias i="brew install"
 
 # network
