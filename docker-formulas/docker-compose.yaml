@@ -103,7 +103,7 @@ services:
   # Kasm Workspaces #
   ###################
   kasm:
-    image: lscr.io/linuxserver/kasm:latest
+    image: lscr.io/linuxserver/kasm:develop
     container_name: kasm
     privileged: true
     environment:
