@@ -97,9 +97,9 @@ alias tks='tmux kill-server'
 alias neofetch='fastfetch'
 alias lscount='ls -1 | wc -l'
 alias cleandotnet='find . -iname "bin" -o -iname "obj" | xargs rm -rf'
-alias dotnethardrebuild='dotnet format; dotnet clean; find . -iname "bin" -o -iname "obj" | xargs rm -rf; dotnet restore ;dotnet build'
+alias dotnethardrebuild='dotnet clean;find . -iname "bin" -o -iname "obj" | xargs rm -rf;dotnet restore ;dotnet build'
 alias nugetpurge='rm -rf ~/.nuget/packages/'
-alias i='brew install'
+alias i='brew install;'
 
 # network
 alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
