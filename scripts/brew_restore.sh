@@ -2,7 +2,7 @@
 # please provide env var first
 pkg_list="${PACKAGES_FILE}"
 
-shuf "$pkg_list" | while IFS= read -r package; do
+awk 'BEGIN {srand()} {print rand() "\t" $0}' "$pkg_list" | sort -k1,1n | cut -f2- | while IFS= read -r package; do
   (
     echo "Installing package: $package"
     HOMEBREW_NO_AUTO_UPDATE=1
