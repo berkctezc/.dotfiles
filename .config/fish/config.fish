@@ -62,7 +62,5 @@ if status is-interactive
   atuin init fish --disable-up-arrow | source
 	if set -q TMUX
     fastfetch;
-    else
-        tmux
 	end
 end
