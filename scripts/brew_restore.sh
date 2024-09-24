@@ -2,7 +2,9 @@
 # please provide env var first
 pkg_list="${PACKAGES_FILE}"
 
-awk 'BEGIN {srand()} {print rand() "\t" $0}' "$pkg_list" | sort -k1,1n | cut -f2- | while IFS= read -r package; do
+mapfile -t shuffled_packages < <(awk 'BEGIN {srand()} {print rand() "\t" $0}' "$pkg_list" | sort -k1,1n | cut -f2-)
+
+for package in "${shuffled_packages[@]}"; do
   (
     echo "Installing package: $package"
     HOMEBREW_NO_AUTO_UPDATE=1
