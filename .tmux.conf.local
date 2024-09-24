@@ -339,6 +339,8 @@ set -g default-terminal "xterm-256color"
 
 # start with mouse mode enabled
 set -g mouse on
+setw -g alternate-screen on
+
 
 # force Vi mode
 #  really you should export VISUAL or EDITOR environment variable, see manual

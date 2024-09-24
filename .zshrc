@@ -1,10 +1,20 @@
-##############
-# zsh + omz #
-#############
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+#if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+#fi
+
+##############
+# zsh + omz #
+#############
 export ZSH="$HOME/.dotfiles/.oh-my-zsh";
 
 setopt NO_HUP
@@ -20,7 +30,7 @@ ZSH_THEME="agnoster" # https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 plugins=(
 	# dev thingies
 	dotnet node npm pip python
-	git branch
+	git branch brew
 	kubectl kubectx
 	docker docker-compose
 	mongocli postgres redis-cli
@@ -28,17 +38,19 @@ plugins=(
 	textmate vscode
 	# zsh thingies
 	zsh-interactive-cd zsh-navigation-tools themes
-	web-search
+	web-search  zsh-autosuggestions
+	you-should-use zsh-history-substring-search
 	# os and system thingies
 	archlinux debian systemd
 	macos iterm2 brew
-	battery
+	battery web-search
 	# terminal utility thingies
 	fzf gnu-utils ssh sudo
 	tmux screen
 )
 
 source $ZSH/oh-my-zsh.sh
+source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
 
 ##############
 # zsh + omz #
@@ -60,7 +72,6 @@ export PATH="$PATH:/opt/homebrew/bin";
 alias sudo='sudo '
 alias week='date +%V'
 alias tks='tmux kill-server'
-alias lse='eza --icons'
 alias lscount='ls -1 | wc -l'
 alias cleandotnet='find . -iname "bin" -o -iname "obj" | xargs rm -rf'
 alias dotnethardrebuild='dotnet clean;find . -iname "bin" -o -iname "obj" | xargs rm -rf;dotnet restore;dotnet build'
@@ -106,10 +117,12 @@ else
 fi
 
 if [[ $- == *i* ]]; then
-  atuin init zsh --disable-up-arrow > /dev/null;
+  atuin init zsh --disable-up-arrow > /dev/null
   if [[ -n "$TMUX" ]]; then
-    fastfetch;
+    fastfetch
   else
-	tmux
+  	tmux new
   fi
 fi
+
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
