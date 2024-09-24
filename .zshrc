@@ -1,6 +1,10 @@
 ##############
 # zsh + omz #
 #############
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 export ZSH="$HOME/.dotfiles/.oh-my-zsh";
 
 setopt NO_HUP
@@ -105,5 +109,7 @@ if [[ $- == *i* ]]; then
   atuin init zsh --disable-up-arrow > /dev/null;
   if [[ -n "$TMUX" ]]; then
     fastfetch;
+  else
+	tmux
   fi
 fi
