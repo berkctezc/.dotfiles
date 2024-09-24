@@ -2,13 +2,13 @@
 # please provide env var first
 pkg_list="${PACKAGES_FILE}"
 
-while IFS= read -r package; do
+shuf "$pkg_list" | while IFS= read -r package; do
   (
-  	echo "Installing package: $package";
-	HOMEBREW_NO_AUTO_UPDATE=1
-  	brew install "$package";
-  	) &
-done < shuf "$pkg_list"
+    echo "Installing package: $package"
+    HOMEBREW_NO_AUTO_UPDATE=1
+    brew install "$package"
+  ) &
+done
 wait
 
 #brew install $(cat "$pkg_list")
