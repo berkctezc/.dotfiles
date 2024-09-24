@@ -8,7 +8,7 @@ while IFS= read -r package; do
 	HOMEBREW_NO_AUTO_UPDATE=1
   	brew install "$package";
   	) &
-done < "$pkg_list"
+done < shuf "$pkg_list"
 wait
 
 #brew install $(cat "$pkg_list")
