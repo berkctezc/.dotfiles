@@ -2,15 +2,13 @@
 # please provide env var first
 pkg_list="${PACKAGES_FILE}"
 
-mapfile -t shuffled_packages < <(awk 'BEGIN {srand()} {print rand() "\t" $0}' "$pkg_list" | sort -k1,1n | cut -f2-)
-
-for package in "${shuffled_packages[@]}"; do
+while IFS= read -r package; do
   (
-    echo "Installing package: $package"
+  	echo "Installing package: $package";
     HOMEBREW_NO_AUTO_UPDATE=1
-    brew install "$package"
-  ) &
-done
+  	brew install "$package";
+  )
+done < "$pkg_list"
 wait
 
 #brew install $(cat "$pkg_list")
