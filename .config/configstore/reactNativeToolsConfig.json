@@ -1,7 +1,7 @@
 {
-	"version": "1.10.0",
+	"version": "1.13.0",
 	"tipsConfig": {
-		"daysLeftBeforeGeneralTip": 2,
+		"daysLeftBeforeGeneralTip": 1,
 		"firstTimeMinDaysToRemind": 4,
 		"firstTimeMaxDaysToRemind": 6,
 		"minDaysToRemind": 6,
@@ -28,7 +28,7 @@
 				"networkInspectorLogsColorTheme": {}
 			}
 		},
-		"lastExtensionUsageDate": "2023-02-08T12:31:26.008Z"
+		"lastExtensionUsageDate": "2024-09-24T02:18:10.793Z"
 	},
 	"surveyConfig": {
 		"shortPeriodToRemind": 30,
