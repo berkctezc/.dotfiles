@@ -333,6 +333,7 @@ tmux_conf_copy_to_os_clipboard=true
 set -g xterm-keys on
 set-window-option -g xterm-keys on
 set -g default-terminal "xterm-256color"
+set -g allow-passthrough on
 
 # increase history size
 #set -g history-limit 10000
