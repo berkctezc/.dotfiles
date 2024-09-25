@@ -1,7 +1,7 @@
 ##############
 # zsh + omz #
 #############
-export ZSH="$HOME/.dotfiles/.oh-my-zsh";
+export ZSH="$HOME/.oh-my-zsh";
 
 setopt NO_HUP
 setopt HIST_VERIFY
@@ -11,7 +11,7 @@ setopt PROMPT_SUBST
 setopt CORRECT
 setopt COMPLETE_IN_WORD
 
-ZSH_THEME="agnoster" # https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="powerlevel10k/powerlevel10k" # https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 
 plugins=(
 	# dev thingies
