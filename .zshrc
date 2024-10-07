@@ -105,9 +105,9 @@ fi
 if [[ $- == *i* ]]; then
   atuin init zsh --disable-up-arrow > /dev/null
   if [[ -n "$TMUX" ]]; then
-    fastfetch
+    fastfetch;
   else
-  	tmux new
+  	tmux new;
   fi
 fi
 
