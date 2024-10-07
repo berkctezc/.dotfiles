@@ -50,7 +50,7 @@ if test (uname -s) = "Darwin"
   alias yum brew
   alias dnf brew
   alias pkg brew
-	alias chrome '/Applications/Thorium.app/Contents/MacOS/Thorium'
+  alias chrome '/Applications/Thorium.app/Contents/MacOS/Thorium'
   export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
   export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 else
@@ -61,8 +61,8 @@ end
 if status is-interactive
   atuin init fish --disable-up-arrow | source
 	if set -q TMUX
-      fastfetch;
-    else
-      tmux new
+        fastfetch;
+    else    
+        tmux new;
 	end
 end
