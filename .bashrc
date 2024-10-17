@@ -77,6 +77,8 @@ source "$OSH"/oh-my-bash.sh
 # bash + osh #
 ##############
 
+[ -n "$PS1" ] && source ~/.bash_profile;
+
 ############################################################
 
 # exports
