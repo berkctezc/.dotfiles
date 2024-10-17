@@ -212,6 +212,11 @@ services:
     restart: unless-stopped
     privileged: true
     network_mode: bridge
+    ports:
+        - 8123:8123
+    environment:
+      PUID: "$(id -u)"
+      PGID: "$(id -g)"
     devices:
       - /dev/ttyUSB0:/dev/ttyUSB0
 
