@@ -175,7 +175,7 @@ services:
   ############
   postgres:
     container_name: postgres
-    image: postgres:latest
+    image: postgres
     network_mode: bridge
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
@@ -211,7 +211,7 @@ services:
       - /run/dbus:/run/dbus:ro
     restart: unless-stopped
     privileged: true
-    network_mode: host
+    network_mode: bridge
     devices:
       - /dev/ttyUSB0:/dev/ttyUSB0
 
