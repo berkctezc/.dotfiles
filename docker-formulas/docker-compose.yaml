@@ -175,7 +175,7 @@ services:
   ############
   postgres:
     container_name: postgres
-    image: postgres
+    image: postgres:latest
     network_mode: bridge
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
@@ -198,6 +198,22 @@ services:
       - '6379:6379'
     volumes:
       - 'redis_data:/root/redis'
+
+  ##################
+  # HomeAssistant #
+  #################
+  homeassistant:
+    container_name: homeassistant
+    image: homeassistant/home-assistant:dev
+    volumes:
+      - ~/.config/homeassistant:/config
+      - /etc/localtime:/etc/localtime:ro
+      - /run/dbus:/run/dbus:ro
+    restart: unless-stopped
+    privileged: true
+    network_mode: host
+    devices:
+      - /dev/ttyUSB0:/dev/ttyUSB0
 
 volumes:
     postgres:
