@@ -248,7 +248,7 @@ services:
     environment:
       EULA: "TRUE"
     volumes:
-      - ./data:/data
+      - ~/mc-java-data:/data
   ###########
 
   ######################
@@ -264,7 +264,7 @@ services:
     environment:
       EULA: "TRUE"
     volumes:
-      - ./data:/data
+      - ~/mc-bedrock-data:/data
 #########################################################
 
   ###################
