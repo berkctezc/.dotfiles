@@ -266,33 +266,6 @@ services:
       - ~/mc-bedrock-data:/data
 #########################################################
 
-###########
-# Huggin #
-##########
-  mysql:
-    image: mysql:5.7
-    restart: always
-    #env_file:
-    volumes_from:
-      - mysqldata
-
-  web:
-    image: ghcr.io/huginn/huginn-single-process
-    restart: always
-    ports:
-      - "3001:3000"
-    depends_on:
-      - mysql
-
-  threaded:
-    image: ghcr.io/huginn/huginn-single-process
-    command: /scripts/init bin/threaded.rb
-    restart: always
-    depends_on:
-      - mysql
-      - web
-#########################################################
-
 ##############
 # Invidious #
 #############
