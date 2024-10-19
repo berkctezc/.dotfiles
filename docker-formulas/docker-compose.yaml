@@ -268,7 +268,7 @@ services:
 ################
 # Adguard Home #
 ################
-adguardhome:
+  adguardhome:
     container_name: adguardhome
     image: adguard/adguardhome:edge
     restart: unless-stopped
