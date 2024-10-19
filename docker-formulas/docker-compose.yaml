@@ -1,9 +1,9 @@
 name: 'homelab-container'
 services:
 
-  #############
-  # Portainer #
-  #############
+#############
+# Portainer #
+#############
   portainer-ce:
     container_name: portainer
     network_mode: bridge
@@ -18,11 +18,11 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ~/.config/portainer_data:/data
-  #########################################################
+#########################################################
 
-  ############
-  # Jellyfin #
-  ############
+############
+# Jellyfin #
+############
   jellyfin:
     image: jellyfin/jellyfin:unstable
     container_name: jellyfin
@@ -44,11 +44,11 @@ services:
       - "host.docker.internal:host-gateway"
     devices:
       - /dev/dri/renderD128:/dev/dri/renderD128
-  #########################################################
+#########################################################
 
-  ################
-  # qBittorrent #
-  ###############
+################
+# qBittorrent #
+###############
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
@@ -69,11 +69,11 @@ services:
       - "6881:6881"
       - "6881:6881/udp"
     restart: unless-stopped
-  #########################################################
+#########################################################
 
-  ##############
-  # Syncthing #
-  #############
+##############
+# Syncthing #
+#############
   syncthing:
     image: syncthing/syncthing:rc
     container_name: syncthing-server
@@ -90,22 +90,22 @@ services:
       - "22000:22000/udp"
       - "21027:21027/udp"
     restart: unless-stopped
-  #########################################################
+#########################################################
 
-  ##############
-  # Watchtower #
-  ##############
+##############
+# Watchtower #
+##############
   watchtower:
     container_name: watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     image: containrrr/watchtower:latest-dev
     restart: unless-stopped
-  #########################################################
+#########################################################
 
-  ###################
-  # Kasm Workspaces #
-  ###################
+###################
+# Kasm Workspaces #
+###################
   kasm:
     image: lscr.io/linuxserver/kasm:develop
     container_name: kasm
@@ -123,11 +123,11 @@ services:
       - "3512:3000"
       - "489:443"
     restart: unless-stopped
-  #########################################################
+#########################################################
 
-  ###########
-  # Rancher #
-  ###########
+###########
+# Rancher #
+###########
   rancher:
     container_name: rancher-server
     image: rancher/rancher:latest
@@ -138,11 +138,11 @@ services:
       - "80:80"
       - "443:443"
     privileged: true
-  #########################################################
+#########################################################
 
-  ###############
-  # Filebrowser #
-  ###############
+###############
+# Filebrowser #
+###############
   filebrowser:
     image: filebrowser/filebrowser:s6
     container_name: filebrowser
@@ -156,11 +156,11 @@ services:
     ports:
       - "8764:80"
     restart: unless-stopped
-  #########################################################
+#########################################################
 
-  ###########
-  # Homarr #
-  ##########
+###########
+# Homarr #
+##########
   homarr:
     container_name: homarr
     network_mode: bridge
@@ -176,11 +176,11 @@ services:
     environment:
       PUID: "$(id -u)"
       PGID: "$(id -g)"
-  #########################################################
+#########################################################
 
-  #############
-  # Postgres #
-  ############
+#############
+# Postgres #
+############
   postgres:
     container_name: postgres
     image: postgres
@@ -194,11 +194,11 @@ services:
     ports:
       - "6432:5432"
     restart: unless-stopped
-  #########################################################
+#########################################################
 
-  ##########
-  # Redis #
-  #########
+##########
+# Redis #
+#########
   redis:
     container_name: redis
     image: redis
@@ -210,11 +210,11 @@ services:
       - '6379:6379'
     volumes:
       - 'redis_data:/root/redis'
-  #########################################################
+#########################################################
 
-  ##################
-  # HomeAssistant #
-  #################
+##################
+# HomeAssistant #
+#################
   homeassistant:
     container_name: homeassistant
     image: homeassistant/home-assistant:dev
@@ -232,11 +232,11 @@ services:
       PGID: "$(id -g)"
     devices:
       - /dev/ttyUSB0:/dev/ttyUSB0
-  #########################################################
+#########################################################
 
-  ###################
-  # Minecraft Java #
-  ##################
+###################
+# Minecraft Java #
+##################
   mc:
     image: itzg/minecraft-server
     tty: true
@@ -248,11 +248,11 @@ services:
       EULA: "TRUE"
     volumes:
       - ~/mc-java-data:/data
-  ###########
+#########################################################
 
-  ######################
-  # Minecraft Bedrock #
-  ####################
+######################
+# Minecraft Bedrock #
+####################
   mc-bedrock:
     image: itzg/minecraft-bedrock-server
     tty: true
@@ -264,15 +264,11 @@ services:
       EULA: "TRUE"
     volumes:
       - ~/mc-bedrock-data:/data
-  #########################################################
+#########################################################
 
-  ###########
-  # Huggin #
-  ##########
-  mysqldata:
-    image: mysql:5.7
-    command: /bin/true
-
+###########
+# Huggin #
+##########
   mysql:
     image: mysql:5.7
     restart: always
@@ -295,72 +291,11 @@ services:
     depends_on:
       - mysql
       - web
-  #########################################################
+#########################################################
 
-  #################
-  # TubeArchivist #
-  #################
-  tubearchivist:
-    container_name: tubearchivist
-    restart: unless-stopped
-    image: bbilly1/tubearchivist
-    ports:
-      - 8001:8000
-    volumes:
-      - media:/youtube
-      - cache:/cache
-    environment:
-      - ES_URL=http://archivist-es:9200
-      - REDIS_HOST=archivist-redis
-      - HOST_UID=1000
-      - HOST_GID=1000
-      - TA_HOST=tubearchivist.local
-      - TA_USERNAME=tubearchivist
-      - TA_PASSWORD=verysecret
-      - ELASTIC_PASSWORD=verysecret
-      - TZ=America/New_York
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8001/health" ]
-      interval: 2m
-      timeout: 10s
-      retries: 3
-      start_period: 30s
-    depends_on:
-      - archivist-es
-      - archivist-redis
-  archivist-redis:
-    image: redis/redis-stack-server
-    container_name: archivist-redis
-    restart: unless-stopped
-    expose:
-      - "6379"
-    volumes:
-      - redis:/data
-    depends_on:
-      - archivist-es
-  archivist-es:
-    image: bbilly1/tubearchivist-es
-    container_name: archivist-es
-    restart: unless-stopped
-    environment:
-      - "ELASTIC_PASSWORD=verysecret"
-      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
-      - "xpack.security.enabled=true"
-      - "discovery.type=single-node"
-      - "path.repo=/usr/share/elasticsearch/data/snapshot"
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    volumes:
-      - es:/usr/share/elasticsearch/data
-    expose:
-      - "9200"
-  #########################################################
-
-  ##############
-  # Invidious #
-  #############
+##############
+# Invidious #
+#############
   invidious:
     image: quay.io/invidious/invidious:latest
     restart: unless-stopped
@@ -417,11 +352,11 @@ services:
       POSTGRES_DB: invidious
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB" ]
-  #########################################################
+#########################################################
 
-  #############
-  # TubeSync #
-  ############
+#############
+# TubeSync #
+############
   tubesync:
     image: ghcr.io/meeb/tubesync:latest
     container_name: tubesync
@@ -441,21 +376,21 @@ services:
 #############
 # Pi-Hole #
 ############
-pihole:
-  container_name: pihole
-  image: pihole/pihole:latest
-  network_mode: "host"
-  ports:
-    - "53:53/tcp"
-    - "53:53/udp"
-    - "67:67/udp"
-    - "80:80/tcp"
-  volumes:
-    - './etc-pihole:/etc/pihole'
-    - './etc-dnsmasq.d:/etc/dnsmasq.d'
-  cap_add:
-    - NET_ADMIN
-  restart: unless-stopped
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    network_mode: "host"
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "67:67/udp"
+      - "80:80/tcp"
+    volumes:
+      - './etc-pihole:/etc/pihole'
+      - './etc-dnsmasq.d:/etc/dnsmasq.d'
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
 
 volumes:
   media:
