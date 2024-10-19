@@ -293,28 +293,6 @@ services:
 
 #########################################################
 
-#############
-# Pi-Hole #
-############
-  pihole:
-    container_name: pihole
-    image: pihole/pihole:latest
-    network_mode: host
-    environment:
-      - DNSMASQ_USER=root
-    ports:
-      - "53:53/tcp"
-      - "53:53/udp"
-      - "67:67/udp"
-      - "80:80/tcp"
-    volumes:
-      - '~/.config/pihole/etc:/etc/pihole'
-      - '~/.config/pihole/dnsmasq:/etc/dnsmasq.d'
-    cap_add:
-      - NET_ADMIN
-    restart: unless-stopped
-#########################################################
-
 volumes:
   cache:
   postgres:
