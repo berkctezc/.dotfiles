@@ -1,4 +1,3 @@
-
 name: 'homelab-container'
 services:
 
@@ -19,7 +18,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ~/.config/portainer_data:/data
-#########################################################
+  #########################################################
 
   ############
   # Jellyfin #
@@ -45,7 +44,7 @@ services:
       - "host.docker.internal:host-gateway"
     devices:
       - /dev/dri/renderD128:/dev/dri/renderD128
-#########################################################
+  #########################################################
 
   ################
   # qBittorrent #
@@ -70,7 +69,7 @@ services:
       - "6881:6881"
       - "6881:6881/udp"
     restart: unless-stopped
-#########################################################
+  #########################################################
 
   ##############
   # Syncthing #
@@ -91,7 +90,7 @@ services:
       - "22000:22000/udp"
       - "21027:21027/udp"
     restart: unless-stopped
-#########################################################
+  #########################################################
 
   ##############
   # Watchtower #
@@ -102,7 +101,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     image: containrrr/watchtower:latest-dev
     restart: unless-stopped
-#########################################################
+  #########################################################
 
   ###################
   # Kasm Workspaces #
@@ -124,7 +123,7 @@ services:
       - "3512:3000"
       - "489:443"
     restart: unless-stopped
-#########################################################
+  #########################################################
 
   ###########
   # Rancher #
@@ -139,7 +138,7 @@ services:
       - "80:80"
       - "443:443"
     privileged: true
-#########################################################
+  #########################################################
 
   ###############
   # Filebrowser #
@@ -157,7 +156,7 @@ services:
     ports:
       - "8764:80"
     restart: unless-stopped
-#########################################################
+  #########################################################
 
   ###########
   # Homarr #
@@ -165,7 +164,7 @@ services:
   homarr:
     container_name: homarr
     network_mode: bridge
-    image:  ghcr.io/ajnart/homarr:dev
+    image: ghcr.io/ajnart/homarr:dev
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -177,7 +176,7 @@ services:
     environment:
       PUID: "$(id -u)"
       PGID: "$(id -g)"
-#########################################################
+  #########################################################
 
   #############
   # Postgres #
@@ -191,11 +190,11 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
       PGDATA: /data/postgres
     volumes:
-       - postgres:/data/postgres
+      - postgres:/data/postgres
     ports:
       - "6432:5432"
     restart: unless-stopped
-#########################################################
+  #########################################################
 
   ##########
   # Redis #
@@ -211,7 +210,7 @@ services:
       - '6379:6379'
     volumes:
       - 'redis_data:/root/redis'
-#########################################################
+  #########################################################
 
   ##################
   # HomeAssistant #
@@ -227,13 +226,13 @@ services:
     privileged: true
     network_mode: host
     ports:
-        - 8123:8123
+      - 8123:8123
     environment:
       PUID: "$(id -u)"
       PGID: "$(id -g)"
     devices:
       - /dev/ttyUSB0:/dev/ttyUSB0
-#########################################################
+  #########################################################
 
   ###################
   # Minecraft Java #
@@ -265,37 +264,7 @@ services:
       EULA: "TRUE"
     volumes:
       - ~/mc-bedrock-data:/data
-#########################################################
-
-  ###################
-  # YT-DL Material #
-  ##################
-  ytdl_material:
-      environment:
-          ytdl_mongodb_connection_string: 'mongodb://ytdl-mongo-db:27017'
-          ytdl_use_local_db: 'false'
-          write_ytdl_config: 'true'
-      restart: unless-stopped
-      depends_on:
-          - ytdl-mongo-db
-      volumes:
-          - ./appdata:/app/appdata
-          - ./audio:/app/audio
-          - ./video:/app/video
-          - ./subscriptions:/app/subscriptions
-          - ./users:/app/users
-      ports:
-          - "8998:17442"
-      image: tzahi12345/youtubedl-material:latest
-  ytdl-mongo-db:
-      image: mongo:4
-      logging:
-          driver: "none"
-      container_name: mongo-db
-      restart: always
-      volumes:
-          - ./db/:/data/db
-#########################################################
+  #########################################################
 
   ###########
   # Huggin #
@@ -308,7 +277,6 @@ services:
     image: mysql:5.7
     restart: always
     #env_file:
-    #  - ../mysql.env
     volumes_from:
       - mysqldata
 
@@ -317,9 +285,6 @@ services:
     restart: always
     ports:
       - "3001:3000"
-    #env_file:
-    #  - ../mysql.env
-    #  - ../secrets.env
     depends_on:
       - mysql
 
@@ -327,13 +292,10 @@ services:
     image: ghcr.io/huginn/huginn-single-process
     command: /scripts/init bin/threaded.rb
     restart: always
-    #env_file:
-    #  - ../mysql.env
-    #  - ../secrets.env
     depends_on:
       - mysql
       - web
-#########################################################
+  #########################################################
 
   #################
   # TubeArchivist #
@@ -348,17 +310,17 @@ services:
       - media:/youtube
       - cache:/cache
     environment:
-      - ES_URL=http://archivist-es:9200     # needs protocol e.g. http and port
-      - REDIS_HOST=archivist-redis          # don't add protocol
+      - ES_URL=http://archivist-es:9200
+      - REDIS_HOST=archivist-redis
       - HOST_UID=1000
       - HOST_GID=1000
-      - TA_HOST=tubearchivist.local         # set your host name
-      - TA_USERNAME=tubearchivist           # your initial TA credentials
-      - TA_PASSWORD=verysecret              # your initial TA credentials
-      - ELASTIC_PASSWORD=verysecret         # set password for Elasticsearch
-      - TZ=America/New_York                 # set your time zone
+      - TA_HOST=tubearchivist.local
+      - TA_USERNAME=tubearchivist
+      - TA_PASSWORD=verysecret
+      - ELASTIC_PASSWORD=verysecret
+      - TZ=America/New_York
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      test: [ "CMD", "curl", "-f", "http://localhost:8001/health" ]
       interval: 2m
       timeout: 10s
       retries: 3
@@ -377,11 +339,11 @@ services:
     depends_on:
       - archivist-es
   archivist-es:
-    image: bbilly1/tubearchivist-es         # only for amd64, or use official es 8.14.3
+    image: bbilly1/tubearchivist-es
     container_name: archivist-es
     restart: unless-stopped
     environment:
-      - "ELASTIC_PASSWORD=verysecret"       # matching Elasticsearch password
+      - "ELASTIC_PASSWORD=verysecret"
       - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
       - "xpack.security.enabled=true"
       - "discovery.type=single-node"
@@ -391,29 +353,23 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - es:/usr/share/elasticsearch/data    # check for permission error when using bind mount, see readme
+      - es:/usr/share/elasticsearch/data
     expose:
       - "9200"
-#########################################################
+  #########################################################
 
   ##############
   # Invidious #
   #############
   invidious:
     image: quay.io/invidious/invidious:latest
-    # image: quay.io/invidious/invidious:latest-arm64 # ARM64/AArch64 devices
     restart: unless-stopped
     ports:
       - "127.0.0.1:3002:3000"
     environment:
-      # Please read the following file for a comprehensive list of all available
-      # configuration options and their associated syntax:
-      # https://github.com/iv-org/invidious/blob/master/config/config.example.yml
       INVIDIOUS_CONFIG: |
         db:
           dbname: invidious
-          user: kemal
-          password: kemal
           host: invidious-db
           port: 5432
         check_tables: true
@@ -440,7 +396,7 @@ services:
   inv_sig_helper:
     image: quay.io/invidious/inv-sig-helper:latest
     init: true
-    command: ["--tcp", "0.0.0.0:12999"]
+    command: [ "--tcp", "0.0.0.0:12999" ]
     environment:
       - RUST_LOG=info
     restart: unless-stopped
@@ -459,19 +415,18 @@ services:
       - ./docker/init-invidious-db.sh:/docker-entrypoint-initdb.d/init-invidious-db.sh
     environment:
       POSTGRES_DB: invidious
-      POSTGRES_USER: kemal
-      POSTGRES_PASSWORD: kemal
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
-#########################################################
+      test: [ "CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB" ]
+  #########################################################
 
-#############
-# TubeSync #
-############
+  #############
+  # TubeSync #
+  ############
   tubesync:
     image: ghcr.io/meeb/tubesync:latest
     container_name: tubesync
     restart: unless-stopped
+    network_mode: bridge
     ports:
       - 4848:4848
     volumes:
@@ -482,6 +437,25 @@ services:
       PGID: "$(id -g)"
 
 #########################################################
+
+#############
+# Pi-Hole #
+############
+pihole:
+  container_name: pihole
+  image: pihole/pihole:latest
+  network_mode: "host"
+  ports:
+    - "53:53/tcp"
+    - "53:53/udp"
+    - "67:67/udp"
+    - "80:80/tcp"
+  volumes:
+    - './etc-pihole:/etc/pihole'
+    - './etc-dnsmasq.d:/etc/dnsmasq.d'
+  cap_add:
+    - NET_ADMIN
+  restart: unless-stopped
 
 volumes:
   media:
