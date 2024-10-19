@@ -237,7 +237,7 @@ services:
 ###################
 # Minecraft Java #
 ##################
-  mc:
+  minecraft:
     image: itzg/minecraft-server
     tty: true
     stdin_open: true
@@ -253,7 +253,7 @@ services:
 ######################
 # Minecraft Bedrock #
 ####################
-  mc-bedrock:
+  minecraft-bedrock:
     image: itzg/minecraft-bedrock-server
     tty: true
     stdin_open: true
@@ -306,11 +306,7 @@ services:
 #########################################################
 
 volumes:
-  media:
   cache:
-  redis:
-  es:
-  postgresdata:
   postgres:
   redis_data:
     driver: local
