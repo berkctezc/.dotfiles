@@ -22,13 +22,14 @@ services:
 
   agent:
     container_name: portainer_agent
+    network_mode: bridge
     ports:
       - "9001:9001"
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /var/lib/docker/volumes:/var/lib/docker/volumes
-    image: portainer/agent:latest
+    image: portainer/agent:alpine-sts
 
   #########################################################
 
@@ -90,7 +91,7 @@ services:
     image: syncthing/syncthing:rc
     container_name: syncthing-server
     hostname: synct-server
-    network_mode: host
+    network_mode: bridge
     environment:
       PUID: "$(id -u)"
       PGID: "$(id -g)"
@@ -108,6 +109,7 @@ services:
   # Watchtower #
   ##############
   watchtower:
+    network_mode: bridge
     container_name: watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -236,7 +238,7 @@ services:
       - /run/dbus:/run/dbus:ro
     restart: unless-stopped
     privileged: true
-    network_mode: host
+    network_mode: bridge
     ports:
       - 8123:8123
     environment:
