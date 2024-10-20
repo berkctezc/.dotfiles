@@ -9,6 +9,7 @@ esac
 
 # Path to your oh-my-bash installation.
 export OSH="$HOME/.oh-my-bash"
+. "$HOME/.cargo/env"
 
 # osh configuration
 OSH_THEME="agnoster"
