@@ -1,5 +1,6 @@
 name: 'homelab-container'
 services:
+#############
 
   #############
   # Portainer #
@@ -30,8 +31,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /var/lib/docker/volumes:/var/lib/docker/volumes
     image: portainer/agent:alpine-sts
-
-  #########################################################
+#########################################################
 
   ############
   # Jellyfin #
@@ -57,7 +57,7 @@ services:
       - "host.docker.internal:host-gateway"
     devices:
       - /dev/dri/renderD128:/dev/dri/renderD128
-  #########################################################
+#########################################################
 
   ################
   # qBittorrent #
@@ -82,7 +82,7 @@ services:
       - "6881:6881"
       - "6881:6881/udp"
     restart: unless-stopped
-  #########################################################
+#########################################################
 
   ##############
   # Syncthing #
@@ -103,7 +103,7 @@ services:
       - "22000:22000/udp"
       - "21027:21027/udp"
     restart: unless-stopped
-  #########################################################
+#########################################################
 
   ##############
   # Watchtower #
@@ -115,7 +115,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     image: containrrr/watchtower:latest-dev
     restart: unless-stopped
-  #########################################################
+#########################################################
 
   ###################
   # Kasm Workspaces #
@@ -137,7 +137,7 @@ services:
       - "3512:3000"
       - "489:443"
     restart: unless-stopped
-  #########################################################
+#########################################################
 
   ###########
   # Rancher #
@@ -152,7 +152,7 @@ services:
       - "89:80"
       - "446:443"
     privileged: true
-  #########################################################
+#########################################################
 
   ###############
   # Filebrowser #
@@ -170,27 +170,8 @@ services:
     ports:
       - "8764:80"
     restart: unless-stopped
-  #########################################################
 
-  ###########
-  # Homarr #
-  ##########
-  homarr:
-    container_name: homarr
-    network_mode: bridge
-    image: ghcr.io/ajnart/homarr:dev
-    restart: unless-stopped
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ~/.config/homarr/configs:/app/data/configs
-      - ~/.config/homarr/icons:/app/public/icons
-      - ~/.config/homarr/data:/data
-    ports:
-      - "7575:7575"
-    environment:
-      PUID: "$(id -u)"
-      PGID: "$(id -g)"
-  #########################################################
+#########################################################
 
   #############
   # Postgres #
@@ -208,7 +189,7 @@ services:
     ports:
       - "6432:5432"
     restart: unless-stopped
-  #########################################################
+#########################################################
 
   ##########
   # Redis #
@@ -224,7 +205,7 @@ services:
       - '6379:6379'
     volumes:
       - 'redis_data:/root/redis'
-  #########################################################
+#########################################################
 
   ##################
   # HomeAssistant #
@@ -246,7 +227,7 @@ services:
       PGID: "$(id -g)"
     devices:
       - /dev/ttyUSB0:/dev/ttyUSB0
-  #########################################################
+#########################################################
 
   #############
   # TubeSync #
@@ -264,11 +245,54 @@ services:
     environment:
       PUID: "$(id -u)"
       PGID: "$(id -g)"
-
 #########################################################
 
+  ##############
+  # Prometheus #
+  ##############
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:main
+    network_mode: bridge
+    volumes:
+      - ~/.config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9091:9090"
+    restart: unless-stopped
+#########################################################
+
+  ###################
+  # Node Exporter  #
+  #################
+  node_exporter:
+    container_name: node_exporter
+    image: prom/node-exporter:master
+    #network_mode: bridge
+    #ports:
+    #  - "9100:9100"
+    restart: unless-stopped
+#########################################################
+
+  ############
+  # Grafana  #
+  ############
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:main-ubuntu
+    network_mode: bridge
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - ~/.config/grafana:/var/lib/grafana
+    restart: unless-stopped
+#########################################################
+
+###################
 volumes:
   cache:
   postgres:
   redis_data:
     driver: local
+###################
