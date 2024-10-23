@@ -1,7 +1,6 @@
 ### Author: https://github.com/mathiasbynens
 # Add `~/bin` to the `$PATH`
 export PATH="$HOME/bin:$PATH";
-. "$HOME/.cargo/env"
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
