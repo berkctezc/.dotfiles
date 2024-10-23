@@ -11,7 +11,7 @@ setopt PROMPT_SUBST
 setopt CORRECT
 setopt COMPLETE_IN_WORD
 
-ZSH_THEME="powerlevel10k/powerlevel10k" # https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="agnoster" # https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 
 plugins=(
 	# dev thingies
@@ -110,7 +110,4 @@ if [[ $- == *i* ]]; then
   fi
 fi
 
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
