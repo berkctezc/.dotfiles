@@ -199,7 +199,7 @@ services:
     privileged: true
     network_mode: bridge
     ports:
-      - 8123:8123
+      - 8124:8123
     environment:
       PUID: "$(id -u)"
       PGID: "$(id -g)"
@@ -266,6 +266,35 @@ services:
       - ~/.config/grafana:/var/lib/grafana
     restart: unless-stopped
 #########################################################
+
+  #############
+  # Crafty 4  #
+  #############
+  crafty:
+    container_name: crafty_container
+    image: registry.gitlab.com/crafty-controller/crafty-4:latest
+    restart: always
+    environment:
+        - TZ=Etc/UTC
+    ports:
+        - "8443:8443"
+        - "8123:8123"
+        - "19132:19132/udp"
+        - "25500-25600:25500-25600"
+    volumes:
+        - ~/.config/crafty/backups:/crafty/backups
+        - ~/.config/crafty/logs:/crafty/logs
+        - ~/.config/crafty/servers:/crafty/servers
+        - ~/.config/crafty/config:/crafty/app/config
+        - ~/.config/crafty/import:/crafty/import
+#########################################################
+  uptime-kuma:
+    image: louislam/uptime-kuma:1
+    volumes:
+      - ~/.config/uptime-kuma/data:/app/data
+    ports:
+      - 3001:3001
+    restart: unless-stopped
 
 ###################
 volumes:
