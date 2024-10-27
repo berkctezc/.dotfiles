@@ -288,6 +288,10 @@ services:
         - ~/.config/crafty/config:/crafty/app/config
         - ~/.config/crafty/import:/crafty/import
 #########################################################
+
+  ###############
+  # Uptime Kuma #
+  ###############
   uptime-kuma:
     image: louislam/uptime-kuma:1
     volumes:
@@ -295,6 +299,24 @@ services:
     ports:
       - 3001:3001
     restart: unless-stopped
+#########################################################
+  
+  ###############
+  # Code Server #
+  ###############
+  code-server:
+    image: lscr.io/linuxserver/code-server:latest
+    container_name: code-server
+    environment:
+      PUID: "$(id -u)"
+      PGID: "$(id -g)"
+      TZ: "Etc/UTC"
+    volumes:
+      - ~/.config/code-server:/config
+    ports:
+      - 8447:8443
+    restart: unless-stopped
+#########################################################
 
 ###################
 volumes:
