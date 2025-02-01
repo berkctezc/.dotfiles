@@ -28,7 +28,7 @@ alias ifactive "ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'
 
 # maintanance
 alias macupdate 'sudo softwareupdate -i -a'
-alias update 'brew update ; brew upgrade --formula; brew upgrade --cask --greedy;'
+alias update 'brew update ; brew upgrade --formula; brew upgrade'
 alias gemupdate 'sudo gem update --system; sudo gem update;'
 alias flush "dscacheutil -flushcache && killall -HUP mDNSResponder"
 alias cleanup "brew cleanup ; sudo gem cleanup ; echo 'started .DS_Store cleanup' && sudo find . -name ".DS_Store" -type f -delete && echo 'finished .DS_Store cleanup'"
