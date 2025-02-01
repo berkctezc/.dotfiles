@@ -1,25 +1,25 @@
 [alias]
-	l = log --pretty=oneline -n 20 --graph --abbrev-commit # View abbreviated SHA, description, and history graph of the latest 20 commits.
-	s = status -s # View the current working tree status using the short format.
-	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat" # Show the diff between the latest commit and the current state.
-	di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d" # `git di $number` shows the diff between the state `$number` revisions ago and the current state.
-	p = pull --recurse-submodules # Pull in remote changes for the current repository and all its submodules.
-	c = clone --recursive # Clone a repository including all submodules.
-	ca = !git add -A && git commit -av # Commit all changes.
-	go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f" # Switch to a branch, creating it if necessary.
+	l = log --pretty=oneline -n 20 --graph --abbrev-commit
+	s = status -s
+	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+	di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
+	p = pull --recurse-submodules
+	c = clone --recursive
+	ca = !git add -A && git commit -av
+	go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
 	tags = tag -l
 	branches = branch --all
 	remotes = remote --verbose
-	aliases = config --get-regexp alias # List aliases.
-	amend = commit --amend --reuse-message=HEAD # Amend the currently staged files to the latest commit.
-	credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f" # Credit an author on the latest commit.
-	reb = "!r() { git rebase -i HEAD~$1; }; r" # Interactive rebase with the given number of latest commits.
-	retag = "!r() { git tag -d $1 && git push origin :refs/tags/$1 && git tag $1; }; r" # Remove the old tag with this name and tag the latest commit with it.
-	fb = "!f() { git branch -a --contains $1; }; f" # Find branches containing commit
-	ft = "!f() { git describe --always --contains $1; }; f" # Find tags containing commit
-	fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f" # Find commits by source code
-	fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f" # Find commits by commit message
-	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d" # Remove branches that have already been merged with main. a.k.a. ‘delete merged’
+	aliases = config --get-regexp alias
+	amend = commit --amend --reuse-message=HEAD
+	credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
+	reb = "!r() { git rebase -i HEAD~$1; }; r"
+	retag = "!r() { git tag -d $1 && git push origin :refs/tags/$1 && git tag $1; }; r"
+	fb = "!f() { git branch -a --contains $1; }; f"
+	ft = "!f() { git describe --always --contains $1; }; f"
+	fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
+	fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
+	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
 	contributors = shortlog --summary --numbered
 	whoami = config user.email
 
@@ -55,10 +55,10 @@
 
 [credential]
 
-	credentialStore =  cache
-	helper = store
-	helper = /usr/local/bin/git-credential-manager
+	helper = osxkeychain
+	helper = manager
 	helper = /usr/local/share/gcm-core/git-credential-manager
+	helper = cache
 
 [color]
 
@@ -73,9 +73,9 @@
 [color "diff"]
 
 	meta = yellow bold
-	frag = magenta bold # line info
-	old = red # deletions
-	new = green # additions
+	frag = magenta bold
+	old = red
+	new = green
 
 [color "status"]
 
