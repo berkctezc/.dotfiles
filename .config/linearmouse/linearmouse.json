@@ -4,63 +4,66 @@
     {
       "if" : {
         "device" : {
-          "category" : "trackpad",
           "productID" : "0x281",
           "productName" : "Apple Internal Keyboard \/ Trackpad",
-          "vendorID" : "0x5ac"
+          "vendorID" : "0x5ac",
+          "category" : "trackpad"
         }
       },
       "pointer" : {
         "disableAcceleration" : false
       },
+      "buttons" : {
+        "universalBackForward" : true
+      },
       "scrolling" : {
+        "reverse" : {
+          "vertical" : false
+        },
         "modifiers" : {
           "option" : {
             "type" : "alterOrientation"
           }
-        },
-        "reverse" : {
-          "vertical" : false
         }
-      },
-      "buttons" : {
-        "universalBackForward" : true
       }
     },
     {
       "if" : {
         "device" : {
-          "productName" : "USB Receiver",
-          "productID" : "0xc534",
+          "category" : "mouse",
           "vendorID" : "0x46d",
-          "category" : "mouse"
+          "productName" : "USB Receiver",
+          "productID" : "0xc534"
         }
+      },
+      "buttons" : {
+        "universalBackForward" : true
       },
       "scrolling" : {
         "reverse" : {
           "vertical" : true
         },
         "modifiers" : {
+          "horizontal" : {
+            "control" : {
+              "type" : "auto"
+            },
+            "option" : {
+              "type" : "alterOrientation"
+            }
+          },
           "vertical" : {
+            "option" : {
+              "type" : "alterOrientation"
+            },
             "command" : {
+              "type" : "auto"
+            },
+            "shift" : {
               "type" : "auto"
             },
             "control" : {
               "type" : "pinchZoom"
-            },
-            "option" : {
-              "type" : "alterOrientation"
-            },
-            "shift" : {
-              "type" : "auto"
-            }
-          },
-          "horizontal" : {
-            "option" : {
-              "type" : "alterOrientation"
-            },
-            "control" : {
-              "type" : "auto"
             }
           }
         },
@@ -69,11 +72,8 @@
         }
       },
       "pointer" : {
-        "speed" : 0.1578,
-        "acceleration" : 0.4659
-      },
-      "buttons" : {
-        "universalBackForward" : true
+        "acceleration" : 0.4659,
+        "speed" : 0.1578
       }
     },
     {
@@ -81,47 +81,47 @@
         "device" : {
           "productName" : "Apple Internal Keyboard \/ Trackpad",
           "category" : "trackpad",
-          "vendorID" : "0x0",
-          "productID" : "0x0"
+          "productID" : "0x0",
+          "vendorID" : "0x0"
         }
       },
       "scrolling" : {
-        "distance" : {
-          "vertical" : "auto"
-        },
         "acceleration" : 1,
+        "speed" : {
+          "vertical" : 1.1
+        },
         "modifiers" : {
           "vertical" : {
-            "shift" : {
-              "type" : "auto"
-            },
-            "control" : {
-              "type" : "auto"
-            },
             "command" : {
               "type" : "auto"
             },
             "option" : {
               "type" : "alterOrientation"
-            }
-          },
-          "horizontal" : {
+            },
             "shift" : {
               "type" : "auto"
             },
-            "option" : {
+            "control" : {
               "type" : "auto"
-            },
+            }
+          },
+          "horizontal" : {
             "control" : {
               "type" : "auto"
             },
             "command" : {
               "type" : "auto"
+            },
+            "shift" : {
+              "type" : "auto"
+            },
+            "option" : {
+              "type" : "auto"
             }
           }
         },
-        "speed" : {
-          "vertical" : 1.1
+        "distance" : {
+          "vertical" : "auto"
         }
       },
       "buttons" : {
@@ -129,11 +129,6 @@
       }
     },
     {
-      "pointer" : {
-        "acceleration" : 0,
-        "speed" : 0.3326,
-        "disableAcceleration" : false
-      },
       "scrolling" : {
         "acceleration" : {
           "vertical" : 1.05
@@ -144,24 +139,44 @@
         "speed" : {
           "vertical" : 30.2
         },
-        "reverse" : {
-          "vertical" : false
-        },
         "modifiers" : {
           "vertical" : {
             "option" : {
               "type" : "alterOrientation"
             }
           }
+        },
+        "reverse" : {
+          "vertical" : false
         }
+      },
+      "pointer" : {
+        "speed" : 0.3326,
+        "acceleration" : 0,
+        "disableAcceleration" : false
       },
       "if" : {
         "device" : {
-          "productID" : "0x1503",
-          "vendorID" : "0x22d4",
           "productName" : "Glorious Model I",
+          "vendorID" : "0x22d4",
+          "productID" : "0x1503",
           "category" : "mouse"
         }
+      }
+    },
+    {
+      "if" : {
+        "device" : {
+          "category" : "mouse",
+          "productName" : "BT5.1 Mouse",
+          "vendorID" : "0x25a7",
+          "productID" : "0xfa6c"
+        }
+      },
+      "pointer" : {
+        "speed" : 1,
+        "acceleration" : 1.0248,
+        "disableAcceleration" : true
       }
     }
   ]
