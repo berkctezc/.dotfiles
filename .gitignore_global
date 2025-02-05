@@ -112,3 +112,4 @@ fabric.properties
 .wget-hsts
 **/fish/completions/**
 .config/**/*.copy
+.qodo
