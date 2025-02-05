@@ -8,3 +8,6 @@ defaults write com.apple.Dock tilesize -int 28
 
 # Set iTerm2 preferences directory
 defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.dotfiles/.iterm2"
+
+# Menu Bar spacing
+ defaults -currentHost write -globalDomain NSStatusItemSpacing -int 4
