@@ -22,6 +22,7 @@ DISABLE_LS_COLORS="false"
 COMPLETION_WAITING_DOTS="true"
 OMB_USE_SUDO=true
 OMB_PROMPT_SHOW_PYTHON_VENV=true
+export PATH="$PATH:$HOME/.cache/lm-studio/bin"
 
 completions=( # ~/.oh-my-bash/completions/*
   git
