@@ -9,22 +9,9 @@ export PATH="$PATH:/$HOME/.dotnet/tools"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:/opt/homebrew/bin"
 export HF_HOME="$HOME/llm/oobabooga/text-generation-webui/models"
+export TERM="xterm-256color"
 
-# Added by LM Studio CLI (lms)
-set -gx PATH $PATH /Users/berkcantezcaner/.cache/lm-studio/bin
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-if test -f /opt/homebrew/Caskroom/miniconda/base/bin/conda
-    eval /opt/homebrew/Caskroom/miniconda/base/bin/conda "shell.fish" "hook" $argv | source
-else
-    if test -f "/opt/homebrew/Caskroom/miniconda/base/etc/fish/conf.d/conda.fish"
-        . "/opt/homebrew/Caskroom/miniconda/base/etc/fish/conf.d/conda.fish"
-    else
-        set -x PATH "/opt/homebrew/Caskroom/miniconda/base/bin" $PATH
-    end
-end
-# <<< conda initialize <<<
+set -gx PATH $PATH $HOME/.cache/lm-studio/bin
 
 # utils
 alias sudo 'sudo '
@@ -60,7 +47,7 @@ alias ... "cd ../.."
 alias .... "cd ../../.."
 alias ..... "cd ../../../.."
 
-# non os agnostic
+# os specific adjustments
 if test (uname -s) = "Darwin"
   alias copy pbcopy # copy to clipboard
     # (╯°□°)╯︵ ┻━┻
@@ -71,6 +58,18 @@ if test (uname -s) = "Darwin"
   alias chrome '/Applications/Thorium.app/Contents/MacOS/Thorium'
   export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
   export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+  # >>> conda initialize >>>
+  if test -f /opt/homebrew/Caskroom/miniconda/base/bin/conda
+      eval /opt/homebrew/Caskroom/miniconda/base/bin/conda "shell.fish" "hook" $argv | source
+  else
+      if test -f "/opt/homebrew/Caskroom/miniconda/base/etc/fish/conf.d/conda.fish"
+          . "/opt/homebrew/Caskroom/miniconda/base/etc/fish/conf.d/conda.fish"
+      else
+          set -x PATH "/opt/homebrew/Caskroom/miniconda/base/bin" $PATH
+      end
+  end
+# <<< conda initialize <<<
+
 else
   alias copy 'xclip -sel clip'
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
