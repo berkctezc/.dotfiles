@@ -251,22 +251,6 @@ services:
     restart: unless-stopped
 #########################################################
 
-  ############
-  # Grafana  #
-  ############
-  grafana:
-    container_name: grafana
-    image: grafana/grafana:main-ubuntu
-    network_mode: bridge
-    ports:
-      - "3000:3000"
-    environment:
-      - GF_SECURITY_ADMIN_PASSWORD=admin
-    volumes:
-      - ~/.config/grafana:/var/lib/grafana
-    restart: unless-stopped
-#########################################################
-
   #############
   # Crafty 4  #
   #############
@@ -300,7 +284,7 @@ services:
       - 3001:3001
     restart: unless-stopped
 #########################################################
-  
+
   ###############
   # Code Server #
   ###############
@@ -331,7 +315,7 @@ services:
     volumes:
       - ./services/mimir/mimir.yaml:/etc/mimir.yaml
       - ./services/mimir/alertmanager.yaml:/etc/alertmanager-fallback-config.yaml
- 
+
   loki:
     image: grafana/loki:latest
     container_name: loki
