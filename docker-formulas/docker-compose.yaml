@@ -297,7 +297,9 @@ services:
       - AGENTDVR_WEBUI_PORT=8090 
       - TZ=Asia/Dhaka
     volumes:
-      - ~/.config/AgentDVR:/AgentDVR
+      - ~/.config/AgentDVR/config:/AgentDVR/Media/XML
+      - ~/.config/AgentDVR/recordings:/AgentDVR/Media/WebServerRoot/Media
+      - ~/.config/AgentDVR/commands:/AgentDVR/Commands
     ports:
       - 8090:8090
       - 3478:3478/udp
