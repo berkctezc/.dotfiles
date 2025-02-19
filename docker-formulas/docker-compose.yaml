@@ -1,7 +1,6 @@
 name: 'homelab-container'
 services:
-#############
-
+#########################################################
   #############
   # Portainer #
   #############
@@ -32,7 +31,6 @@ services:
       - /var/lib/docker/volumes:/var/lib/docker/volumes
     image: portainer/agent:alpine-sts
 #########################################################
-
   ############
   # Jellyfin #
   ############
@@ -58,7 +56,6 @@ services:
     devices:
       - /dev/dri/renderD128:/dev/dri/renderD128
 #########################################################
-
   ################
   # qBittorrent #
   ###############
@@ -83,7 +80,6 @@ services:
       - "6881:6881/udp"
     restart: unless-stopped
 #########################################################
-
   ##############
   # Syncthing #
   #############
@@ -104,7 +100,6 @@ services:
       - "21027:21027/udp"
     restart: unless-stopped
 #########################################################
-
   ##############
   # Watchtower #
   ##############
@@ -116,7 +111,6 @@ services:
     image: containrrr/watchtower:latest-dev
     restart: unless-stopped
 #########################################################
-
   ###########
   # Rancher #
   ###########
@@ -131,7 +125,6 @@ services:
       - "446:443"
     privileged: true
 #########################################################
-
   ###############
   # Filebrowser #
   ###############
@@ -150,7 +143,6 @@ services:
     restart: unless-stopped
 
 #########################################################
-
   #############
   # Postgres #
   ############
@@ -168,7 +160,6 @@ services:
       - "6432:5432"
     restart: unless-stopped
 #########################################################
-
   ##########
   # Redis #
   #########
@@ -184,7 +175,6 @@ services:
     volumes:
       - 'redis_data:/root/redis'
 #########################################################
-
   ##################
   # HomeAssistant #
   #################
@@ -206,7 +196,6 @@ services:
     devices:
       - /dev/ttyUSB0:/dev/ttyUSB0
 #########################################################
-
   #############
   # TubeSync #
   ############
@@ -224,7 +213,6 @@ services:
       - PUID="$(id -u)"
       - PGID="$(id -g)"
 #########################################################
-
   ##############
   # Prometheus #
   ##############
@@ -233,12 +221,11 @@ services:
     image: prom/prometheus:main
     network_mode: bridge
     volumes:
-      - ~/.config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ~/.config/prometheus:/etc/prometheus
     ports:
       - "9091:9090"
     restart: unless-stopped
 #########################################################
-
   ###################
   # Node Exporter  #
   #################
@@ -250,7 +237,6 @@ services:
     #  - "9100:9100"
     restart: unless-stopped
 #########################################################
-
   #############
   # Crafty 4  #
   #############
@@ -272,7 +258,6 @@ services:
         - ~/.config/crafty/config:/crafty/app/config
         - ~/.config/crafty/import:/crafty/import
 #########################################################
-
   ###############
   # Uptime Kuma #
   ###############
@@ -284,7 +269,6 @@ services:
       - 3001:3001
     restart: unless-stopped
 #########################################################
-
   ###############
   # Code Server #
   ###############
@@ -301,81 +285,6 @@ services:
       - 8447:8443
     restart: unless-stopped
 #########################################################
-
-  ##############
-  # LGTM Stack #
-  ##############
-  mimir:
-    image: grafana/mimir:latest
-    container_name: mimir
-    ports:
-      - 9090:9090
-    restart: unless-stopped
-    command: --config.file=/etc/mimir.yaml
-    volumes:
-      - ./services/mimir/mimir.yaml:/etc/mimir.yaml
-      - ./services/mimir/alertmanager.yaml:/etc/alertmanager-fallback-config.yaml
-
-  loki:
-    image: grafana/loki:latest
-    container_name: loki
-    command: -config.file=/etc/loki/local-config.yaml
-    environment:
-      - JAEGER_AGENT_HOST=otelcol
-
-  grafana:
-    image: grafana/grafana:latest-ubuntu
-    container_name: grafana
-    restart: unless-stopped
-    ports:
-      - 3000:3000
-    environment:
-      - GF_AUTH_ANONYMOUS_ENABLED=true
-      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
-      - GF_AUTH_DISABLE_LOGIN_FORM=true
-      - GF_SECURITY_ALLOW_EMBEDDING=true
-    volumes:
-      - ./services/grafana/grafana-datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
-      # - ./services/grafana/grafana.ini:/etc/grafana/grafana.ini
-    depends_on:
-      - loki
-      - tempo
-      - mimir
-
-  tempo:
-    image: grafana/tempo:latest
-    container_name: tempo
-    command: [ "-config.file=/etc/tempo.yaml" ]
-    volumes:
-      - ./services/tempo/tempo.yaml:/etc/tempo.yaml
-
-  ## Tools
-  promtail:
-    image: grafana/promtail:latest
-    container_name: promtail
-    volumes:
-      - /var/log:/var/log
-    command: -config.file=/etc/promtail/config.yml
-
-  otelcol:
-    image: otel/opentelemetry-collector:latest
-    container_name: otelcol
-    restart: unless-stopped
-    ports:
-      - 4317:4317  # otlp grpc
-      - 4318:4318  # otlp http
-      - 8888:8888 # monitoring
-    command: --config=/etc/otelcol/config.yaml
-    depends_on:
-      - loki
-      - tempo
-      - mimir
-      - grafana
-    volumes:
-      - ./services/otelcol/config.yaml:/etc/otelcol/config.yaml
-
-#########################################################
-
   #################
   # ISpy AgentDVR #
   #################
@@ -394,7 +303,6 @@ services:
       - 3478:3478/udp
       - 50000-50100:50000-50100/udp
     restart: unless-stopped
-
 #########################################################
 
 ###################
