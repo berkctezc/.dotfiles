@@ -11,8 +11,8 @@ services:
     image: portainer/portainer-ce:alpine-sts
     command: -H tcp://agent:9443 --tlsskipverify
     environment:
-      PUID: "$(id -u)"
-      PGID: "$(id -g)"
+      - PUID="$(id -u)"
+      - PGID="$(id -g)"
     ports:
       - "8000:8000"
       - "9443:9443"
@@ -46,8 +46,8 @@ services:
       - "7359:7359/udp"
       - "1900:1900/udp"
     environment:
-      PUID: "$(id -u)"
-      PGID: "$(id -g)"
+      - PUID="$(id -u)"
+      - PGID="$(id -g)"
     volumes:
       - ~/:/data
       - ~/.config/jellyfin:/config
@@ -93,8 +93,8 @@ services:
     hostname: synct-server
     network_mode: bridge
     environment:
-      PUID: "$(id -u)"
-      PGID: "$(id -g)"
+      - PUID="$(id -u)"
+      - PGID="$(id -g)"
     volumes:
       - ~/Syncthing:/var/syncthing
     ports:
@@ -201,8 +201,8 @@ services:
     ports:
       - 8124:8123
     environment:
-      PUID: "$(id -u)"
-      PGID: "$(id -g)"
+      - PUID="$(id -u)"
+      - PGID="$(id -g)"
     devices:
       - /dev/ttyUSB0:/dev/ttyUSB0
 #########################################################
@@ -221,8 +221,8 @@ services:
       - /some/directory/tubesync-config:/config
       - /some/directory/tubesync-downloads:/downloads
     environment:
-      PUID: "$(id -u)"
-      PGID: "$(id -g)"
+      - PUID="$(id -u)"
+      - PGID="$(id -g)"
 #########################################################
 
   ##############
@@ -360,7 +360,7 @@ services:
   otelcol:
     image: otel/opentelemetry-collector:latest
     container_name: otelcol
-    # restart: unless-stopped
+    restart: unless-stopped
     ports:
       - 4317:4317  # otlp grpc
       - 4318:4318  # otlp http
@@ -373,6 +373,29 @@ services:
       - grafana
     volumes:
       - ./services/otelcol/config.yaml:/etc/otelcol/config.yaml
+
+#########################################################
+
+  #################
+  # ISpy AgentDVR #
+  #################
+  ispyagentdvr:
+    image: mekayelanik/ispyagentdvr:latest
+    container_name: ispyagentdvr
+    environment:
+      - PUID="$(id -u)"
+      - PGID="$(id -g)"
+      - AGENTDVR_WEBUI_PORT=8090 
+      - TZ=Asia/Dhaka
+    volumes:
+      - ~/.config/AgentDVR:/AgentDVR
+    ports:
+      - 8090:8090
+      - 3478:3478/udp
+      - 50000-50100:50000-50100/udp
+    restart: unless-stopped
+
+#########################################################
 
 ###################
 volumes:
