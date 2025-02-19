@@ -10,8 +10,8 @@ services:
     image: portainer/portainer-ce:alpine-sts
     command: -H tcp://agent:9443 --tlsskipverify
     environment:
-      - PUID="$(id -u)"
-      - PGID="$(id -g)"
+      PUID: 1000
+      PGID: 1000
     ports:
       - "8000:8000"
       - "9443:9443"
@@ -44,8 +44,8 @@ services:
       - "7359:7359/udp"
       - "1900:1900/udp"
     environment:
-      - PUID="$(id -u)"
-      - PGID="$(id -g)"
+      PUID: 1000
+      PGID: 1000
     volumes:
       - ~/:/data
       - ~/.config/jellyfin:/config
@@ -68,8 +68,8 @@ services:
     environment:
       WEBUI_PORT: "8080"
       TORRENTING_PORT: "6881"
-      PUID: "$(id -u)"
-      PGID: "$(id -g)"
+      PUID: 1000
+      PGID: 1000
     volumes:
       - ~/.config/qbittorrent:/config
       - ~/Syncthing:/syncthing
@@ -89,8 +89,8 @@ services:
     hostname: synct-server
     network_mode: bridge
     environment:
-      - PUID="$(id -u)"
-      - PGID="$(id -g)"
+      PUID: 1000
+      PGID: 1000
     volumes:
       - ~/Syncthing:/var/syncthing
     ports:
@@ -136,8 +136,8 @@ services:
       - ~/.config/filebrowser/database/:/database/
       - ~/.config/filebrowser/config/:/config/
     environment:
-      - PUID="$(id -u)"
-      - PGID="$(id -g)"
+      PUID: 1000
+      PGID: 1000
     ports:
       - "8764:80"
     restart: unless-stopped
@@ -191,8 +191,8 @@ services:
     ports:
       - 8124:8123
     environment:
-      - PUID="$(id -u)"
-      - PGID="$(id -g)"
+      PUID: 1000
+      PGID: 1000
     devices:
       - /dev/ttyUSB0:/dev/ttyUSB0
 #########################################################
@@ -210,32 +210,8 @@ services:
       - /some/directory/tubesync-config:/config
       - /some/directory/tubesync-downloads:/downloads
     environment:
-      - PUID="$(id -u)"
-      - PGID="$(id -g)"
-#########################################################
-  ##############
-  # Prometheus #
-  ##############
-  prometheus:
-    container_name: prometheus
-    image: prom/prometheus:main
-    network_mode: bridge
-    volumes:
-      - ~/.config/prometheus:/etc/prometheus
-    ports:
-      - "9091:9090"
-    restart: unless-stopped
-#########################################################
-  ###################
-  # Node Exporter  #
-  #################
-  node_exporter:
-    container_name: node_exporter
-    image: prom/node-exporter:master
-    #network_mode: bridge
-    #ports:
-    #  - "9100:9100"
-    restart: unless-stopped
+      PUID: 1000
+      PGID: 1000
 #########################################################
   #############
   # Crafty 4  #
@@ -276,8 +252,8 @@ services:
     image: lscr.io/linuxserver/code-server:latest
     container_name: code-server
     environment:
-      PUID: "$(id -u)"
-      PGID: "$(id -g)"
+      PUID: 1000
+      PGID: 1000
       TZ: "Etc/UTC"
     volumes:
       - ~/.config/code-server:/config
@@ -291,11 +267,12 @@ services:
   ispyagentdvr:
     image: mekayelanik/ispyagentdvr:latest
     container_name: ispyagentdvr
+    network_mode: bridge
     environment:
-      - PUID="$(id -u)"
-      - PGID="$(id -g)"
-      - AGENTDVR_WEBUI_PORT=8090 
-      - TZ=Asia/Dhaka
+      PUID: 1000
+      PGID: 1000
+      AGENTDVR_WEBUI_PORT: 8090
+      TZ: "Etc/UTC"
     volumes:
       - ~/.config/AgentDVR/config:/AgentDVR/Media/XML
       - ~/.config/AgentDVR/recordings:/AgentDVR/Media/WebServerRoot/Media
@@ -307,10 +284,31 @@ services:
     restart: unless-stopped
 #########################################################
 
-###################
+  vsftpd:
+      container_name: vsftpd
+      image: fauria/vsftpd
+      restart: unless-stopped
+      volumes:
+          - ~/ftp-sv:/home/vsftpd
+      ports:
+          - 20:20
+          - 21:21
+          - 21100-21110:21100-21110
+      environment:
+        - PUID=1000
+        - PGID=1000
+        - FTP_USER=root
+        - FTP_PASS=root
+        - PASV_ADDRESS=127.0.0.1
+        - PASV_MIN_PORT=21100
+        - PASV_MAX_PORT=21110
+
+#########################################################
+
+#########################################################
 volumes:
   cache:
   postgres:
   redis_data:
     driver: local
-###################
+#########################################################
