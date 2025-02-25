@@ -35,7 +35,7 @@ services:
   # Jellyfin #
   ############
   jellyfin:
-    image: jellyfin/jellyfin:unstable
+    image: jellyfin/jellyfin:latest
     container_name: jellyfin
     network_mode: bridge
     ports:
@@ -54,7 +54,7 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     devices:
-      - /dev/dri/renderD128:/dev/dri/renderD128
+      - /dev/dri:/dev/dri
 #########################################################
   ################
   # qBittorrent #
@@ -72,10 +72,10 @@ services:
       PGID: 1000
     volumes:
       - ~/.config/qbittorrent:/config
-      - ~/Syncthing:/syncthing
-      - ~/Downloads:/downloads
+      - ~/Storage/Syncthing:/syncthing
+      - ~/Storage/Downloads:/downloads
     ports:
-      - "8080:8080"
+      - "8081:8080"
       - "6881:6881"
       - "6881:6881/udp"
     restart: unless-stopped
@@ -92,7 +92,7 @@ services:
       PUID: 1000
       PGID: 1000
     volumes:
-      - ~/Syncthing:/var/syncthing
+      - ~/Storage/Syncthing:/var/syncthing
     ports:
       - "8384:8384"
       - "22000:22000/tcp"
@@ -207,15 +207,15 @@ services:
     ports:
       - 4848:4848
     volumes:
-      - /some/directory/tubesync-config:/config
-      - /some/directory/tubesync-downloads:/downloads
+      - ~/Storage/directory/tubesync-config:/config
+      - ~/Storage/tubesync-downloads:/downloads
     environment:
       PUID: 1000
       PGID: 1000
 #########################################################
-  #############
-  # Crafty 4  #
-  #############
+  ############
+  # Crafty 4 #
+  ############
   crafty:
     container_name: crafty_container
     image: registry.gitlab.com/crafty-controller/crafty-4:latest
@@ -275,7 +275,7 @@ services:
       TZ: "Etc/UTC"
     volumes:
       - ~/.config/AgentDVR/config:/AgentDVR/Media/XML
-      - ~/.config/AgentDVR/recordings:/AgentDVR/Media/WebServerRoot/Media
+      - ~/Storage/AgentDVR/recordings:/AgentDVR/Media/WebServerRoot/Media
       - ~/.config/AgentDVR/commands:/AgentDVR/Commands
     ports:
       - 8090:8090
@@ -283,25 +283,27 @@ services:
       - 50000-50100:50000-50100/udp
     restart: unless-stopped
 #########################################################
-
+  ##########
+  # vsftpd #
+  ##########
   vsftpd:
       container_name: vsftpd
       image: fauria/vsftpd
       restart: unless-stopped
       volumes:
-          - ~/ftp-sv:/home/vsftpd
+          - ~/Storage/ftp-sv:/home/vsftpd
       ports:
           - 20:20
           - 21:21
           - 21100-21110:21100-21110
       environment:
-        - PUID=1000
-        - PGID=1000
-        - FTP_USER=root
-        - FTP_PASS=root
-        - PASV_ADDRESS=127.0.0.1
-        - PASV_MIN_PORT=21100
-        - PASV_MAX_PORT=21110
+        PUID: 1000
+        PGID: 1000
+        FTP_USER: "root"
+        FTP_PASS: "root"
+        PASV_ADDRESS: "127.0.0.1"
+        PASV_MIN_PORT: 21100
+        PASV_MAX_PORT: 21110
 
 #########################################################
 volumes:
