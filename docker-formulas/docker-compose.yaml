@@ -261,28 +261,6 @@ services:
       - 8447:8443
     restart: unless-stopped
 #########################################################
-  #################
-  # ISpy AgentDVR #
-  #################
-  ispyagentdvr:
-    image: mekayelanik/ispyagentdvr:latest
-    container_name: ispyagentdvr
-    network_mode: bridge
-    environment:
-      PUID: 1000
-      PGID: 1000
-      AGENTDVR_WEBUI_PORT: 8090
-      TZ: "Etc/UTC"
-    volumes:
-      - ~/.config/AgentDVR/config:/AgentDVR/Media/XML
-      - ~/Storage/AgentDVR/recordings:/AgentDVR/Media/WebServerRoot/Media
-      - ~/.config/AgentDVR/commands:/AgentDVR/Commands
-    ports:
-      - 8090:8090
-      - 3478:3478/udp
-      - 50000-50100:50000-50100/udp
-    restart: unless-stopped
-#########################################################
   ##########
   # vsftpd #
   ##########
