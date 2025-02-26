@@ -304,6 +304,30 @@ services:
         PASV_ADDRESS: "127.0.0.1"
         PASV_MIN_PORT: 21100
         PASV_MAX_PORT: 21110
+#########################################################
+  ############
+  # Scrypted #
+  ############
+  scrypted:
+    image: koush/scrypted
+    environment:
+        - SCRYPTED_WEBHOOK_UPDATE_AUTHORIZATION=Bearer token
+        - SCRYPTED_WEBHOOK_UPDATE=http://localhost:10444/v1/update
+    container_name: scrypted
+    restart: unless-stopped
+    network_mode: host
+    devices:
+        - /dev/dri:/dev/dri
+    volumes:
+        - ~/Storage/scrypted/volume:/server/volume
+        - ~/Storage/scrypted/video:/nvr
+    logging:
+        driver: "json-file"
+        options:
+            max-size: "25m"
+            max-file: "10"
+    labels:
+        - "com.centurylinklabs.watchtower.scope=scrypted"
 
 #########################################################
 volumes:
