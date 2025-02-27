@@ -60,25 +60,22 @@ services:
     devices:
       - /dev/dri:/dev/dri
 #########################################################
-  ################
-  # qBittorrent #
-  ###############
-  qbittorrent:
-    image: lscr.io/linuxserver/qbittorrent:latest
-    container_name: qbittorrent
-    network_mode: bridge
+  ##########
+  # Deluge #
+  ##########
+  transmission:
+    image: lscr.io/linuxserver/transmission:latest
+    container_name: transmission
     environment:
       <<: *common-env
-      WEBUI_PORT: "8080"
-      TORRENTING_PORT: "6881"
     volumes:
-      - ~/.config/qbittorrent:/config
-      - ~/Storage/Syncthing:/syncthing
+      - ~/.config/transmission:/config
+      - ~/Storage:/storage
       - ~/Storage/Downloads:/downloads
     ports:
-      - "8081:8080"
-      - "6881:6881"
-      - "6881:6881/udp"
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
     restart: unless-stopped
 #########################################################
   ##############
@@ -140,7 +137,6 @@ services:
     ports:
       - "8764:80"
     restart: unless-stopped
-
 #########################################################
   #############
   # Postgres #
@@ -150,14 +146,32 @@ services:
     image: postgres
     network_mode: bridge
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
       PGDATA: /data/postgres
     volumes:
       - postgres:/data/postgres
     ports:
       - "6432:5432"
+    restart: unless-stopped 
+#########################################################
+  #############
+  # MariaDB #
+  ############
+  mariadb:
+    container_name: mariadb
+    image: mariadb:latest
     restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_DATABASE: mysql
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - ~/.config/mariadb:/var/lib/mysql
+      - ~/.config/mariadb/conf:/etc/mysql/conf.d
 #########################################################
   ##########
   # Redis #
@@ -326,31 +340,37 @@ services:
   ##############
   zoneminder:
     container_name: zoneminder
-    network_mode: bridge
+    restart: unless-stopped
     privileged: false
     shm_size: 5G
     ports:
-        - 8444:443/tcp
-        - 9000:9000/tcp
+      - 8444:443/tcp
+      - 9000:9000/tcp
     environment:
-        <<: *common-env
-        INSTALL_HOOK: 0
-        INSTALL_FACE: 0
-        INSTALL_TINY_YOLOV3: 0
-        INSTALL_YOLOV3: 0
-        INSTALL_TINY_YOLOV4: 0
-        INSTALL_YOLOV4: 0
-        MULTI_PORT_START: 0
-        MULTI_PORT_END: 0
+      <<: *common-env
+      INSTALL_HOOK: 0
+      INSTALL_FACE: 0
+      INSTALL_TINY_YOLOV3: 0
+      INSTALL_YOLOV3: 0
+      INSTALL_TINY_YOLOV4: 0
+      INSTALL_YOLOV4: 0
+      MULTI_PORT_START: 0
+      MULTI_PORT_END: 0
+      ZM_DB_HOST: mysql
+      ZM_DB_USER: mysql
+      ZM_DB_PASS: mysql
+      ZM_DB_NAME: mysql
     volumes:
-        - ~/Storage/zoneminder/config:/config
-        - ~/Storage/zoneminder/cache:/var/cache/zoneminder
-        - ~/Storage/zoneminder/data:/data
-        - ~/Storage/zoneminder/log:/log
-        - type: tmpfs
-          target: /dev/shm
-          tmpfs:
-            size: 1000000000
+      - ~/Storage/zoneminder/config:/config
+      - ~/Storage/zoneminder/cache:/var/cache/zoneminder
+      - ~/Storage/zoneminder/data:/data
+      - ~/Storage/zoneminder/log:/log
+      - type: tmpfs
+        target: /dev/shm
+        tmpfs:
+          size: 1000000000
+    depends_on:
+      - mariadb
     image: dlandon/zoneminder
 #########################################################
   ##########
@@ -390,6 +410,56 @@ services:
       - ~/Storage/sickgear/downloads:/downloads
     ports:
       - 8082:8081
+    restart: unless-stopped
+
+#########################################################
+  #############
+  # ARR Stack #
+  #############  
+  prowlarr:
+    image: linuxserver/prowlarr:latest
+    container_name: prowlarr
+    hostname: prowlarr
+    environment:
+      <<: *common-env
+    volumes:
+      - ~/Storage/prowlarr/config:/config
+      - ~/Storage/prowlarr/backup:/data/Backup
+      - ~/Storage/prowlarr/downloads:/downloads
+    ports:
+      - 9696:9696
+    restart: unless-stopped
+      
+  sonarr:
+    image: linuxserver/sonarr:latest
+    container_name: sonarr
+    hostname: sonarr
+    environment:
+      <<: *common-env
+    volumes:
+      - ~/Storage/sonarr/config:/config
+      - ~/Storage/sonarr/backup:/data/Backup
+      - ~/Storage/sonarr/tvshows:/data/tvshows
+      - ~/Storage:/storage
+      - ~/Storage/sonarr/Downloads:/downloads
+    ports:
+      - 8989:8989
+    restart: unless-stopped
+
+  radarr:
+    image: linuxserver/radarr:latest
+    container_name: radarr
+    hostname: radarr
+    environment:
+      <<: *common-env
+    volumes:
+      - ~/Storage/radarr/config:/config
+      - ~/Storage/radarr/movies:/data/movies
+      - ~/Storage/radarr/backup:/data/Backup
+      - ~/Storage:/storage
+      - ~/Storage/radarr/downloads:/downloads
+    ports:
+      - 7878:7878
     restart: unless-stopped
 
 #########################################################
