@@ -306,6 +306,61 @@ services:
             max-file: "10"
     labels:
         - "com.centurylinklabs.watchtower.scope=scrypted"
+#########################################################
+  #####################
+  # Speedtest Tracker #
+  #####################
+  speedtest-tracker:
+    image: lscr.io/linuxserver/speedtest-tracker:latest
+    container_name: speedtest-tracker
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - APP_KEY=
+      - APP_URL=
+      - DB_CONNECTION=sqlite
+      - SPEEDTEST_SCHEDULE=
+      - SPEEDTEST_SERVERS=
+    volumes:
+      - ~/.config/speedtest-tracker:/config
+    ports:
+      - 82:80
+    restart: unless-stopped
+#########################################################
+  ##############
+  # ZoneMinder #
+  ##############
+  zoneminder:
+        container_name: zoneminder
+        network_mode: bridge
+        privileged: false
+        shm_size: 5G
+        ports:
+            - 8444:443/tcp
+            - 9000:9000/tcp
+        environment:
+            - TZ=Etc/UTC
+            - PUID=99
+            - PGID=100
+            - INSTALL_HOOK=0
+            - INSTALL_FACE=0
+            - INSTALL_TINY_YOLOV3=0
+            - INSTALL_YOLOV3=0
+            - INSTALL_TINY_YOLOV4=0
+            - INSTALL_YOLOV4=0
+            - MULTI_PORT_START=0
+            - MULTI_PORT_END=0
+        volumes:
+            - ~/Storage/zoneminder/config:/config
+            - ~/Storage/zoneminder/cache:/var/cache/zoneminder
+            - ~/Storage/zoneminder/data:/data
+            - ~/Storage/zoneminder/log:/log
+            - type: tmpfs
+              target: /dev/shm
+              tmpfs:
+                size: 1000000000
+        image: dlandon/zoneminder
 
 #########################################################
 volumes:
