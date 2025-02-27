@@ -1,4 +1,10 @@
 name: 'homelab-container'
+
+x-common-env: &common-env
+  PUID: 1000
+  PGID: 1000
+  TZ: Etc/UTC
+
 services:
 #########################################################
   #############
@@ -10,8 +16,7 @@ services:
     image: portainer/portainer-ce:alpine-sts
     command: -H tcp://agent:9443 --tlsskipverify
     environment:
-      PUID: 1000
-      PGID: 1000
+      <<: *common-env
     ports:
       - "8000:8000"
       - "9443:9443"
@@ -44,8 +49,7 @@ services:
       - "7359:7359/udp"
       - "1900:1900/udp"
     environment:
-      PUID: 1000
-      PGID: 1000
+      <<: *common-env
     volumes:
       - ~/:/data
       - ~/.config/jellyfin:/config
@@ -63,13 +67,10 @@ services:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
     network_mode: bridge
-    env_file:
-      - ".env"
     environment:
+      <<: *common-env
       WEBUI_PORT: "8080"
       TORRENTING_PORT: "6881"
-      PUID: 1000
-      PGID: 1000
     volumes:
       - ~/.config/qbittorrent:/config
       - ~/Storage/Syncthing:/syncthing
@@ -89,8 +90,7 @@ services:
     hostname: synct-server
     network_mode: bridge
     environment:
-      PUID: 1000
-      PGID: 1000
+      <<: *common-env
     volumes:
       - ~/Storage/Syncthing:/var/syncthing
     ports:
@@ -136,8 +136,7 @@ services:
       - ~/.config/filebrowser/database/:/database/
       - ~/.config/filebrowser/config/:/config/
     environment:
-      PUID: 1000
-      PGID: 1000
+      <<: *common-env
     ports:
       - "8764:80"
     restart: unless-stopped
@@ -191,8 +190,7 @@ services:
     ports:
       - 8124:8123
     environment:
-      PUID: 1000
-      PGID: 1000
+      <<: *common-env
     devices:
       - /dev/ttyUSB0:/dev/ttyUSB0
 #########################################################
@@ -210,8 +208,7 @@ services:
       - ~/Storage/directory/tubesync-config:/config
       - ~/Storage/tubesync-downloads:/downloads
     environment:
-      PUID: 1000
-      PGID: 1000
+      <<: *common-env
 #########################################################
   ############
   # Crafty 4 #
@@ -252,8 +249,7 @@ services:
     image: lscr.io/linuxserver/code-server:latest
     container_name: code-server
     environment:
-      PUID: 1000
-      PGID: 1000
+      <<: *common-env
       TZ: "Etc/UTC"
     volumes:
       - ~/.config/code-server:/config
@@ -275,8 +271,7 @@ services:
           - 21:21
           - 21100-21110:21100-21110
       environment:
-        PUID: 1000
-        PGID: 1000
+        <<: *common-env
         FTP_USER: "root"
         FTP_PASS: "root"
         PASV_ADDRESS: "127.0.0.1"
@@ -314,14 +309,12 @@ services:
     image: lscr.io/linuxserver/speedtest-tracker:latest
     container_name: speedtest-tracker
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-      - APP_KEY=
-      - APP_URL=
-      - DB_CONNECTION=sqlite
-      - SPEEDTEST_SCHEDULE=
-      - SPEEDTEST_SERVERS=
+      <<: *common-env
+      APP_KEY: ""
+      APP_URL: ""
+      DB_CONNECTION: sqlite
+      SPEEDTEST_SCHEDULE: ""
+      SPEEDTEST_SERVERS: ""
     volumes:
       - ~/.config/speedtest-tracker:/config
     ports:
@@ -340,17 +333,15 @@ services:
         - 8444:443/tcp
         - 9000:9000/tcp
     environment:
-        - TZ=Etc/UTC
-        - PUID=99
-        - PGID=100
-        - INSTALL_HOOK=0
-        - INSTALL_FACE=0
-        - INSTALL_TINY_YOLOV3=0
-        - INSTALL_YOLOV3=0
-        - INSTALL_TINY_YOLOV4=0
-        - INSTALL_YOLOV4=0
-        - MULTI_PORT_START=0
-        - MULTI_PORT_END=0
+        <<: *common-env
+        INSTALL_HOOK: 0
+        INSTALL_FACE: 0
+        INSTALL_TINY_YOLOV3: 0
+        INSTALL_YOLOV3: 0
+        INSTALL_TINY_YOLOV4: 0
+        INSTALL_YOLOV4: 0
+        MULTI_PORT_START: 0
+        MULTI_PORT_END: 0
     volumes:
         - ~/Storage/zoneminder/config:/config
         - ~/Storage/zoneminder/cache:/var/cache/zoneminder
@@ -371,11 +362,9 @@ services:
     security_opt:
       - seccomp:unconfined
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-      - SUBFOLDER=/
-      - TITLE=Webtop
+      <<: *common-env
+      SUBFOLDER: /
+      TITLE: Webtop
     volumes:
       - ~/.config/webtop:/config
       - /var/run/docker.sock:/var/run/docker.sock
@@ -394,9 +383,7 @@ services:
     image: lscr.io/linuxserver/sickgear:latest
     container_name: sickgear
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
+      <<: *common-env
     volumes:
       - ~/Storage/sickgear/config:/config
       - ~/Storage/sickgear/tv:/tv
