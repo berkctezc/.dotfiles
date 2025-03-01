@@ -60,9 +60,9 @@ services:
     devices:
       - /dev/dri:/dev/dri
 #########################################################
-  ##########
-  # Deluge #
-  ##########
+  ################
+  # Transmission #
+  ################
   transmission:
     image: lscr.io/linuxserver/transmission:latest
     container_name: transmission
@@ -407,11 +407,23 @@ services:
     volumes:
       - ~/Storage/sickgear/config:/config
       - ~/Storage/sickgear/tv:/tv
-      - ~/Storage/sickgear/downloads:/downloads
+      - ~/Storage/downloads:/downloads
     ports:
       - 8082:8081
     restart: unless-stopped
-
+#########################################################
+  #############
+  # Handbrake #
+  ############# 
+  handbrake:
+    container_name: handbrake
+    image: jlesage/handbrake
+    ports:
+        - 5800:5800
+    volumes:
+        - ~/Storage:/storage:rw
+        - ~/Storage/handbrake/watch:/watch:rw
+        - ~/Storage/handbrake/output:/output:rw
 #########################################################
   #############
   # ARR Stack #
@@ -425,7 +437,7 @@ services:
     volumes:
       - ~/Storage/prowlarr/config:/config
       - ~/Storage/prowlarr/backup:/data/Backup
-      - ~/Storage/prowlarr/downloads:/downloads
+      - ~/Storage/downloads:/downloads
     ports:
       - 9696:9696
     restart: unless-stopped
@@ -441,7 +453,7 @@ services:
       - ~/Storage/sonarr/backup:/data/Backup
       - ~/Storage/sonarr/tvshows:/data/tvshows
       - ~/Storage:/storage
-      - ~/Storage/sonarr/Downloads:/downloads
+      - ~/Storage/Downloads:/downloads
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -457,7 +469,7 @@ services:
       - ~/Storage/radarr/movies:/data/movies
       - ~/Storage/radarr/backup:/data/Backup
       - ~/Storage:/storage
-      - ~/Storage/radarr/downloads:/downloads
+      - ~/Storage/downloads:/downloads
     ports:
       - 7878:7878
     restart: unless-stopped
