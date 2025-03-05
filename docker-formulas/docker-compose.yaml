@@ -66,7 +66,7 @@ services:
   # Transmission #
   ################
   transmission:
-    image: lscr.io/linuxserver/transmission:latest
+    image: linuxserver/transmission:latest
     container_name: transmission
     environment:
       <<: *common-env
@@ -231,7 +231,7 @@ services:
   ############
   crafty:
     container_name: crafty_container
-    image: registry.gitlab.com/crafty-controller/crafty-4:latest
+    image: arcadiatechnology/crafty-4:latest
     restart: always
     environment:
         - TZ=Etc/UTC
@@ -499,6 +499,18 @@ services:
     ports:
       - 9117:9117
     restart: unless-stopped
+#########################################################
+  ############
+  # MiniDLNA #
+  ############ 
+  minidlna:
+    network_mode: host
+    volumes:
+        - ~/Storage/Syncthing/media-sync:/media
+    environment:
+        - MINIDLNA_MEDIA_DIR=/media
+        - MINIDLNA_FRIENDLY_NAME=DLNA
+    image: vladgh/minidlna
 
 #########################################################
 volumes:
