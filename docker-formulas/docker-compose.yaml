@@ -212,22 +212,6 @@ services:
     devices:
       - /dev/ttyUSB0:/dev/ttyUSB0
 #########################################################
-  #############
-  # TubeSync #
-  ############
-  tubesync:
-    image: ghcr.io/meeb/tubesync:latest
-    container_name: tubesync
-    restart: unless-stopped
-    network_mode: bridge
-    ports:
-      - 4848:4848
-    volumes:
-      - ~/Storage/directory/tubesync-config:/config
-      - ~/Storage/tubesync-downloads:/downloads
-    environment:
-      <<: *common-env
-#########################################################
   ############
   # Crafty 4 #
   ############
