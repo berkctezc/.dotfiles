@@ -89,16 +89,11 @@ services:
     image: syncthing/syncthing:rc
     container_name: syncthing-server
     hostname: synct-server
-    network_mode: bridge
+    network_mode: host
     environment:
       <<: *common-env
     volumes:
       - ~/Storage/Syncthing:/var/syncthing
-    ports:
-      - "8384:8384"
-      - "22000:22000/tcp"
-      - "22000:22000/udp"
-      - "21027:21027/udp"
     restart: unless-stopped
 #########################################################
   ##############
