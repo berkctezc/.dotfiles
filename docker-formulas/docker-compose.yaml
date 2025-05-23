@@ -86,7 +86,7 @@ services:
   # Syncthing #
   #############
   syncthing:
-    image: syncthing/syncthing:rc
+    image: syncthing/syncthing:edge
     container_name: syncthing-server
     hostname: synct-server
     network_mode: host
@@ -95,6 +95,11 @@ services:
     volumes:
       - ~/Storage/Syncthing:/var/syncthing
     restart: unless-stopped
+    #ports:
+    #  - "8384:8384"
+    #  - "22000:22000/tcp"
+    #  - "22000:22000/udp"
+    #  - "21027:21027/udp"
 #########################################################
   ##############
   # Watchtower #
@@ -113,6 +118,9 @@ services:
       WATCHTOWER_ROLLING_RESTART: true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    cpus: 0.5
+    mem_limit: 512m
+    mem_reservation: 10m
 #########################################################
   ###########
   # Rancher #
@@ -127,6 +135,8 @@ services:
       - "89:80"
       - "446:443"
     privileged: true
+    cpus: 1
+    mem_limit: 1g
 #########################################################
   ###############
   # Filebrowser #
