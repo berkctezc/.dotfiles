@@ -6,8 +6,9 @@ export NODE_REPL_MODE='sloppy';
 export ZSH="$HOME/.dotfiles/.oh-my-zsh"
 export MANPATH="/usr/local/man:$MANPATH"
 export PATH="$PATH:/$HOME/.dotnet/tools"
-export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:/$HOME/.local/bin"
 export PATH="$PATH:/opt/homebrew/bin"
+export PATH="$PATH:$(brew --prefix python)/libexec/bin"
 export HF_HOME="$HOME/llm/oobabooga/text-generation-webui/models"
 export TERM="xterm-256color"
 
@@ -32,7 +33,7 @@ alias ifactive "ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'
 
 # maintanance
 alias macupdate 'sudo softwareupdate -i -a'
-alias update 'brew update ; brew upgrade --formula; brew upgrade'
+alias update 'brew update; brew upgrade --formula; brew upgrade --greedy'
 alias gemupdate 'sudo gem update --system; sudo gem update;'
 alias flush "dscacheutil -flushcache && killall -HUP mDNSResponder"
 alias cleanup "brew cleanup ; sudo gem cleanup ; echo 'started .DS_Store cleanup' && sudo find . -name ".DS_Store" -type f -delete && echo 'finished .DS_Store cleanup'"
