@@ -84,3 +84,12 @@ if status is-interactive
         tmux new;
 	end
 end
+
+# Added by LM Studio CLI (lms)
+set -gx PATH $PATH /Users/berkcantezcaner/.cache/lm-studio/bin
+# End of LM Studio CLI section
+
+
+# Added by OrbStack: command-line tools and integration
+# This won't be added again if you remove it.
+source ~/.orbstack/shell/init2.fish 2>/dev/null || :

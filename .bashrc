@@ -149,3 +149,8 @@ if [[ $- == *i* ]]; then
     fastfetch;
   fi
 fi
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/berkcantezcaner/.cache/lm-studio/bin"
+# End of LM Studio CLI section
+
