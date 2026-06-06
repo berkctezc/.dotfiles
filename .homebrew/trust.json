@@ -1,0 +1,19 @@
+{
+  "trustedtaps": [
+    "apple/apple",
+    "deskflow/tap",
+    "grishka/grishka",
+    "gromgit/fuse",
+    "hashicorp/tap",
+    "lihaoyun6/tap",
+    "localsend/localsend",
+    "mac-cleanup/mac-cleanup-py",
+    "sikarugir-app/sikarugir",
+    "teamookla/speedtest",
+    "upc/virt-manager",
+    "vancluever/input-leap"
+  ],
+  "trustedformulae": [
+    "berkctezc/uad-ng/uad-ng"
+  ]
+}
