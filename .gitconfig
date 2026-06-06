@@ -55,10 +55,8 @@
 
 [credential]
 
-	helper = osxkeychain
-	helper = manager
-	helper = /usr/local/share/gcm-core/git-credential-manager
 	helper = cache
+	credentialStore = gpg
 
 [color]
 
@@ -135,3 +133,9 @@
 
 [credential "https://dev.azure.com"]
 	useHttpPath = true
+[credential "https://github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential
