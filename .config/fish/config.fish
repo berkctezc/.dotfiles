@@ -11,6 +11,7 @@ export PATH="$PATH:/opt/homebrew/bin"
 export PATH="$PATH:$(brew --prefix python)/libexec/bin"
 export HF_HOME="$HOME/llm/oobabooga/text-generation-webui/models"
 export TERM="xterm-256color"
+source ~/.orbstack/shell/init2.fish 2>/dev/null || :
 
 set -gx PATH $PATH $HOME/.cache/lm-studio/bin
 
@@ -18,7 +19,6 @@ set -gx PATH $PATH $HOME/.cache/lm-studio/bin
 alias sudo 'sudo '
 alias week 'date +%V'
 alias tks 'tmux kill-server'
-alias neofetch 'fastfetch'
 alias lscount 'ls -1 | wc -l'
 alias cleandotnet 'find . -iname "bin" -o -iname "obj" | xargs rm -rf'
 alias dotnethardrebuild='dotnet clean;find . -iname "bin" -o -iname "obj" | xargs rm -rf;dotnet restore;dotnet build'
@@ -36,10 +36,10 @@ alias macupdate 'sudo softwareupdate -i -a'
 alias update 'brew update; brew upgrade --formula; brew upgrade --greedy'
 alias gemupdate 'sudo gem update --system; sudo gem update;'
 alias flush "dscacheutil -flushcache && killall -HUP mDNSResponder"
-alias cleanup "brew cleanup ; sudo gem cleanup ; echo 'started .DS_Store cleanup' && sudo find . -name ".DS_Store" -type f -delete && echo 'finished .DS_Store cleanup'"
+alias cleanup "brew cleanup --prune=all;rm -rf ~/.cache/*;brew autoremove;rm -rf ~/Library/Caches/* ~/Library/Logs/* 2>/dev/null ~/Library/Containers/com.apple.mail/Data/Library/Mail\ Downloads/*;sudo gem cleanup"
 alias reload "exec $SHELL -l"
 alias maintain "update && cleanup && flush && reload;"
-alias ubuntumaintain="sudo apt update -y && sudo apt upgrade -y &&  sudo apt full-upgrade -y && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo apt autoclean -y && update && cleanup"
+alias ubuntumaintain "sudo apt update -y && sudo apt upgrade -y &&  sudo apt full-upgrade -y && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo apt autoclean -y && update && cleanup"
 alias backup_brew "cd ~ && ./scripts/brew_list.sh"
 
 # navigation
@@ -51,25 +51,10 @@ alias ..... "cd ../../../.."
 # os specific adjustments
 if test (uname -s) = "Darwin"
   alias copy pbcopy # copy to clipboard
-    # (╯°□°)╯︵ ┻━┻
-  alias apt brew
-  alias yum brew
-  alias dnf brew
-  alias pkg brew
-  alias chrome '/Applications/Thorium.app/Contents/MacOS/Thorium'
+  # (╯°□°)╯︵ ┻━┻
+  alias browser 'open /Applications/Zen.app'
   export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
   export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
-  # >>> conda initialize >>>
-  if test -f /opt/homebrew/Caskroom/miniconda/base/bin/conda
-      eval /opt/homebrew/Caskroom/miniconda/base/bin/conda "shell.fish" "hook" $argv | source
-  else
-      if test -f "/opt/homebrew/Caskroom/miniconda/base/etc/fish/conf.d/conda.fish"
-          . "/opt/homebrew/Caskroom/miniconda/base/etc/fish/conf.d/conda.fish"
-      else
-          set -x PATH "/opt/homebrew/Caskroom/miniconda/base/bin" $PATH
-      end
-  end
-# <<< conda initialize <<<
 
 else
   alias copy 'xclip -sel clip'
@@ -84,12 +69,3 @@ if status is-interactive
         tmux new;
 	end
 end
-
-# Added by LM Studio CLI (lms)
-set -gx PATH $PATH /Users/berkcantezcaner/.cache/lm-studio/bin
-# End of LM Studio CLI section
-
-
-# Added by OrbStack: command-line tools and integration
-# This won't be added again if you remove it.
-source ~/.orbstack/shell/init2.fish 2>/dev/null || :

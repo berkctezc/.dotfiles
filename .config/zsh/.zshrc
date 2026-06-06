@@ -61,7 +61,6 @@ alias lscount='ls -1 | wc -l'
 alias cleandotnet='find . -iname "bin" -o -iname "obj" | xargs rm -rf'
 alias dotnethardrebuild='dotnet clean;find . -iname "bin" -o -iname "obj" | xargs rm -rf;dotnet restore;dotnet build'
 alias nugetpurge='rm -rf ~/.nuget/packages'
-alias i="brew install;"
 
 # network
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
@@ -70,13 +69,9 @@ alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[
 alias ifactive="ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'"
 
 # maintanance
-alias update='brew update ; brew upgrade --formula; brew upgrade --cask --greedy;'
-alias gemupdate='sudo gem update --system; sudo gem update;'
 alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
-alias cleanup="brew cleanup ; sudo gem cleanup ; echo 'started .DS_Store cleanup' && sudo find . -name ".DS_Store" -type f -delete && echo 'finished .DS_Store cleanup'"
 alias reload="exec $SHELL -l"
-alias maintain="update && cleanup && flush && reload;"
-alias ubuntumaintain="sudo apt update -y && sudo apt upgrade -y &&  sudo apt full-upgrade -y && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo apt autoclean -y && update && cleanup"
+alias ubuntumaintain="sudo apt update -y;sudo apt upgrade -y;sudo apt full-upgrade -y;sudo apt dist-upgrade -y;sudo apt autoremove -y;sudo apt autoclean -y;sudo apt clean;sudo journalctl --vacuum-size=300M;sudo journalctl --vacuum-time=3d;update;cleanup"
 alias backup_brew="cd ~ && ./scripts/brew_list.sh"
 
 # navigation
@@ -90,11 +85,6 @@ if [ "$(uname -s)" = "Darwin" ]; then
   alias macupdate='sudo softwareupdate -i -a'
   alias copy='pbcopy' # copy to clipboard
   # (╯°□°)╯︵ ┻━┻
-  alias apt='brew'
-  alias yum='brew'
-  alias dnf='brew'
-  alias pkg='brew'
-  alias chrome='/Applications/Thorium.app/Contents/MacOS/Thorium'
   export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
   export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 else
@@ -110,5 +100,3 @@ if [[ $- == *i* ]]; then
   	tmux new;
   fi
 fi
-
-
