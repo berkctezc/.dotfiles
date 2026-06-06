@@ -9,7 +9,6 @@ esac
 
 # Path to your oh-my-bash installation.
 export OSH="$HOME/.oh-my-bash"
-# . "$HOME/.cargo/env"
 
 # osh configuration
 OSH_THEME="agnoster"
@@ -22,7 +21,6 @@ DISABLE_LS_COLORS="false"
 COMPLETION_WAITING_DOTS="true"
 OMB_USE_SUDO=true
 OMB_PROMPT_SHOW_PYTHON_VENV=true
-export PATH="$PATH:$HOME/.cache/lm-studio/bin"
 
 completions=( # ~/.oh-my-bash/completions/*
   git
@@ -79,8 +77,6 @@ source "$OSH"/oh-my-bash.sh
 # bash + osh #
 ##############
 
-# [ -n "$PS1" ] && source ~/.bash_profile;
-
 ############################################################
 
 # exports
@@ -98,12 +94,7 @@ export PATH="$PATH:/opt/homebrew/bin";
 alias sudo="sudo "
 alias week="date +%V"
 alias tks='tmux kill-server'
-alias neofetch='fastfetch'
 alias lscount='ls -1 | wc -l'
-alias cleandotnet='find . -iname "bin" -o -iname "obj" | xargs rm -rf'
-alias dotnethardrebuild='dotnet clean;find . -iname "bin" -o -iname "obj" | xargs rm -rf;dotnet restore ;dotnet build'
-alias nugetpurge='rm -rf ~/.nuget/packages/'
-alias i='brew install;'
 
 # network
 alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
@@ -112,13 +103,8 @@ alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[
 alias ifactive="ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'"
 
 # maintanance
-alias update='brew update ; brew upgrade --formula; brew upgrade --cask --greedy;'
-alias gemupdate='sudo gem update --system; sudo gem update;'
 alias flush='dscacheutil -flushcache && killall -HUP mDNSResponder'
-alias cleanup="brew cleanup ; sudo gem cleanup ; echo 'started .DS_Store cleanup' && sudo find . -name ".DS_Store" -type f -delete && echo 'finished .DS_Store cleanup'"
 alias reload='exec $SHELL -l'
-alias maintain='update && cleanup && flush && reload;'
-alias ubuntumaintain="sudo apt update -y && sudo apt upgrade -y &&  sudo apt full-upgrade -y && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo apt autoclean -y"
 
 # navigation
 alias ..="cd .."
@@ -131,11 +117,6 @@ if [ "$(uname -s)" = "Darwin" ]; then
   alias macupdate='sudo softwareupdate -i -a'
   alias copy='pbcopy' # copy to clipboard
   # (╯°□°)╯︵ ┻━┻
-  alias apt='brew'
-  alias yum='brew'
-  alias dnf='brew'
-  alias pkg='brew'
-  alias chrome='/Applications/Thorium.app/Contents/MacOS/Thorium'
   export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
   export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 else
@@ -149,8 +130,3 @@ if [[ $- == *i* ]]; then
     fastfetch;
   fi
 fi
-
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/berkcantezcaner/.cache/lm-studio/bin"
-# End of LM Studio CLI section
-

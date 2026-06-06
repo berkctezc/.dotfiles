@@ -32,15 +32,10 @@ alias ips "ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[
 alias ifactive "ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'"
 
 # maintanance
-alias macupdate 'sudo softwareupdate -i -a'
-alias update 'brew update; brew upgrade --formula; brew upgrade --greedy'
-alias gemupdate 'sudo gem update --system; sudo gem update;'
 alias flush "dscacheutil -flushcache && killall -HUP mDNSResponder"
-alias cleanup "brew cleanup --prune=all;rm -rf ~/.cache/*;brew autoremove;rm -rf ~/Library/Caches/* ~/Library/Logs/* 2>/dev/null ~/Library/Containers/com.apple.mail/Data/Library/Mail\ Downloads/*;sudo gem cleanup"
 alias reload "exec $SHELL -l"
 alias maintain "update && cleanup && flush && reload;"
-alias ubuntumaintain "sudo apt update -y && sudo apt upgrade -y &&  sudo apt full-upgrade -y && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo apt autoclean -y && update && cleanup"
-alias backup_brew "cd ~ && ./scripts/brew_list.sh"
+alias ubuntumaintain "sudo apt update -y && sudo apt upgrade -y &&  sudo apt full-upgrade -y && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo apt autoclean -y"
 
 # navigation
 alias ..  "cd .."

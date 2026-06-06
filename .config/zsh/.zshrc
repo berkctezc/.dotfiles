@@ -71,7 +71,7 @@ alias ifactive="ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'
 # maintanance
 alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
 alias reload="exec $SHELL -l"
-alias ubuntumaintain="sudo apt update -y;sudo apt upgrade -y;sudo apt full-upgrade -y;sudo apt dist-upgrade -y;sudo apt autoremove -y;sudo apt autoclean -y;sudo apt clean;sudo journalctl --vacuum-size=300M;sudo journalctl --vacuum-time=3d;update;cleanup"
+alias ubuntumaintain="sudo apt update -y;sudo apt upgrade -y;sudo apt full-upgrade -y;sudo apt dist-upgrade -y;sudo apt autoremove -y;sudo apt autoclean -y;sudo apt clean;sudo journalctl --vacuum-size=300M;sudo journalctl --vacuum-time=3d;"
 alias backup_brew="cd ~ && ./scripts/brew_list.sh"
 
 # navigation
