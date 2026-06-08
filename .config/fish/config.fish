@@ -21,9 +21,10 @@ alias week 'date +%V'
 alias tks 'tmux kill-server'
 alias lscount 'ls -1 | wc -l'
 alias cleandotnet 'find . -iname "bin" -o -iname "obj" | xargs rm -rf'
-alias dotnethardrebuild='dotnet clean;find . -iname "bin" -o -iname "obj" | xargs rm -rf;dotnet restore;dotnet build'
-alias nugetpurge='rm -rf ~/.nuget/packages/'
+alias dotnethardrebuild 'dotnet clean;find . -iname "bin" -o -iname "obj" | xargs rm -rf;dotnet restore;dotnet build'
+alias nugetpurge 'rm -rf ~/.nuget/packages/'
 alias i 'brew install;'
+alias backup_brew "cd ~ && ./scripts/brew_list.sh"
 
 # network
 alias myip 'dig +short myip.opendns.com @resolver1.opendns.com'
@@ -32,6 +33,9 @@ alias ips "ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[
 alias ifactive "ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'"
 
 # maintanance
+alias macupdate 'sudo softwareupdate -i -a'
+alias update 'brew update; brew upgrade --formula; brew upgrade --greedy'
+alias cleanup "brew cleanup --prune=all;brew autoremove;rm -rf ~/.cache/* ~/Library/Caches/* ~/Library/Logs/* 2>/dev/null;sudo gem cleanup"
 alias flush "dscacheutil -flushcache && killall -HUP mDNSResponder"
 alias reload "exec $SHELL -l"
 alias maintain "update && cleanup && flush && reload;"
