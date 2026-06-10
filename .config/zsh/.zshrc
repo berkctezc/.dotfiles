@@ -58,20 +58,21 @@ alias sudo='sudo '
 alias week='date +%V'
 alias tks='tmux kill-server'
 alias lscount='ls -1 | wc -l'
+
+# dotnet
 alias cleandotnet='find . -iname "bin" -o -iname "obj" | xargs rm -rf'
 alias dotnethardrebuild='dotnet clean;find . -iname "bin" -o -iname "obj" | xargs rm -rf;dotnet restore;dotnet build'
 alias nugetpurge='rm -rf ~/.nuget/packages'
 
 # network
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
-alias localip="ipconfig getifaddr en0"
+alias localip="if ip addr show en0 >/dev/null 2>&1; then ip addr show en0 | grep 'inet ' | awk '{print \$2}' | cut -d/ -f1; else hostname -I | awk '{print \$1}'; fi"
 alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 alias ifactive="ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'"
 
-# maintanance
-alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
+# maintenance
 alias reload="exec $SHELL -l"
-alias ubuntumaintain="sudo apt update -y;sudo apt upgrade -y;sudo apt full-upgrade -y;sudo apt dist-upgrade -y;sudo apt autoremove -y;sudo apt autoclean -y;sudo apt clean;sudo journalctl --vacuum-size=300M;sudo journalctl --vacuum-time=3d;"
+alias ubuntumaintain="sudo apt update -y && sudo apt full-upgrade -y;sudo apt autoremove -y;sudo apt autoclean -y"
 alias backup_brew="cd ~ && ./scripts/brew_list.sh"
 
 # navigation
@@ -80,11 +81,9 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
-# non os agnostic
+# os gnostic
 if [ "$(uname -s)" = "Darwin" ]; then
-  alias macupdate='sudo softwareupdate -i -a'
-  alias copy='pbcopy' # copy to clipboard
-  # (╯°□°)╯︵ ┻━┻
+  alias copy='pbcopy'
   export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
   export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 else
