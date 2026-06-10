@@ -20,26 +20,28 @@ alias sudo 'sudo '
 alias week 'date +%V'
 alias tks 'tmux kill-server'
 alias lscount 'ls -1 | wc -l'
-alias cleandotnet 'find . -iname "bin" -o -iname "obj" | xargs rm -rf'
-alias dotnethardrebuild 'dotnet clean;find . -iname "bin" -o -iname "obj" | xargs rm -rf;dotnet restore;dotnet build'
-alias nugetpurge 'rm -rf ~/.nuget/packages/'
 alias i 'brew install;'
 alias backup_brew "cd ~ && ./scripts/brew_list.sh"
 
+# dotnet
+alias cleandotnet 'find . -iname "bin" -o -iname "obj" | xargs rm -rf'
+alias dotnethardrebuild 'dotnet clean;find . -iname "bin" -o -iname "obj" | xargs rm -rf;dotnet restore;dotnet build'
+alias nugetpurge 'rm -rf ~/.nuget/packages/'
+
 # network
 alias myip 'dig +short myip.opendns.com @resolver1.opendns.com'
-alias localip 'ipconfig getifaddr en0'
+alias localip "ifconfig en0 2>/dev/null | grep 'inet ' | awk '{print \$2}' || hostname -I | awk '{print \$1}'"
 alias ips "ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 alias ifactive "ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'"
 
-# maintanance
+# maintenance
 alias macupdate 'sudo softwareupdate -i -a'
-alias update 'brew update; brew upgrade --formula; brew upgrade --greedy'
-alias cleanup "brew cleanup --prune=all;brew autoremove;rm -rf ~/.cache/* ~/Library/Caches/* ~/Library/Logs/* 2>/dev/null;sudo gem cleanup"
-alias flush "dscacheutil -flushcache && killall -HUP mDNSResponder"
+alias brewupdate 'brew update;brew upgrade --greedy -y'
+alias cleanup "brew cleanup --prune=all;brew autoremove;rm -rf ~/.cache/* ~/Library/Caches/* ~/Library/Logs/* 2>/dev/null;sudo gem cleanup;brew doctor"
+alias macmaintain "macupdate;brewupdate;cleanup"
+alias flushdns "dscacheutil -flushcache && killall -HUP mDNSResponder"
 alias reload "exec $SHELL -l"
-alias maintain "update && cleanup && flush && reload;"
-alias ubuntumaintain "sudo apt update -y && sudo apt upgrade -y &&  sudo apt full-upgrade -y && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo apt autoclean -y"
+alias ubuntumaintain "sudo apt update -y && sudo apt full-upgrade -y;sudo apt autoremove -y;sudo apt autoclean -y"
 
 # navigation
 alias ..  "cd .."
@@ -47,15 +49,14 @@ alias ... "cd ../.."
 alias .... "cd ../../.."
 alias ..... "cd ../../../.."
 
-# os specific adjustments
+# os gnostic
+# (╯°□°)╯︵ ┻━┻
 if test (uname -s) = "Darwin"
-  alias copy pbcopy # copy to clipboard
-  # (╯°□°)╯︵ ┻━┻
+  alias copy pbcopy
   alias browser 'open /Applications/Zen.app'
   export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
   export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
-
-else
+else #linux
   alias copy 'xclip -sel clip'
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 end
