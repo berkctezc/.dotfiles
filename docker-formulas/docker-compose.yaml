@@ -106,7 +106,7 @@ services:
   ##############
   watchtower:
     network_mode: bridge
-    image: containrrr/watchtower:latest
+    image: nickfedor/watchtower:nightly
     container_name: watchtower
     restart: unless-stopped
     environment:
@@ -486,15 +486,29 @@ services:
   ############
   # MiniDLNA #
   ############ 
-  minidlna:
-    network_mode: host
-    volumes:
-        - ~/Storage/Syncthing/media-sync:/media
-    environment:
-        - MINIDLNA_MEDIA_DIR=/media
-        - MINIDLNA_FRIENDLY_NAME=DLNA
-    image: vladgh/minidlna
-
+  # minidlna:
+  #  network_mode: host
+  #  volumes:
+  #      - ~/Storage/Syncthing/media-sync:/media
+  #  environment:
+  #      - MINIDLNA_MEDIA_DIR=/media
+  #      - MINIDLNA_FRIENDLY_NAME=DLNA
+  #  image: vladgh/minidlna
+#########################################################
+  # ###########
+  # # Pi-hole #
+  # ########### 
+  # pihole:
+  #   container_name: pihole
+  #   image: pihole/pihole:nightly
+  #   network_mode: host
+  #   environment:
+  #     TZ: 'Turkey/Istanbul'
+  #     WEBPASSWORD: 'bt'
+  #   volumes:
+  #     - ~/Storage/etc-pihole:/etc/pihole
+  #     - ~/Storage/etc-dnsmasq.d:/etc/dnsmasq.d
+  #   restart: unless-stopped
 #########################################################
 volumes:
   cache:
