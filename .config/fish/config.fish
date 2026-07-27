@@ -37,7 +37,7 @@ alias ifactive "ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'
 # maintenance
 alias macupdate 'sudo softwareupdate -i -a'
 alias brewupdate 'brew update;brew upgrade --greedy -y'
-alias cleanup "brew cleanup --prune=all;brew autoremove;rm -rf ~/.cache/* ~/Library/Caches/* ~/Library/Logs/* 2>/dev/null;sudo gem cleanup;brew doctor"
+alias cleanup "brew cleanup --prune=all;brew autoremove;rm -rf ~/.cache/* ~/Library/Caches/* 2>/dev/null;sudo gem cleanup;brew doctor"
 alias macmaintain "macupdate;brewupdate;cleanup"
 alias flushdns "dscacheutil -flushcache && killall -HUP mDNSResponder"
 alias reload "exec $SHELL -l"
