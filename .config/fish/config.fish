@@ -41,7 +41,7 @@ alias cleanup "brew cleanup --prune=all;brew autoremove;rm -rf ~/.cache/* ~/Libr
 alias macmaintain "macupdate;brewupdate;cleanup"
 alias flushdns "dscacheutil -flushcache && killall -HUP mDNSResponder"
 alias reload "exec $SHELL -l"
-alias ubuntumaintain "sudo apt update -y && sudo apt full-upgrade -y;sudo apt autoremove -y;sudo apt autoclean -y"
+alias archmaintain "sudo pacman -Syu --noconfirm && sudo pacman -Rns \$(pacman -Qdtq) --noconfirm; sudo pacman -Sc --noconfirm"
 
 # navigation
 alias ..  "cd .."
