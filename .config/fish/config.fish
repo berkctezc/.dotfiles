@@ -12,15 +12,15 @@ export PATH="$PATH:$(brew --prefix python)/libexec/bin"
 export HF_HOME="$HOME/llm/oobabooga/text-generation-webui/models"
 export TERM="xterm-256color"
 source ~/.orbstack/shell/init2.fish 2>/dev/null || :
-
 set -gx PATH $PATH $HOME/.cache/lm-studio/bin
+
+fish_config theme choose "mono-smoke"
 
 # utils
 alias sudo 'sudo '
 alias week 'date +%V'
 alias tks 'tmux kill-server'
 alias lscount 'ls -1 | wc -l'
-alias i 'brew install;'
 alias backup_brew "cd ~ && ./scripts/brew_list.sh"
 
 # dotnet
@@ -41,7 +41,7 @@ alias cleanup "brew cleanup --prune=all;brew autoremove;rm -rf ~/.cache/* ~/Libr
 alias macmaintain "macupdate;brewupdate;cleanup"
 alias flushdns "dscacheutil -flushcache && killall -HUP mDNSResponder"
 alias reload "exec $SHELL -l"
-alias archmaintain "sudo pacman -Syu --noconfirm && sudo pacman -Rns \$(pacman -Qdtq) --noconfirm; sudo pacman -Sc --noconfirm"
+alias archmaintain "sudo pacman -Syu --noconfirm && sudo pacman -Scc --noconfirm"
 
 # navigation
 alias ..  "cd .."
@@ -53,7 +53,6 @@ alias ..... "cd ../../../.."
 # (╯°□°)╯︵ ┻━┻
 if test (uname -s) = "Darwin"
   alias copy pbcopy
-  alias browser 'open /Applications/Zen.app'
   export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
   export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 else #linux

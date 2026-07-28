@@ -72,7 +72,7 @@ alias ifactive="ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'
 
 # maintenance
 alias reload="exec $SHELL -l"
-alias archmaintain="sudo pacman -Syu --noconfirm && sudo pacman -Rns \$(pacman -Qdtq) --noconfirm; sudo pacman -Sc --noconfirm"
+alias archmaintain="sudo pacman -Syu --noconfirm; sudo pacman -Sc --noconfirm"
 alias backup_brew="cd ~ && ./scripts/brew_list.sh"
 
 # navigation

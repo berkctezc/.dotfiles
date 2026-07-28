@@ -113,3 +113,4 @@ fabric.properties
 **/fish/completions/**
 .config/**/*.copy
 .qodo
+.zcompdump-*
