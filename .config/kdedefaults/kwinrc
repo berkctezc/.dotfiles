@@ -1,7 +1,7 @@
 [TabBox]
 DesktopLayout=org.kde.breeze.desktop
 DesktopListLayout=org.kde.breeze.desktop
-LayoutName=org.kde.breeze.desktop
+LayoutName=big_icons
 
 [Windows]
 Placement=Centered

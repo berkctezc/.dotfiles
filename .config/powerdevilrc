@@ -1,6 +1,4 @@
 [AC][Display]
-DimDisplayIdleTimeoutSec=900
-TurnOffDisplayIdleTimeoutSec=1800
 TurnOffDisplayIdleTimeoutWhenLockedSec=300
 
 [AC][Performance]
@@ -11,6 +9,15 @@ RunScriptIdleTimeoutSec=1800
 
 [AC][SuspendAndShutdown]
 AutoSuspendIdleTimeoutSec=4800
+LidAction=64
+
+[Battery][SuspendAndShutdown]
+AutoSuspendAction=0
+LidAction=64
 
 [BatteryManagement]
 BatteryCriticalAction=0
+
+[LowBattery][SuspendAndShutdown]
+AutoSuspendAction=0
+LidAction=64
