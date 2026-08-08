@@ -6,10 +6,9 @@ x-common-env: &common-env
   TZ: Etc/UTC
 
 services:
-#########################################################
-  #############
-  # Portainer #
-  #############
+#############
+# Portainer #
+#############
   portainer-ce:
     container_name: portainer
     network_mode: bridge
@@ -25,7 +24,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ~/.config/portainer_data:/data
     privileged: true
-
   agent:
     container_name: portainer_agent
     image: portainer/agent:sts
@@ -37,10 +35,9 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /var/lib/docker/volumes:/var/lib/docker/volumes
       - /:/host
-#########################################################
-  ############
-  # Jellyfin #
-  ############
+############
+# Jellyfin #
+############
   jellyfin:
     image: jellyfin/jellyfin:latest
     container_name: jellyfin
@@ -63,10 +60,9 @@ services:
       - "host.docker.internal:host-gateway"
     devices:
       - /dev/dri:/dev/dri
-#########################################################
-  ################
-  # Transmission #
-  ################
+################
+# Transmission #
+################
   transmission:
     image: linuxserver/transmission:latest
     container_name: transmission
@@ -81,10 +77,9 @@ services:
       - 51413:51413
       - 51413:51413/udp
     restart: unless-stopped
-#########################################################
-  ##############
-  # Syncthing #
-  #############
+#############
+# Syncthing #
+#############
   syncthing:
     image: syncthing/syncthing:edge
     container_name: syncthing-server
@@ -100,10 +95,9 @@ services:
     #  - "22000:22000/tcp"
     #  - "22000:22000/udp"
     #  - "21027:21027/udp"
-#########################################################
-  ##############
-  # Watchtower #
-  ##############
+##############
+# Watchtower #
+##############
   watchtower:
     network_mode: bridge
     image: nickfedor/watchtower:nightly
@@ -121,10 +115,9 @@ services:
     cpus: 0.5
     mem_limit: 512m
     mem_reservation: 10m
-#########################################################
-  ###########
-  # Rancher #
-  ###########
+###########
+# Rancher #
+###########
   rancher:
     container_name: rancher-server
     image: rancher/rancher:latest
@@ -137,10 +130,9 @@ services:
     privileged: true
     cpus: 1
     mem_limit: 1g
-#########################################################
-  ###############
-  # Filebrowser #
-  ###############
+###############
+# Filebrowser #
+###############
   filebrowser:
     image: filebrowser/filebrowser:s6
     container_name: filebrowser
@@ -153,10 +145,9 @@ services:
     ports:
       - "8764:80"
     restart: unless-stopped
-#########################################################
-  #############
-  # Postgres #
-  ############
+############
+# Postgres #
+############
   postgres:
     container_name: postgres
     image: postgres
@@ -169,11 +160,10 @@ services:
       - postgres:/data/postgres
     ports:
       - "6432:5432"
-    restart: unless-stopped 
-#########################################################
-  #############
-  # MariaDB #
-  ############
+    restart: unless-stopped
+###########
+# MariaDB #
+###########
   mariadb:
     container_name: mariadb
     image: mariadb:latest
@@ -188,10 +178,9 @@ services:
     volumes:
       - ~/.config/mariadb:/var/lib/mysql
       - ~/.config/mariadb/conf:/etc/mysql/conf.d
-#########################################################
-  ##########
-  # Redis #
-  #########
+#########
+# Redis #
+#########
   redis:
     container_name: redis
     image: redis
@@ -203,10 +192,9 @@ services:
       - '6380:6379'
     volumes:
       - 'redis_data:/root/redis'
-#########################################################
-  ##################
-  # HomeAssistant #
-  #################
+#################
+# HomeAssistant #
+#################
   homeassistant:
     container_name: homeassistant
     image: homeassistant/home-assistant:stable
@@ -223,10 +211,9 @@ services:
       <<: *common-env
     devices:
       - /dev/ttyUSB0:/dev/ttyUSB0
-#########################################################
-  ############
-  # Crafty 4 #
-  ############
+############
+# Crafty 4 #
+############
   crafty:
     container_name: crafty_container
     image: arcadiatechnology/crafty-4:latest
@@ -244,10 +231,9 @@ services:
         - ~/.config/crafty/servers:/crafty/servers
         - ~/.config/crafty/config:/crafty/app/config
         - ~/.config/crafty/import:/crafty/import
-#########################################################
-  ###############
-  # Uptime Kuma #
-  ###############
+###############
+# Uptime Kuma #
+###############
   uptime-kuma:
     image: louislam/uptime-kuma:1
     volumes:
@@ -255,10 +241,9 @@ services:
     ports:
       - 3001:3001
     restart: unless-stopped
-#########################################################
-  ##########
-  # vsftpd #
-  ##########
+##########
+# vsftpd #
+##########
   vsftpd:
       container_name: vsftpd
       image: fauria/vsftpd:latest
@@ -276,10 +261,9 @@ services:
         PASV_ADDRESS: "127.0.0.1"
         PASV_MIN_PORT: 21100
         PASV_MAX_PORT: 21110
-#########################################################
-  ############
-  # Scrypted #
-  ############
+############
+# Scrypted #
+############
   scrypted:
     image: koush/scrypted
     environment:
@@ -300,10 +284,9 @@ services:
             max-file: "10"
     labels:
         - "com.centurylinklabs.watchtower.scope=scrypted"
-#########################################################
-  #####################
-  # Speedtest Tracker #
-  #####################
+#####################
+# Speedtest Tracker #
+#####################
   speedtest-tracker:
     image: linuxserver/speedtest-tracker:latest
     container_name: speedtest-tracker
@@ -319,10 +302,9 @@ services:
     ports:
       - 82:80
     restart: unless-stopped
-#########################################################
-  ##############
-  # ZoneMinder #
-  ##############
+##############
+# ZoneMinder #
+##############
   zoneminder:
     container_name: zoneminder
     image: dlandon/zoneminder
@@ -357,10 +339,9 @@ services:
           size: 1000000000
     depends_on:
       - mariadb
-#########################################################
-  ##########
-  # Webtop #
-  ##########
+##########
+# Webtop #
+##########
   webtop:
     image: linuxserver/webtop:latest
     container_name: webtop
@@ -380,10 +361,38 @@ services:
       - /dev/dri:/dev/dri
     shm_size: "1gb"
     restart: unless-stopped
-#########################################################
-  ############
-  # Sickgear #
-  ############
+###########
+# SearXNG #
+###########
+  searxng-redis:
+    container_name: searxng-redis
+    image: docker.io/valkey/valkey:7-alpine
+    command: valkey-server --save "" --appendonly no
+    restart: unless-stopped
+    networks:
+      - searxng-net
+    tmpfs:
+      - /data
+  searxng:
+    container_name: searxng
+    image: docker.io/searxng/searxng:latest
+    restart: unless-stopped
+    ports:
+      - "8888:8080"
+    volumes:
+      - ./config:/etc/searxng:rw
+    environment:
+      - SEARXNG_SETTINGS_PATH=/etc/searxng/settings.yml
+    networks:
+      - searxng-net
+    depends_on:
+      - redis
+networks:
+  searxng-net:
+    driver: bridge
+############
+# Sickgear #
+############
   sickgear:
     image: linuxserver/sickgear:latest
     container_name: sickgear
@@ -396,10 +405,9 @@ services:
     ports:
       - 8082:8081
     restart: unless-stopped
-#########################################################
-  #############
-  # Handbrake #
-  ############# 
+#############
+# Handbrake #
+#############
   handbrake:
     container_name: handbrake
     image: jlesage/handbrake
@@ -409,10 +417,9 @@ services:
         - ~/Storage:/storage:rw
         - ~/Storage/handbrake/watch:/watch:rw
         - ~/Storage/handbrake/output:/output:rw
-#########################################################
-  #############
-  # ARR Stack #
-  #############  
+#############
+# ARR Stack #
+#############
   prowlarr:
     image: linuxserver/prowlarr:latest
     container_name: prowlarr
@@ -426,7 +433,6 @@ services:
     ports:
       - 9696:9696
     restart: unless-stopped
-      
   sonarr:
     image: linuxserver/sonarr:latest
     container_name: sonarr
@@ -442,7 +448,6 @@ services:
     ports:
       - 8989:8989
     restart: unless-stopped
-
   radarr:
     image: linuxserver/radarr:latest
     container_name: radarr
@@ -458,7 +463,6 @@ services:
     ports:
       - 7878:7878
     restart: unless-stopped
-
   flaresolverr:
     image: flaresolverr/flaresolverr:latest
     container_name: flaresolverr
@@ -469,8 +473,7 @@ services:
       CAPTCHA_SOLVER: ${CAPTCHA_SOLVER:-none}
     ports:
       - "${PORT:-8191}:8191"
-    restart: unless-stopped 
-    
+    restart: unless-stopped
   jackett:
     image: linuxserver/jackett:latest
     container_name: jackett
@@ -482,10 +485,9 @@ services:
     ports:
       - 9117:9117
     restart: unless-stopped
-#########################################################
-  ############
-  # MiniDLNA #
-  ############ 
+############
+# MiniDLNA #
+############
   # minidlna:
   #  network_mode: host
   #  volumes:
@@ -494,10 +496,9 @@ services:
   #      - MINIDLNA_MEDIA_DIR=/media
   #      - MINIDLNA_FRIENDLY_NAME=DLNA
   #  image: vladgh/minidlna
-#########################################################
-  # ###########
-  # # Pi-hole #
-  # ########### 
+# ###########
+# # Pi-hole #
+# ###########
   # pihole:
   #   container_name: pihole
   #   image: pihole/pihole:nightly
@@ -509,10 +510,8 @@ services:
   #     - ~/Storage/etc-pihole:/etc/pihole
   #     - ~/Storage/etc-dnsmasq.d:/etc/dnsmasq.d
   #   restart: unless-stopped
-#########################################################
 volumes:
   cache:
   postgres:
   redis_data:
     driver: local
-#########################################################
