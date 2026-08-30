@@ -386,10 +386,8 @@ services:
     networks:
       - searxng-net
     depends_on:
-      - redis
-networks:
-  searxng-net:
-    driver: bridge
+      - searxng-redis
+
 ############
 # Sickgear #
 ############
@@ -405,6 +403,7 @@ networks:
     ports:
       - 8082:8081
     restart: unless-stopped
+
 #############
 # Handbrake #
 #############
@@ -417,6 +416,7 @@ networks:
         - ~/Storage:/storage:rw
         - ~/Storage/handbrake/watch:/watch:rw
         - ~/Storage/handbrake/output:/output:rw
+
 #############
 # ARR Stack #
 #############
@@ -474,6 +474,7 @@ networks:
     ports:
       - "${PORT:-8191}:8191"
     restart: unless-stopped
+
   jackett:
     image: linuxserver/jackett:latest
     container_name: jackett
@@ -485,6 +486,7 @@ networks:
     ports:
       - 9117:9117
     restart: unless-stopped
+
 ############
 # MiniDLNA #
 ############
@@ -496,6 +498,7 @@ networks:
   #      - MINIDLNA_MEDIA_DIR=/media
   #      - MINIDLNA_FRIENDLY_NAME=DLNA
   #  image: vladgh/minidlna
+
 # ###########
 # # Pi-hole #
 # ###########
@@ -510,6 +513,11 @@ networks:
   #     - ~/Storage/etc-pihole:/etc/pihole
   #     - ~/Storage/etc-dnsmasq.d:/etc/dnsmasq.d
   #   restart: unless-stopped
+
+networks:
+  searxng-net:
+    driver: bridge
+
 volumes:
   cache:
   postgres:
