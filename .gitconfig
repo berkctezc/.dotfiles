@@ -60,6 +60,8 @@
 	helper = /usr/local/share/gcm-core/git-credential-manager
 	helper =
 	helper = /home/linuxbrew/.linuxbrew/bin/git-credential-manager
+	helper =
+	helper = /usr/bin/git-credential-manager
 
 [color]
 
@@ -134,10 +136,7 @@
 
 	defaultBranch = master
 [credential "https://github.com"]
-	helper = git-credential-manager
-	helper = !/opt/homebrew/bin/gh auth git-credential
-[credential "https://gist.github.com"]
-	helper = git-credential-manager
-	helper = !/opt/homebrew/bin/gh auth git-credential
+	credentialStore = cache
+	helper = manager
 [credential "https://dev.azure.com"]
 	useHttpPath = true
