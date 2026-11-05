@@ -62,6 +62,7 @@ end
 
 if status is-interactive
   atuin init fish --disable-up-arrow | source
+  zoxide init fish | source
 	if set -q TMUX
         fastfetch;
     else
