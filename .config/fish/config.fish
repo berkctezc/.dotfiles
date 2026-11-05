@@ -42,6 +42,7 @@ alias macmaintain "macupdate;brewupdate;cleanup"
 alias flushdns "dscacheutil -flushcache && killall -HUP mDNSResponder"
 alias reload "exec $SHELL -l"
 alias archmaintain "sudo pacman -Syu --noconfirm && sudo pacman -Scc --noconfirm"
+alias ubuntumaintain "sudo apt update -y && sudo apt full-upgrade -y;sudo apt autoremove -y;sudo apt autoclean -y"
 
 # navigation
 alias ..  "cd .."
