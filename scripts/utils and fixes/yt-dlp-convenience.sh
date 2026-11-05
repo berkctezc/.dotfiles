@@ -1,0 +1,1 @@
+yt-dlp --yes-playlist :ytwatchlater --cookies-from-browser firefox -S res:480 --playlist-reverse --restrict-filenames --sponsorblock-remove all --merge-output-format mkv
