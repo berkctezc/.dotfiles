@@ -1,0 +1,1 @@
+exiftool -b -QuickTime:MotionPhotoVideo input.heic > output.mp4 && heif-convert input.heic output.jpg -q 95
