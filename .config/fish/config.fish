@@ -22,6 +22,7 @@ alias week 'date +%V'
 alias tks 'tmux kill-server'
 alias lscount 'ls -1 | wc -l'
 alias backup_brew "cd ~ && ./scripts/brew_list.sh"
+alias nano 'micro'
 
 # dotnet
 alias cleandotnet 'find . -iname "bin" -o -iname "obj" | xargs rm -rf'
