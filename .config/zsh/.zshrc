@@ -16,19 +16,19 @@ ZSH_THEME="agnoster" # https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 plugins=(
 	# dev thingies
 	dotnet node npm pip python
-	git branch brew
+	git gh branch brew
 	kubectl kubectx
 	docker docker-compose
 	mongocli postgres redis-cli
 	# text editor thingies
-	textmate vscode
+	vscode
 	# zsh thingies
 	zsh-interactive-cd zsh-navigation-tools themes
 	web-search  zsh-autosuggestions
 	you-should-use zsh-history-substring-search
 	# os and system thingies
-	archlinux debian systemd
-	macos iterm2 brew
+	archlinux debian ubuntu systemd sudo
+	macos brew
 	battery web-search
 	# terminal utility thingies
 	fzf gnu-utils ssh sudo
