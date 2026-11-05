@@ -58,7 +58,6 @@
 	helper = cache
 	credentialStore = gpg
 	helper = /usr/local/share/gcm-core/git-credential-manager
-	helper =
 	helper = /home/linuxbrew/.linuxbrew/bin/git-credential-manager
 
 [color]
