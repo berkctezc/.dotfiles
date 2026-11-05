@@ -22,6 +22,7 @@ alias week 'date +%V'
 alias tks 'tmux kill-server'
 alias lscount 'ls -1 | wc -l'
 alias backup_brew "cd ~ && ./scripts/brew_list.sh"
+alias nano 'micro'
 
 # dotnet
 alias cleandotnet 'find . -iname "bin" -o -iname "obj" | xargs rm -rf'
@@ -42,6 +43,7 @@ alias macmaintain "macupdate;brewupdate;cleanup"
 alias flushdns "dscacheutil -flushcache && killall -HUP mDNSResponder"
 alias reload "exec $SHELL -l"
 alias archmaintain "sudo pacman -Syu --noconfirm && sudo pacman -Scc --noconfirm"
+alias ubuntumaintain "sudo apt update -y && sudo apt full-upgrade -y;sudo apt autoremove -y;sudo apt autoclean -y"
 
 # navigation
 alias ..  "cd .."
@@ -62,6 +64,7 @@ end
 
 if status is-interactive
   atuin init fish --disable-up-arrow | source
+  zoxide init fish | source
 	if set -q TMUX
         fastfetch;
     else

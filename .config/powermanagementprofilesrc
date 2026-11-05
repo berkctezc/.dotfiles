@@ -45,3 +45,6 @@ idleTime=60000
 lidAction=64
 powerButtonAction=16
 powerDownAction=16
+
+[Migration]
+MigratedProfilesToPlasma6=powerdevilrc

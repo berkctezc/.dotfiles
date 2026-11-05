@@ -1,0 +1,1 @@
+magick mogrify -format -avif -define heic:speed=0 *.jpg
