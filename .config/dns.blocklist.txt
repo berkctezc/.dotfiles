@@ -1,0 +1,14 @@
+||analyticsengine.s3.amazonaws.com^
+||analytics.s3.amazonaws.com^
+||an.facebook.com^
+||ads-api.twitter.com^
+||ads-api.tiktok.com^
+||ads-sg.tiktok.com^
+||business-api.tiktok.com^
+||log.byteoversea.com^
+||udcm.yahoo.com^
+||analytics.query.yahoo.com^
+||log.fc.yahoo.com^
+||gemini.yahoo.com^
+||adtech.yahooinc.com^
+||business-api.tiktok.com^
