@@ -3,7 +3,10 @@
   "modules": [
     "title",
     "separator",
-    "os",
+    {
+      "type": "os",
+      "key": "OS"
+    },
     "host",
     "kernel",
     "uptime",
@@ -30,5 +33,23 @@
     "locale",
     "break",
     "colors"
-  ]
+  ],
+  "logo": {
+    "padding": {
+      "top": 0,
+      "left": 0,
+      "right": 1,
+      "bottom": 0
+    }
+  },
+    "display": {
+    "separator": " ➜  ",
+    "color": {
+      "keys": "cyan",
+      "title": "blue"
+    },
+    "key": {
+      "width": "auto"
+    }
+  }
 }
