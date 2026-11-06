@@ -1,14 +1,30 @@
-||analyticsengine.s3.amazonaws.com^
-||analytics.s3.amazonaws.com^
-||an.facebook.com^
-||ads-api.twitter.com^
-||ads-api.tiktok.com^
-||ads-sg.tiktok.com^
-||business-api.tiktok.com^
-||log.byteoversea.com^
-||udcm.yahoo.com^
-||analytics.query.yahoo.com^
-||log.fc.yahoo.com^
-||gemini.yahoo.com^
-||adtech.yahooinc.com^
-||business-api.tiktok.com^
+0.0.0.0 analyticsengine.s3.amazonaws.com
+0.0.0.0 analytics.s3.amazonaws.com
+0.0.0.0 ads-api.twitter.com
+0.0.0.0 an.facebook.com
+0.0.0.0 ads-sg.tiktok.com
+0.0.0.0 ads-api.tiktok.com
+0.0.0.0 business-api.tiktok.com
+0.0.0.0 log.byteoversea.com
+0.0.0.0 udcm.yahoo.com
+0.0.0.0 analytics.query.yahoo.com
+0.0.0.0 log.fc.yahoo.com
+0.0.0.0 gemini.yahoo.com
+0.0.0.0 adtech.yahooinc.com
+0.0.0.0 adfstat.yandex.ru
+0.0.0.0 metrika.yandex.ru
+0.0.0.0 appmetrica.yandex.ru
+0.0.0.0 auction.unityads.unity3d.com
+0.0.0.0 webview.unityads.unity3d.com
+0.0.0.0 config.unityads.unity3d.com
+0.0.0.0 adserver.unityads.unity3d.com
+0.0.0.0 data.mistat.xiaomi.com
+0.0.0.0 data.mistat.india.xiaomi.com
+0.0.0.0 data.mistat.rus.xiaomi.com
+0.0.0.0 tracking.rus.miui.com
+0.0.0.0 grs.hicloud.com
+0.0.0.0 iadsdk.apple.com
+0.0.0.0 api-adservices.apple.com
+0.0.0.0 books-analytics-events.apple.com
+0.0.0.0 weather-analytics-events.apple.com
+0.0.0.0 notes-analytics-events.apple.com
