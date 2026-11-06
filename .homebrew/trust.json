@@ -1,6 +1,7 @@
 {
   "trustedtaps": [
     "apple/apple",
+    "bramstein/webfonttools",
     "deskflow/tap",
     "grishka/grishka",
     "gromgit/fuse",
@@ -14,6 +15,7 @@
     "vancluever/input-leap"
   ],
   "trustedformulae": [
-    "berkctezc/uad-ng/uad-ng"
+    "berkctezc/uad-ng/uad-ng",
+    "bramstein/webfonttools/sfnt2woff"
   ]
 }
