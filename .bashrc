@@ -84,7 +84,6 @@ export LANG="en_US.UTF-8";
 export LC_ALL="en_US.UTF-8";
 export EDITOR="micro";
 export NODE_REPL_MODE="sloppy";
-export ZSH="$HOME/.dotfiles/.oh-my-zsh";
 export MANPATH="/usr/local/man:$MANPATH";
 export PATH="$PATH:/$HOME/.dotnet/tools";
 export PATH="$PATH:$HOME/.local/bin";
@@ -114,18 +113,15 @@ alias .....="cd ../../../.."
 
 # non os agnostic
 if [ "$(uname -s)" = "Darwin" ]; then
-  alias macupdate='sudo softwareupdate -i -a'
   alias copy='pbcopy' # copy to clipboard
   # (╯°□°)╯︵ ┻━┻
   export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
   export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 else
   alias copy='xclip -sel clip'
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
 if [[ $- == *i* ]]; then
-  atuin init bash --disable-up-arrow > /dev/null;
   if [[ -n "$TMUX" ]]; then
     fastfetch;
   fi
