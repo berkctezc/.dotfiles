@@ -1,3 +1,9 @@
+# dns reroutes
+192.168.3.70 BT-SV1
+192.168.3.70 bt-sv1
+192.168.3.70 home-server
+
+# blocked
 0.0.0.0 analyticsengine.s3.amazonaws.com
 0.0.0.0 analytics.s3.amazonaws.com
 0.0.0.0 ads-api.twitter.com
