@@ -1,7 +1,6 @@
 # dns reroutes
-192.168.3.70 BT-SV1
-192.168.3.70 bt-sv1
-192.168.3.70 home-server
+192.168.3.70 bt-sv1.local
+192.168.3.70 home-server.local
 
 # blocked
 0.0.0.0 analyticsengine.s3.amazonaws.com
