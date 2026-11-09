@@ -265,11 +265,11 @@ services:
 # Scrypted #
 ############
   scrypted:
-    image: koush/scrypted
+    container_name: scrypted
+    image: koush/scrypted:full
     environment:
         - SCRYPTED_WEBHOOK_UPDATE_AUTHORIZATION=Bearer token
         - SCRYPTED_WEBHOOK_UPDATE=http://localhost:10444/v1/update
-    container_name: scrypted
     restart: unless-stopped
     network_mode: host
     devices:
