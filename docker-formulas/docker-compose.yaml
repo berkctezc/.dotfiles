@@ -418,7 +418,7 @@ services:
 # ARR Stack #
 #############
   prowlarr:
-    image: linuxserver/prowlarr:latest
+    image: linuxserver/prowlarr:nightly
     container_name: prowlarr
     hostname: prowlarr
     environment:
