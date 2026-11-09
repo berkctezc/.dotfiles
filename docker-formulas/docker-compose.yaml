@@ -307,7 +307,7 @@ services:
 ##############
   zoneminder:
     container_name: zoneminder
-    image: dlandon/zoneminder
+    image: zoneminderhq/zoneminder
     restart: unless-stopped
     privileged: false
     shm_size: 5G
