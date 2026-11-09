@@ -241,26 +241,6 @@ services:
     ports:
       - 3001:3001
     restart: unless-stopped
-##########
-# vsftpd #
-##########
-  vsftpd:
-      container_name: vsftpd
-      image: fauria/vsftpd:latest
-      restart: unless-stopped
-      volumes:
-          - ~/Storage/ftp-sv:/home/vsftpd
-      ports:
-          - 20:20
-          - 21:21
-          - 21100-21110:21100-21110
-      environment:
-        <<: *common-env
-        FTP_USER: "root"
-        FTP_PASS: "root"
-        PASV_ADDRESS: "127.0.0.1"
-        PASV_MIN_PORT: 21100
-        PASV_MAX_PORT: 21110
 ############
 # Scrypted #
 ############
