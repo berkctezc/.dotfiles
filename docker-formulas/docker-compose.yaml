@@ -391,7 +391,7 @@ services:
 # Sickgear #
 ############
   sickgear:
-    image: linuxserver/sickgear:latest
+    image: linuxserver/sickgear:develop
     container_name: sickgear
     environment:
       <<: *common-env
