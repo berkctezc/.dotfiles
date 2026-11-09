@@ -134,7 +134,7 @@ services:
       WATCHTOWER_REVIVE_STOPPED: true
       WATCHTOWER_MONITOR_ONLY: false
       WATCHTOWER_ROLLING_RESTART: true
-      WATCHTOWER_SKIP_IMAGE_NAMES: "zoneminderhq/zoneminder,rancher/rancher,postgres,mariadb,redis"
+      WATCHTOWER_SKIP_IMAGE_NAMES: ""
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     cpus: 0.5
@@ -152,6 +152,8 @@ services:
     ports:
       - "89:80"
       - "446:443"
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
     privileged: true
     cpus: 2
     mem_limit: 6g
@@ -166,6 +168,8 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       PGDATA: /data/postgres
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
     volumes:
       - postgres:/data/postgres
     ports:
@@ -183,6 +187,8 @@ services:
       MYSQL_DATABASE: mysql
       MYSQL_USER: mysql
       MYSQL_PASSWORD: mysql
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
     ports:
       - "3306:3306"
     volumes:
@@ -198,6 +204,8 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - REDIS_PORT=6379
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
     ports:
       - '6380:6379'
     volumes:
@@ -319,6 +327,8 @@ services:
       ZM_DB_USER: mysql
       ZM_DB_PASS: mysql
       ZM_DB_NAME: mysql
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
     volumes:
       - ~/Storage/zoneminder/config:/config
       - ~/Storage/zoneminder/cache:/var/cache/zoneminder
@@ -360,6 +370,8 @@ services:
     image: valkey/valkey:unstable-alpine
     command: valkey-server --save "" --appendonly no
     restart: unless-stopped
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
     networks:
       - searxng-net
     tmpfs:
@@ -374,6 +386,8 @@ services:
       - ./config:/etc/searxng:rw
     environment:
       - SEARXNG_SETTINGS_PATH=/etc/searxng/settings.yml
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
     networks:
       - searxng-net
     depends_on:
