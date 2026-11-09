@@ -19,3 +19,4 @@
 docker-formulas/config/settings.yml
 docker-formulas/etc-pihole/
 docker-formulas/relaysrv-data/
+docker-formulas/discosrv-data/

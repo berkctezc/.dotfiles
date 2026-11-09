@@ -105,7 +105,7 @@ services:
       - ./discosrv-data:/var/stdiscosrv
     restart: unless-stopped
     command:
-      - "-listen=:8443"
+      - "--listen=:8443"
   relay-server:
     image: syncthing/relaysrv:edge
     container_name: syncthing-relay
@@ -118,7 +118,7 @@ services:
     entrypoint:
       - "/bin/entrypoint.sh"
       - "/bin/strelaysrv"
-      - "-pools="
+      - "--pools="
 ##############
 # Watchtower #
 ##############
@@ -239,7 +239,7 @@ services:
     environment:
         - TZ=Etc/UTC
     ports:
-        - "8443:8443"
+        - "8445:8443"
         - "8123:8123"
         - "19132:19132/udp"
         - "25500-25600:25500-25600"
