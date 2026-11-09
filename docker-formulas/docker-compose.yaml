@@ -366,7 +366,7 @@ services:
 ###########
   searxng-redis:
     container_name: searxng-redis
-    image: docker.io/valkey/valkey:7-alpine
+    image: valkey/valkey:unstable-alpine
     command: valkey-server --save "" --appendonly no
     restart: unless-stopped
     networks:
