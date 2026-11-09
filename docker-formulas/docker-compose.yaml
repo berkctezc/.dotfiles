@@ -95,6 +95,30 @@ services:
     #  - "22000:22000/tcp"
     #  - "22000:22000/udp"
     #  - "21027:21027/udp"
+  discovery-server:
+    image: syncthing/discosrv:edge
+    container_name: syncthing-discovery
+    network_mode: host
+    environment:
+      <<: *common-env
+    volumes:
+      - ./discosrv-data:/var/stdiscosrv
+    restart: unless-stopped
+    command:
+      - "-listen=:8443"
+  relay-server:
+    image: syncthing/relaysrv:edge
+    container_name: syncthing-relay
+    network_mode: host
+    environment:
+      <<: *common-env
+    volumes:
+      - ./relaysrv-data:/var/strelaysrv
+    restart: unless-stopped
+    entrypoint:
+      - "/bin/entrypoint.sh"
+      - "/bin/strelaysrv"
+      - "-pools="
 ##############
 # Watchtower #
 ##############
@@ -110,6 +134,7 @@ services:
       WATCHTOWER_REVIVE_STOPPED: true
       WATCHTOWER_MONITOR_ONLY: false
       WATCHTOWER_ROLLING_RESTART: true
+      WATCHTOWER_SKIP_IMAGE_NAMES: "zoneminderhq/zoneminder,rancher/rancher,postgres,mariadb,redis"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     cpus: 0.5
@@ -128,23 +153,8 @@ services:
       - "89:80"
       - "446:443"
     privileged: true
-    cpus: 1
-    mem_limit: 1g
-###############
-# Filebrowser #
-###############
-  filebrowser:
-    image: filebrowser/filebrowser:s6
-    container_name: filebrowser
-    volumes:
-      - /home:/srv
-      - ~/.config/filebrowser/database/:/database/
-      - ~/.config/filebrowser/config/:/config/
-    environment:
-      <<: *common-env
-    ports:
-      - "8764:80"
-    restart: unless-stopped
+    cpus: 2
+    mem_limit: 6g
 ############
 # Postgres #
 ############
@@ -216,7 +226,7 @@ services:
 ############
   crafty:
     container_name: crafty_container
-    image: arcadiatechnology/crafty-4:latest
+    image: arcadiatechnology/crafty-4:nightly
     restart: always
     environment:
         - TZ=Etc/UTC
