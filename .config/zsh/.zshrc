@@ -52,6 +52,7 @@ export MANPATH="/usr/local/man:$MANPATH";
 export PATH="$PATH:/$HOME/.dotnet/tools";
 export PATH="$PATH:$HOME/.local/bin";
 export PATH="$PATH:/opt/homebrew/bin";
+export KUBECONFIG=~/.kube/config;
 
 # utils
 alias sudo='sudo '
