@@ -415,6 +415,8 @@ services:
     image: jlesage/handbrake:nightly-latest
     ports:
         - 5800:5800
+    devices:
+          - /dev/dri:/dev/dri
     volumes:
         - ~/Storage:/storage:rw
         - ~/Storage/handbrake/watch:/watch:rw
