@@ -16,7 +16,7 @@
 .config/transmission/
 .config/uptime-kuma/
 .config/webtop/
-docker-formulas/config/settings.yml
-docker-formulas/etc-pihole/
-docker-formulas/relaysrv-data/
-docker-formulas/discosrv-data/
+homelab/docker-formulas/config/settings.yml
+homelab/docker-formulas/etc-pihole/
+homelab/docker-formulas/relaysrv-data/
+homelab/docker-formulas/discosrv-data/
