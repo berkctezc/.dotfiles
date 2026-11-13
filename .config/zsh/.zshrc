@@ -49,7 +49,7 @@ export LC_ALL="en_US.UTF-8";
 export EDITOR='micro';
 export NODE_REPL_MODE='sloppy';
 export MANPATH="/usr/local/man:$MANPATH";
-export PATH="$PATH:/$HOME/.dotnet/tools";
+export PATH="$PATH:$HOME/.dotnet/tools";
 export PATH="$PATH:$HOME/.local/bin";
 export PATH="$PATH:/opt/homebrew/bin";
 export KUBECONFIG=~/.kube/config;
@@ -85,19 +85,21 @@ alias .....="cd ../../../.."
 
 # os gnostic
 if [ "$(uname -s)" = "Darwin" ]; then
-  alias copy='pbcopy'
-  export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-  export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+  	alias copy='pbcopy'
+  	export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+  	export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 else
-  alias copy='xclip -sel clip'
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  	alias copy='xclip -sel clip'
+	if [[ -f /home/linuxbrew/.linuxbrew/Library/Homebrew/brew.sh ]]; then
+	    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+	fi
 fi
 
 if [[ $- == *i* ]]; then
-  atuin init zsh --disable-up-arrow > /dev/null
-  if [[ -n "$TMUX" ]]; then
-    fastfetch;
-  else
-  	tmux new;
+  	atuin init zsh --disable-up-arrow > /dev/null
+  	if [[ -n "$TMUX" ]]; then
+    	fastfetch;
+	else
+  		tmux new;
   fi
 fi
