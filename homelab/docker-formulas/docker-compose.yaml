@@ -69,9 +69,9 @@ services:
     environment:
       <<: *common-env
     volumes:
-      - ~/.config/transmission:/config
-      - ~/Storage:/storage
-      - ~/Storage/Downloads:/downloads
+      - /mnt/storage/transmission/config:/config
+      - /mnt/storage/:/storage/
+      - /mnt/storage/Downloads:/downloads
     ports:
       - 9091:9091
       - 51413:51413
@@ -88,7 +88,7 @@ services:
     environment:
       <<: *common-env
     volumes:
-      - ~/Storage/Syncthing:/var/syncthing
+      - /mnt/storage/Syncthing:/var/syncthing
     restart: unless-stopped
     #ports:
     #  - "8384:8384"
@@ -244,11 +244,11 @@ services:
         - "19132:19132/udp"
         - "25500-25600:25500-25600"
     volumes:
-        - ~/.config/crafty/backups:/crafty/backups
-        - ~/.config/crafty/logs:/crafty/logs
-        - ~/.config/crafty/servers:/crafty/servers
-        - ~/.config/crafty/config:/crafty/app/config
-        - ~/.config/crafty/import:/crafty/import
+        - /mnt/storage/crafty/backups:/crafty/backups
+        - /mnt/storage/crafty/logs:/crafty/logs
+        - /mnt/storage/crafty/servers:/crafty/servers
+        - /mnt/storage/crafty/config:/crafty/app/config
+        - /mnt/storage/crafty/import:/crafty/import
 ###############
 # Uptime Kuma #
 ###############
@@ -256,7 +256,7 @@ services:
     container_name: uptime-kuma
     image: louislam/uptime-kuma:nightly
     volumes:
-      - ~/.config/uptime-kuma/data:/app/data
+      -  /mnt/storage/uptime-kuma/data:/app/data
     ports:
       - 3001:3001
     restart: unless-stopped
@@ -274,8 +274,8 @@ services:
     devices:
         - /dev/dri:/dev/dri
     volumes:
-        - ~/Storage/scrypted/volume:/server/volume
-        - ~/Storage/scrypted/video:/nvr
+        - /mnt/storage/scrypted/volume:/server/volume
+        - /mnt/storage/scrypted/video:/nvr
     logging:
         driver: "json-file"
         options:
@@ -297,7 +297,7 @@ services:
       SPEEDTEST_SCHEDULE: ""
       SPEEDTEST_SERVERS: ""
     volumes:
-     - ~/.config/speedtest-tracker:/config
+     - /mnt/storage/speedtest-tracker/config:/config
     ports:
       - 82:80
     restart: unless-stopped
@@ -330,10 +330,10 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=false"
     volumes:
-      - ~/Storage/zoneminder/config:/config
-      - ~/Storage/zoneminder/cache:/var/cache/zoneminder
-      - ~/Storage/zoneminder/data:/data
-      - ~/Storage/zoneminder/log:/log
+      - /mnt/storage/zoneminder/config:/config
+      - /mnt/storage/zoneminder/cache:/var/cache/zoneminder
+      - /mnt/storage/zoneminder/data:/data
+      - /mnt/storage/zoneminder/log:/log
       - type: tmpfs
         target: /dev/shm
         tmpfs:
@@ -353,7 +353,7 @@ services:
       SUBFOLDER: /
       TITLE: Webtop
     volumes:
-      - ~/.config/webtop:/config
+      - /mnt/storage/webtop/config:/config
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - 3005:3000
@@ -401,9 +401,9 @@ services:
     environment:
       <<: *common-env
     volumes:
-      - ~/Storage/sickgear/config:/config
-      - ~/Storage/sickgear/tv:/tv
-      - ~/Storage/downloads:/downloads
+      - /mnt/storage/sickgear/config:/config
+      - /mnt/storage/sickgear/tv:/tv
+      - /mnt/storage/downloads:/downloads
     ports:
       - 8082:8081
     restart: unless-stopped
@@ -418,9 +418,9 @@ services:
     devices:
           - /dev/dri:/dev/dri
     volumes:
-        - ~/Storage:/storage:rw
-        - ~/Storage/handbrake/watch:/watch:rw
-        - ~/Storage/handbrake/output:/output:rw
+        - /mnt/storage:/storage:rw
+        - /mnt/storage/handbrake/watch:/watch:rw
+        - /mnt/storage/handbrake/output:/output:rw
 #############
 # ARR Stack #
 #############
@@ -431,9 +431,9 @@ services:
     environment:
       <<: *common-env
     volumes:
-      - ~/Storage/prowlarr/config:/config
-      - ~/Storage/prowlarr/backup:/data/Backup
-      - ~/Storage/downloads:/downloads
+      - /mnt/storage/prowlarr/config:/config
+      - /mnt/storage/prowlarr/backup:/data/Backup
+      - /mnt/storage/downloads:/downloads
     ports:
       - 9696:9696
     restart: unless-stopped
@@ -444,11 +444,11 @@ services:
     environment:
       <<: *common-env
     volumes:
-      - ~/Storage/sonarr/config:/config
-      - ~/Storage/sonarr/backup:/data/Backup
-      - ~/Storage/sonarr/tvshows:/data/tvshows
-      - ~/Storage:/storage
-      - ~/Storage/Downloads:/downloads
+      - /mnt/storage/sonarr/config:/config
+      - /mnt/storage/sonarr/backup:/data/Backup
+      - /mnt/storage/sonarr/tvshows:/data/tvshows
+      - /mnt/storage/:/storage/
+      - /mnt/storage/Downloads:/downloads
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -459,11 +459,11 @@ services:
     environment:
       <<: *common-env
     volumes:
-      - ~/Storage/radarr/config:/config
-      - ~/Storage/radarr/movies:/data/movies
-      - ~/Storage/radarr/backup:/data/Backup
-      - ~/Storage:/storage
-      - ~/Storage/downloads:/downloads
+      - /mnt/storage/radarr/config:/config
+      - /mnt/storage/radarr/movies:/data/movies
+      - /mnt/storage/radarr/backup:/data/Backup
+      - /mnt/storage/:/storage/
+      - /mnt/storage/downloads:/downloads
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -484,8 +484,8 @@ services:
     environment:
       <<: *common-env
     volumes:
-      - ~/.config/jackett:/config
-      - ~/Storage/Downloads:/downloads
+      - /mnt/storage/jackett/config:/config
+      - /mnt/storage/Downloads:/downloads
     ports:
       - 9117:9117
     restart: unless-stopped
