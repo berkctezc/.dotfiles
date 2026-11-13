@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prowlarr
+  namespace: default
+  labels:
+    app: prowlarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prowlarr
+  template:
+    metadata:
+      labels:
+        app: prowlarr
+    spec:
+      containers:
+      - name: prowlarr
+        image: linuxserver/prowlarr:nightly
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        - name: TZ
+          value: "Etc/UTC"
+        ports:
+        - containerPort: 9696
+          name: http
+        volumeMounts:
+        - name: storage-volume
+          mountPath: /config
+          subPath: prowlarr/config
+        - name: storage-volume
+          mountPath: /data/Backup
+          subPath: prowlarr/backup
+        - name: storage-volume
+          mountPath: /downloads
+          subPath: media/downloads
+      volumes:
+      - name: storage-volume
+        persistentVolumeClaim:
+          claimName: homelab-storage-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prowlarr
+  namespace: default
+spec:
+  type: NodePort
+  selector:
+    app: prowlarr
+  ports:
+  - port: 9696
+    targetPort: 9696
+    nodePort: 30093
+    name: http

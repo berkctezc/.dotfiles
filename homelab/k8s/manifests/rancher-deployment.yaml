@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rancher
+  namespace: default
+  labels:
+    app: rancher
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rancher
+  template:
+    metadata:
+      labels:
+        app: rancher
+    spec:
+      serviceAccountName: rancher-sa
+      containers:
+      - name: rancher
+        image: rancher/rancher:latest
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          privileged: true
+        ports:
+        - containerPort: 80
+          name: http
+        - containerPort: 443
+          name: https
+        resources:
+          limits:
+            cpu: "2"
+            memory: 6Gi
+          requests:
+            cpu: 500m
+            memory: 1Gi
+        volumeMounts:
+        - name: storage-volume
+          mountPath: /var/lib/rancher
+          subPath: rancher
+      volumes:
+      - name: storage-volume
+        persistentVolumeClaim:
+          claimName: homelab-storage-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rancher
+  namespace: default
+spec:
+  type: NodePort
+  selector:
+    app: rancher
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30080
+    name: http
+  - port: 443
+    targetPort: 443
+    nodePort: 30446
+    name: https

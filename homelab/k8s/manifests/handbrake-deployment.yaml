@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: handbrake
+  namespace: default
+  labels:
+    app: handbrake
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: handbrake
+  template:
+    metadata:
+      labels:
+        app: handbrake
+    spec:
+      containers:
+      - name: handbrake
+        image: jlesage/handbrake:nightly-latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5800
+          name: http
+        volumeMounts:
+        - name: storage-volume
+          mountPath: /storage
+          subPath: media
+        - name: storage-volume
+          mountPath: /watch
+          subPath: handbrake/watch
+        - name: storage-volume
+          mountPath: /output
+          subPath: handbrake/output
+        - name: dri-device
+          mountPath: /dev/dri
+      volumes:
+      - name: storage-volume
+        persistentVolumeClaim:
+          claimName: homelab-storage-pvc
+      - name: dri-device
+        hostPath:
+          path: /dev/dri
+          type: Directory
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: handbrake
+  namespace: default
+spec:
+  type: NodePort
+  selector:
+    app: handbrake
+  ports:
+  - port: 5800
+    targetPort: 5800
+    nodePort: 31580
+    name: http

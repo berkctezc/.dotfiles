@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: watchtower
+  namespace: default
+  labels:
+    app: watchtower
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: watchtower
+  template:
+    metadata:
+      labels:
+        app: watchtower
+    spec:
+      containers:
+      - name: watchtower
+        image: nickfedor/watchtower:nightly
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        - name: TZ
+          value: "Etc/UTC"
+        - name: WATCHTOWER_CLEANUP
+          value: "true"
+        - name: WATCHTOWER_INCLUDE_STOPPED
+          value: "true"
+        - name: WATCHTOWER_REVIVE_STOPPED
+          value: "true"
+        - name: WATCHTOWER_MONITOR_ONLY
+          value: "false"
+        - name: WATCHTOWER_ROLLING_RESTART
+          value: "true"
+        - name: WATCHTOWER_SKIP_IMAGE_NAMES
+          value: ""
+        resources:
+          limits:
+            cpu: "0.5"
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 10Mi
+        volumeMounts:
+        - name: docker-sock
+          mountPath: /var/run/docker.sock
+      volumes:
+      - name: docker-sock
+        hostPath:
+          path: /var/run/docker.sock
+          type: Socket

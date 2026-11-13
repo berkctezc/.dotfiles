@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: searxng-redis
+  namespace: default
+  labels:
+    app: searxng-redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: searxng-redis
+  template:
+    metadata:
+      labels:
+        app: searxng-redis
+    spec:
+      containers:
+      - name: redis
+        image: valkey/valkey:unstable-alpine
+        imagePullPolicy: IfNotPresent
+        command: ["valkey-server", "--save", "", "--appendonly", "no"]
+        volumeMounts:
+        - name: data-tmpfs
+          mountPath: /data
+      volumes:
+      - name: data-tmpfs
+        emptyDir:
+          medium: Memory
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: searxng
+  namespace: default
+  labels:
+    app: searxng
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: searxng
+  template:
+    metadata:
+      labels:
+        app: searxng
+    spec:
+      containers:
+      - name: searxng
+        image: searxng/searxng:latest
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: SEARXNG_SETTINGS_PATH
+          value: /etc/searxng/settings.yml
+        ports:
+        - containerPort: 8080
+          name: http
+        volumeMounts:
+        - name: storage-volume
+          mountPath: /etc/searxng
+          subPath: searxng/config
+      volumes:
+      - name: storage-volume
+        persistentVolumeClaim:
+          claimName: homelab-storage-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: searxng
+  namespace: default
+spec:
+  type: NodePort
+  selector:
+    app: searxng
+  ports:
+  - port: 8080
+    targetPort: 8080
+    nodePort: 31880
+    name: http

@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: speedtest-tracker
+  namespace: default
+  labels:
+    app: speedtest-tracker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: speedtest-tracker
+  template:
+    metadata:
+      labels:
+        app: speedtest-tracker
+    spec:
+      containers:
+      - name: speedtest-tracker
+        image: linuxserver/speedtest-tracker:latest
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        - name: TZ
+          value: "Etc/UTC"
+        - name: APP_KEY
+          value: ""
+        - name: APP_URL
+          value: ""
+        - name: DB_CONNECTION
+          value: sqlite
+        ports:
+        - containerPort: 80
+          name: http
+        volumeMounts:
+        - name: storage-volume
+          mountPath: /config
+          subPath: speedtest-tracker/config
+      volumes:
+      - name: storage-volume
+        persistentVolumeClaim:
+          claimName: homelab-storage-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: speedtest-tracker
+  namespace: default
+spec:
+  type: NodePort
+  selector:
+    app: speedtest-tracker
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30082
+    name: http

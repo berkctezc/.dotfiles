@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crafty
+  namespace: default
+  labels:
+    app: crafty
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crafty
+  template:
+    metadata:
+      labels:
+        app: crafty
+    spec:
+      containers:
+      - name: crafty
+        image: arcadiatechnology/crafty-4:nightly
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: TZ
+          value: "Etc/UTC"
+        ports:
+        - containerPort: 8443
+          name: web
+        - containerPort: 8123
+          name: metrics
+        - containerPort: 19132
+          name: bedrock
+          protocol: UDP
+        - containerPort: 25500
+          name: mc-range-start
+        volumeMounts:
+        - name: storage-volume
+          mountPath: /crafty/backups
+          subPath: crafty/backups
+        - name: storage-volume
+          mountPath: /crafty/logs
+          subPath: crafty/logs
+        - name: storage-volume
+          mountPath: /crafty/servers
+          subPath: crafty/servers
+        - name: storage-volume
+          mountPath: /crafty/app/config
+          subPath: crafty/config
+        - name: storage-volume
+          mountPath: /crafty/import
+          subPath: crafty/import
+      volumes:
+      - name: storage-volume
+        persistentVolumeClaim:
+          claimName: homelab-storage-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: crafty
+  namespace: default
+spec:
+  type: NodePort
+  selector:
+    app: crafty
+  ports:
+  - port: 8443
+    targetPort: 8443
+    nodePort: 31443
+    name: web
+  - port: 8123
+    targetPort: 8123
+    nodePort: 31122
+    name: metrics
+  - port: 19132
+    targetPort: 19132
+    nodePort: 31132
+    protocol: UDP
+    name: bedrock
+  - port: 25500
+    targetPort: 25500
+    nodePort: 31200
+    name: mc-default

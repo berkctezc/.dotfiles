@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: syncthing-relaysrv
+  namespace: default
+  labels:
+    app: syncthing-relaysrv
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: syncthing-relaysrv
+  template:
+    metadata:
+      labels:
+        app: syncthing-relaysrv
+    spec:
+      hostNetwork: true
+      containers:
+      - name: relaysrv
+        image: syncthing/relaysrv:edge
+        imagePullPolicy: IfNotPresent
+        command: ["/bin/entrypoint.sh", "/bin/strelaysrv", "--pools="]
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        - name: TZ
+          value: "Etc/UTC"
+        volumeMounts:
+        - name: storage-volume
+          mountPath: /var/strelaysrv
+          subPath: syncthing/relaysrv-data
+      volumes:
+      - name: storage-volume
+        persistentVolumeClaim:
+          claimName: homelab-storage-pvc

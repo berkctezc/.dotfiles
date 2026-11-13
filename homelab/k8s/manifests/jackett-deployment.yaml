@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jackett
+  namespace: default
+  labels:
+    app: jackett
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jackett
+  template:
+    metadata:
+      labels:
+        app: jackett
+    spec:
+      containers:
+      - name: jackett
+        image: linuxserver/jackett:latest
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        - name: TZ
+          value: "Etc/UTC"
+        ports:
+        - containerPort: 9117
+          name: http
+        volumeMounts:
+        - name: storage-volume
+          mountPath: /config
+          subPath: jackett/config
+        - name: storage-volume
+          mountPath: /downloads
+          subPath: media/downloads
+      volumes:
+      - name: storage-volume
+        persistentVolumeClaim:
+          claimName: homelab-storage-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jackett
+  namespace: default
+spec:
+  type: NodePort
+  selector:
+    app: jackett
+  ports:
+  - port: 9117
+    targetPort: 9117
+    nodePort: 31117
+    name: http

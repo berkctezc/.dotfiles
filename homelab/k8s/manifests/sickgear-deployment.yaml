@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sickgear
+  namespace: default
+  labels:
+    app: sickgear
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sickgear
+  template:
+    metadata:
+      labels:
+        app: sickgear
+    spec:
+      containers:
+      - name: sickgear
+        image: linuxserver/sickgear:develop
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        - name: TZ
+          value: "Etc/UTC"
+        ports:
+        - containerPort: 8081
+          name: http
+        volumeMounts:
+        - name: storage-volume
+          mountPath: /config
+          subPath: sickgear/config
+        - name: storage-volume
+          mountPath: /tv
+          subPath: media/tvshows
+        - name: storage-volume
+          mountPath: /downloads
+          subPath: media/downloads
+      volumes:
+      - name: storage-volume
+        persistentVolumeClaim:
+          claimName: homelab-storage-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sickgear
+  namespace: default
+spec:
+  type: NodePort
+  selector:
+    app: sickgear
+  ports:
+  - port: 8081
+    targetPort: 8081
+    nodePort: 31081
+    name: http

@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: syncthing-discosrv
+  namespace: default
+  labels:
+    app: syncthing-discosrv
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: syncthing-discosrv
+  template:
+    metadata:
+      labels:
+        app: syncthing-discosrv
+    spec:
+      hostNetwork: true
+      containers:
+      - name: discosrv
+        image: syncthing/discosrv:edge
+        imagePullPolicy: IfNotPresent
+        command: ["--listen=:8443"]
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        - name: TZ
+          value: "Etc/UTC"
+        volumeMounts:
+        - name: storage-volume
+          mountPath: /var/stdiscosrv
+          subPath: syncthing/discosrv-data
+      volumes:
+      - name: storage-volume
+        persistentVolumeClaim:
+          claimName: homelab-storage-pvc
