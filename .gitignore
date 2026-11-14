@@ -21,3 +21,4 @@ homelab/docker-formulas/etc-pihole/
 homelab/docker-formulas/relaysrv-data/
 homelab/docker-formulas/discosrv-data/
 */go/telemetry/*
+.config/dconf/user
