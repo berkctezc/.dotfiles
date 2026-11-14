@@ -75,6 +75,7 @@ alias ifactive="ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'
 alias reload="exec $SHELL -l"
 alias archmaintain="sudo pacman -Syu --noconfirm; sudo pacman -Sc --noconfirm"
 alias ubuntumaintain="sudo apt update -y && sudo apt full-upgrade -y;sudo apt autoremove -y;sudo apt autoclean -y"
+alias brewmaintain="brew update;brew upgrade --greedy -y;brew cleanup --prune=all;brew autoremove;brew doctor"
 alias backup_brew="cd ~ && ./scripts/brew_list.sh"
 
 # navigation
