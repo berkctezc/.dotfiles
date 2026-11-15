@@ -283,24 +283,6 @@ services:
             max-file: "10"
     labels:
         - "com.centurylinklabs.watchtower.scope=scrypted"
-#####################
-# Speedtest Tracker #
-#####################
-  speedtest-tracker:
-    image: linuxserver/speedtest-tracker:latest
-    container_name: speedtest-tracker
-    environment:
-      <<: *common-env
-      APP_KEY: ""
-      APP_URL: ""
-      DB_CONNECTION: sqlite
-      SPEEDTEST_SCHEDULE: ""
-      SPEEDTEST_SERVERS: ""
-    volumes:
-     - /mnt/storage/speedtest-tracker/config:/config
-    ports:
-      - 82:80
-    restart: unless-stopped
 ##############
 # ZoneMinder #
 ##############
