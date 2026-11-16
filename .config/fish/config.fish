@@ -18,10 +18,10 @@ fish_config theme choose "mono-smoke"
 
 # utils
 alias sudo 'sudo '
+alias reload "exec $SHELL -l"
 alias week 'date +%V'
 alias tks 'tmux kill-server'
 alias lscount 'ls -1 | wc -l'
-alias backup_brew "cd ~ && ./scripts/brew_list.sh"
 alias nano 'micro'
 
 # dotnet
@@ -34,16 +34,17 @@ alias myip 'dig +short myip.opendns.com @resolver1.opendns.com'
 alias localip "ifconfig en0 2>/dev/null | grep 'inet ' | awk '{print \$2}' || hostname -I | awk '{print \$1}'"
 alias ips "ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 alias ifactive "ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'"
+alias flushdns "dscacheutil -flushcache && killall -HUP mDNSResponder"
 
 # maintenance
-alias macupdate 'sudo softwareupdate -i -a'
 alias brewupdate 'brew update;brew upgrade --greedy -y'
-alias cleanup "brew cleanup --prune=all;brew autoremove;rm -rf ~/.cache/* ~/Library/Caches/* 2>/dev/null;sudo gem cleanup;brew doctor"
-alias macmaintain "macupdate;brewupdate;cleanup"
-alias flushdns "dscacheutil -flushcache && killall -HUP mDNSResponder"
-alias reload "exec $SHELL -l"
+alias maccleanup "brew cleanup --prune=all;brew autoremove;rm -rf ~/.cache/* ~/Library/Caches/* 2>/dev/null;sudo gem cleanup;brew doctor"
+alias macupdate 'sudo softwareupdate -i -a'
+alias macmaintain "macupdate;brewupdate;maccleanup"
 alias archmaintain "sudo pacman -Syu --noconfirm && sudo pacman -Scc --noconfirm"
+alias arch_purge_orphans "sudo pacman -Qdtq | sudo pacman -Rs -"
 alias ubuntumaintain "sudo apt update -y && sudo apt full-upgrade -y;sudo apt autoremove -y;sudo apt autoclean -y"
+alias topgrader "topgrade --cleanup --yes --no-retry --allow-root"
 
 # navigation
 alias ..  "cd .."

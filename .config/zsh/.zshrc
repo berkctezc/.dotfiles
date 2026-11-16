@@ -56,6 +56,7 @@ export KUBECONFIG=~/.kube/config;
 
 # utils
 alias sudo='sudo '
+alias reload="exec $SHELL -l"
 alias week='date +%V'
 alias tks='tmux kill-server'
 alias lscount='ls -1 | wc -l'
@@ -72,11 +73,14 @@ alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[
 alias ifactive="ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'"
 
 # maintenance
-alias reload="exec $SHELL -l"
-alias archmaintain="sudo pacman -Syu --noconfirm; sudo pacman -Sc --noconfirm"
+alias brewupdate='brew update;brew upgrade --greedy -y'
+alias maccleanup="brew cleanup --prune=all;brew autoremove;rm -rf ~/.cache/* ~/Library/Caches/* 2>/dev/null;sudo gem cleanup;brew doctor"
+alias macupdate='sudo softwareupdate -i -a'
+alias macmaintain="macupdate;brewupdate;maccleanup"
+alias archmaintain="sudo pacman -Syu --noconfirm && sudo pacman -Scc --noconfirm"
+alias arch_purge_orphans="sudo pacman -Qdtq | sudo pacman -Rs -"
 alias ubuntumaintain="sudo apt update -y && sudo apt full-upgrade -y;sudo apt autoremove -y;sudo apt autoclean -y"
-alias brewmaintain="brew update;brew upgrade --greedy -y;brew cleanup --prune=all;brew autoremove;brew doctor"
-alias backup_brew="cd ~ && ./scripts/brew_list.sh"
+alias topgrader="topgrade --cleanup --yes --no-retry --allow-root"
 
 # navigation
 alias ..="cd .."

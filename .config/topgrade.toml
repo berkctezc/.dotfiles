@@ -4,7 +4,6 @@
 [include]
 # paths = ["/etc/topgrade.toml"]
 
-
 [misc]
 # On Unix systems, Topgrade should not be run as root, it
 # will run commands with sudo or equivalent where needed.
@@ -268,13 +267,11 @@
 # (default: false)
 # enable = true
 
-
 [pkgfile]
 # Enable the pkgfile step (to update the pkgfile database).
 # Pkgfile is sometimes installed by default, but often not used and heavy to update.
 # (default: false)
 # enable = true
-
 
 [git]
 # How many repos to pull or fetch at max in parallel
@@ -333,7 +330,6 @@
 # (default: false)
 # winget_use_sudo = true
 
-
 [chezmoi]
 # Exclude encrypted files from update
 # (default: false)
@@ -363,21 +359,17 @@
 # (default: false)
 # verbose = false
 
-
 [go]
 # Exclude specified binaries from `gup update`
 # gup_exclude = ["kind", "pkgsite"]
-
 
 [npm]
 # Use sudo if the NPM directory isn't owned by the current user
 # use_sudo = true
 
-
 [yarn]
 # Run `yarn global upgrade` with `sudo`
 # use_sudo = true
-
 
 [deno]
 # Upgrade deno executable to the given version.
@@ -387,11 +379,9 @@
 # a delta patch (useful on machines with little memory).
 # no_delta = true
 
-
 [viteplus]
 # Use sudo if the Vite+ directory isn't owned by the current user
 # use_sudo = true
-
 
 [vim]
 # For `vim-plug`, execute `PlugUpdate!` instead of `PlugUpdate`
@@ -399,17 +389,14 @@
 # For Neovim's `vim.pack`, remove inactive packages before updating
 # vim_pack_prune = true
 
-
 [firmware]
 # Offer to update firmware; if false just check for and display available updates
 # upgrade = true
-
 
 [flutter]
 # If this is set to true, the `--force` flag is added to `flutter upgrade`.
 # (default: false)
 # force = true
-
 
 [vagrant]
 # Vagrant directories
@@ -421,11 +408,9 @@
 # Always suspend vagrant boxes instead of powering off
 # always_suspend = true
 
-
 [flatpak]
 # Use sudo for updating the system-wide installation
 # use_sudo = true
-
 
 [distrobox]
 # use_root = false
