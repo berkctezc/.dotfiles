@@ -22,7 +22,7 @@ services:
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ~/.config/portainer_data:/data
+      - /mnt/storage/portainer_data:/data
     privileged: true
   agent:
     container_name: portainer_agent
@@ -50,11 +50,11 @@ services:
     environment:
       <<: *common-env
     volumes:
-      - ~/:/data
+      - /mnt/storage:/data
       - /mnt:/mnt:rw
       - /dev/shm:/transcode:rw
-      - ~/.config/jellyfin:/config
-      - ~/.cache/jellyfin:/cache
+      - /mnt/storage/jellyfin/cache:/config
+      - /mnt/storage/jellyfin/cache:/cache
     restart: unless-stopped
     extra_hosts:
       - "host.docker.internal:host-gateway"
@@ -147,7 +147,7 @@ services:
     container_name: rancher-server
     image: rancher/rancher
     volumes:
-      - ~/rancher:/var/lib/rancher
+      - /mnt/storage/rancher:/var/lib/rancher
     restart: unless-stopped
     ports:
       - "89:80"
@@ -192,8 +192,8 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ~/.config/mariadb:/var/lib/mysql
-      - ~/.config/mariadb/conf:/etc/mysql/conf.d
+      - /mnt/storage/mariadb:/var/lib/mysql
+      - /mnt/storage/mariadb/conf:/etc/mysql/conf.d
 #########
 # Redis #
 #########
@@ -217,7 +217,7 @@ services:
     container_name: homeassistant
     image: homeassistant/home-assistant:dev
     volumes:
-      - ~/.config/homeassistant:/config
+      - /mnt/storage/homeassistant:/config
       - /etc/localtime:/etc/localtime:ro
       - /run/dbus:/run/dbus:ro
     restart: unless-stopped
