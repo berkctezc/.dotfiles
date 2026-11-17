@@ -29,6 +29,22 @@ last = []
 remote_topgrades = []
 remote_topgrade_path = ".cargo/bin/topgrade"
 bashit_branch = "stable"
+show_distribution_summary = true
+nix_handler = "autodetect"
+
+# Arguments to pass to SSH when upgrading remote systems
+# ssh_arguments = "-o ConnectTimeout=2"
+# Changes the way topgrade interacts with
+# the tmux session, creating the session
+# and only attaching to it if not inside tmux
+# (default: "attach_if_not_in_session", allowed values: "attach_if_not_in_session", "attach_always")
+# tmux_session_mode = "attach_if_not_in_session"
+# Run specific steps - same options as the command line flag
+# only = ["system", "emacs"]
+# Extra tracing filter directives
+# These are prepended to the `--log-filter` argument
+# See: https://docs.rs/tracing-subscriber/latest/tracing_subscriber/filter/struct.EnvFilter.html#directives
+# log_filters = ["topgrade::command=debug", "warn"]
 
 [brew]
 greedy_cask = true
@@ -139,36 +155,6 @@ include_release_notes = false
 
 [go]
 gup_exclude = []
-
-[misc]
-# Arguments to pass to SSH when upgrading remote systems
-# ssh_arguments = "-o ConnectTimeout=2"
-
-# Changes the way topgrade interacts with
-# the tmux session, creating the session
-# and only attaching to it if not inside tmux
-# (default: "attach_if_not_in_session", allowed values: "attach_if_not_in_session", "attach_always")
-# tmux_session_mode = "attach_if_not_in_session"
-
-# Run specific steps - same options as the command line flag
-# only = ["system", "emacs"]
-
-# Extra tracing filter directives
-# These are prepended to the `--log-filter` argument
-# See: https://docs.rs/tracing-subscriber/latest/tracing_subscriber/filter/struct.EnvFilter.html#directives
-# log_filters = ["topgrade::command=debug", "warn"]
-
-# Whether to show a distribution-specific summary if applicable, e.g. listing
-# Pacman backup configuration files (*.pacsave and *.pacnew)
-# (default: true)
-# show_distribution_summary = false
-
-# For NixOS/home-manager, there are multiple ways to switch to newer configurations.
-# When set to autodetect: use nh when available, fall back to vanilla
-# Allowed values:
-#   autodetect, nh, vanilla
-# nix_handler = "autodetect"
-
 
 # Commands to run before anything
 [pre_commands]
