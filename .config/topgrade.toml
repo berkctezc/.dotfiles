@@ -6,7 +6,6 @@ sudo_command = "sudo"
 disable = []
 ignore_failures = [
     "vim",
-    "git"
 ]
 set_title = true
 display_time = true
@@ -23,7 +22,7 @@ allow_root = false
 notify_end = "on_failure"
 show_skipped = true
 no_self_update = true
-run_in_tmux = true
+run_in_tmux = false
 first = []
 last = []
 remote_topgrades = []
@@ -171,7 +170,7 @@ gup_exclude = []
 
 [python]
 enable_pip_review = false
-nable_pipupgrade = false
+enable_pipupgrade = false
 # enable_pip_review_local = true                   ###disabled by default
 # pipupgrade_arguments = "-y -u --pip-path pip"    ###disabled by default
 
@@ -274,7 +273,7 @@ wsl_use_windows_path = false
 [windows]
 self_rename = true
 accept_all_updates = true
-updates_auto_reboot = ask
+updates_auto_reboot = "ask"
 winget_use_sudo = false
 winget_silent_install = true
 # open_remotes_in_new_terminal = true
