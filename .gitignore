@@ -1,15 +1,10 @@
 *.lock
 */.config/configstore
 */.config/trashrc
-*/.config/homeassistant/
-*/.config/znt/
-*/.config/jackett/
-*/.config/mariadb/
+/.config/znt/
 */.config/omf/
-*/.config/qt5ct/
-*/.config/qt6ct/
 */.config/btop/
-*/.config/dconf/user
+.config/Code/agent-host/*
 */go/telemetry/*
 */trashrc
 homelab/docker-formulas/config/settings.yml

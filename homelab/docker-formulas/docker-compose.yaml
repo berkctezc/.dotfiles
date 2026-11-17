@@ -51,9 +51,8 @@ services:
       <<: *common-env
     volumes:
       - /mnt/storage:/data
-      - /mnt:/mnt:rw
       - /dev/shm:/transcode:rw
-      - /mnt/storage/jellyfin/cache:/config
+      - /mnt/storage/jellyfin/config:/config
       - /mnt/storage/jellyfin/cache:/cache
     restart: unless-stopped
     extra_hosts:
