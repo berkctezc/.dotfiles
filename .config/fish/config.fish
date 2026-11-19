@@ -52,8 +52,7 @@ alias ... "cd ../.."
 alias .... "cd ../../.."
 alias ..... "cd ../../../.."
 
-# os gnostic
-# (╯°□°)╯︵ ┻━┻
+# os gnostic (╯°□°)╯︵ ┻━┻
 if test (uname -s) = "Darwin"
   alias copy pbcopy
   export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"

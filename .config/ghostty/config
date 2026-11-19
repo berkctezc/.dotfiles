@@ -29,7 +29,7 @@ clipboard-trim-trailing-spaces = true
 shell-integration = detect
 macos-window-shadow = false
 macos-icon = retro
-macos-icon-frame = beige 
+macos-icon-frame = beige
 # aluminum, beige, plastic, chrome
 macos-icon-ghost-color = #BBBBBB
 macos-icon-screen-color = #0F6004
@@ -43,5 +43,6 @@ auto-update-channel = tip
 palette-harmonious = true
 shell-integration-features = sudo,ssh-env,ssh-terminfo
 window-subtitle = working-directory
+custom-shader = ./shaders/tft.glsl
 
 keybind = cmd+shift+space=toggle_quick_terminal
